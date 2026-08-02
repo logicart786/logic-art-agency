@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logic Art | Elite Digital Presence Agency</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #030712;
+            --surface-glass: rgba(13, 20, 38, 0.75);
+            --surface-solid: #0b1329;
+            --primary-blue: #00f2fe;
+            --primary-cyan: #4facfe;
+            --accent-orange: #ff5e62;
+            --accent-amber: #ff9966;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --whatsapp: #25d366;
+            --nav-height: 90px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- ULTRA-SMOOTH ADVANCED CANVAS PARTICLE ECOSYSTEM --- */
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            background: radial-gradient(circle at 50% 20%, #060d24 0%, #030712 100%);
+        }
+
+        .cyber-grid {
+            position: fixed;
+            width: 200vw;
+            height: 200vh;
+            top: -50vh;
+            left: -50vw;
+            z-index: -2;
+            background-image: 
+                linear-gradient(rgba(0, 242, 254, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 254, 0.035) 1px, transparent 1px);
+            background-size: 60px 60px;
+            transform: perspective(800px) rotateX(60deg);
+            animation: gridMove 25s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 1200px; }
+        }
+
+        .ambient-orb {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(150px);
+            z-index: -2;
+            opacity: 0.12;
+            pointer-events: none;
+            animation: orbFloat 15s ease-in-out infinite alternate;
+        }
+
+        .orb-1 { background: var(--primary-blue); top: -10%; left: -10%; }
+        .orb-2 { background: var(--accent-orange); bottom: -10%; right: -10%; animation-delay: -7s; }
+
+        @keyframes orbFloat {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, 40px) scale(1.15); }
+        }
+
+        /* --- PREMIUM HEADER NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 6%;
+            height: var(--nav-height);
+            background: rgba(3, 7, 18, 0.82);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo-block {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+        }
+
+        /* Glowing Circular Logo Frame */
+        .logo-circle-wrapper {
+            position: relative;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            padding: 2.5px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-orange));
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .logo-circle-wrapper:hover {
+            transform: scale(1.1) rotate(8deg);
+            box-shadow: 0 0 30px rgba(255, 94, 98, 0.6);
+        }
+
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            background: #060d24;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 6px 10px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(15px);
+        }
+
+        .nav-menu li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.92rem;
+            font-weight: 600;
+            padding: 10px 22px;
+            border-radius: 30px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .nav-menu li a:hover, .nav-menu li a.active {
+            color: #fff;
+            background: linear-gradient(135deg, rgba(0, 242, 254, 0.15), rgba(255, 94, 98, 0.15));
+            box-shadow: inset 0 0 15px rgba(0, 242, 254, 0.15);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+        }
+
+        .nav-btn-whatsapp {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-btn-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.55);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.6rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* --- PAGES ARCHITECTURE --- */
+        .page-view {
+            display: none;
+            padding: calc(var(--nav-height) + 50px) 6% 80px 6%;
+            min-height: 100vh;
+            max-width: 1450px;
+            margin: 0 auto;
+            animation: viewFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .page-view.active {
+            display: block;
+        }
+
+        @keyframes viewFadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- SPLIT HERO LAYOUT (LEFT OFFER, RIGHT DETAILS) --- */
+        .hub-split-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 40px;
+            align-items: stretch;
+            padding-top: 15px;
+        }
+
+        /* LEFT PANEL: LIMITED OFFER & PRICING */
+        .offer-panel {
+            background: linear-gradient(145deg, rgba(13, 20, 38, 0.9) 0%, rgba(3, 7, 18, 0.95) 100%);
+            border: 1px solid rgba(0, 242, 254, 0.25);
+            border-radius: 30px;
+            padding: 45px;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6), inset 0 0 30px rgba(0, 242, 254, 0.05);
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+        }
+
+        .offer-panel:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 35px 80px rgba(0, 242, 254, 0.12), inset 0 0 40px rgba(0, 242, 254, 0.08);
+            border-color: rgba(0, 242, 254, 0.4);
+        }
+
+        .offer-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-orange));
+        }
+
+        .badge-limited {
+            background: linear-gradient(90deg, rgba(255, 94, 98, 0.15), rgba(255, 153, 102, 0.15));
+            color: var(--accent-amber);
+            border: 1px solid rgba(255, 94, 98, 0.3);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 25px;
+            width: fit-content;
+            box-shadow: 0 0 20px rgba(255, 94, 98, 0.15);
+        }
+
+        .offer-panel h1 {
+            font-size: 3.4rem;
+            line-height: 1.12;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1.5px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 242, 254, 0.3);
+        }
+
+        .offer-panel p {
+            font-size: 1.12rem;
+            color: var(--text-muted);
+            margin-bottom: 35px;
+            line-height: 1.65;
+        }
+
+        .price-display-box {
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 24px 30px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .price-left span {
+            font-size: 0.75rem;
+            color: var(--primary-blue);
+            letter-spacing: 2.5px;
+            display: block;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .price-left strong {
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .price-right {
+            text-align: right;
+        }
+
+        .new-user-pill {
+            background: rgba(37, 211, 102, 0.12);
+            color: var(--whatsapp);
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+
+        .price-right small {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .btn-offer-action {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: #fff;
+            padding: 18px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: center;
+        }
+
+        .btn-offer-action:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 45px rgba(37, 211, 102, 0.6);
+        }
+
+        /* RIGHT PANEL: DETAILED SPECIFICATIONS PANEL */
+        .details-panel {
+            background: linear-gradient(145deg, rgba(13, 20, 38, 0.75) 0%, rgba(3, 7, 18, 0.85) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 30px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .details-panel:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .details-panel h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .details-panel h2 i {
+            color: var(--primary-blue);
+            font-size: 1.7rem;
+        }
+
+        .spec-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 16px 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .spec-item:hover {
+            background: rgba(0, 242, 254, 0.04);
+            border-color: rgba(0, 242, 254, 0.2);
+            transform: translateX(6px);
+        }
+
+        .spec-item i {
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+            margin-top: 2px;
+        }
+
+        .spec-item strong {
+            display: block;
+            font-size: 1.05rem;
+            margin-bottom: 3px;
+            color: #fff;
+        }
+
+        .spec-item span {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        .preview-mini-box {
+            background: #050b1a;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 18px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .preview-mini-box .left-info span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .preview-mini-box .left-info strong {
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .status-dot-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--whatsapp);
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--whatsapp);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--whatsapp);
+            animation: pulseDot 2s infinite;
+        }
+
+        @keyframes pulseDot {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 20px var(--whatsapp); }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        /* --- DECK / SERVICES --- */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+        }
+
+        .deck-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .deck-card {
+            background: linear-gradient(135deg, var(--surface-glass) 0%, rgba(13,20,38,0.5) 100%);
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 45px 35px;
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            backdrop-filter: blur(15px);
+        }
+
+        .deck-card:hover {
+            transform: translateY(-8px);
+            background: var(--surface-solid);
+            border-color: rgba(0, 242, 254, 0.35);
+            box-shadow: 0 30px 60px rgba(0, 242, 254, 0.1);
+        }
+
+        .deck-icon {
+            font-size: 2.8rem;
+            color: var(--primary-blue);
+            margin-bottom: 30px;
+            display: inline-block;
+            filter: drop-shadow(0 0 12px rgba(0,242,254,0.4));
+        }
+
+        .deck-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .deck-card p {
+            color: var(--text-muted);
+            line-height: 1.65;
+            font-size: 1rem;
+        }
+
+        /* --- MATRIX / PERFECT FOR --- */
+        .matrix-box {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .matrix-item {
+            background: linear-gradient(135deg, var(--surface-glass) 0%, rgba(13,20,38,0.3) 100%);
+            padding: 30px;
+            border-radius: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(15px);
+        }
+
+        .matrix-item:hover {
+            border-color: rgba(255, 94, 98, 0.4);
+            background: var(--surface-solid);
+            transform: translateY(-4px);
+        }
+
+        .matrix-item i {
+            font-size: 1.8rem;
+            color: var(--accent-orange);
+            background: rgba(255, 94, 98, 0.1);
+            padding: 18px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 94, 98, 0.25);
+            filter: drop-shadow(0 0 10px rgba(255,94,98,0.35));
+        }
+
+        .matrix-item h4 {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .matrix-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.55;
+        }
+
+        /* --- GATEWAY / CONTACT --- */
+        .gateway-card {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+            background: linear-gradient(135deg, rgba(13,20,38,0.9) 0%, #030712 100%);
+            border-radius: 32px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+            backdrop-filter: blur(20px);
+        }
+
+        .gateway-meta {
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .gateway-meta h3 {
+            font-size: 2.3rem;
+            margin-bottom: 35px;
+            font-weight: 800;
+        }
+
+        .channel-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: #fff;
+            text-decoration: none;
+            background: rgba(255,255,255,0.025);
+            padding: 22px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .channel-row:hover {
+            background: rgba(0, 242, 254, 0.06);
+            border-color: rgba(0, 242, 254, 0.35);
+            transform: translateX(6px);
+        }
+
+        .channel-row i {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            background: rgba(0, 242, 254, 0.12);
+            padding: 14px;
+            border-radius: 14px;
+        }
+
+        .gateway-form {
+            padding: 60px;
+            background: rgba(255,255,255,0.01);
+            border-left: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .field-group {
+            margin-bottom: 24px;
+        }
+
+        .field-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .field-group input, .field-group textarea {
+            width: 100%;
+            padding: 16px;
+            background: #030712;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            color: white;
+            outline: none;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .field-group input:focus, .field-group textarea:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+        }
+
+        .btn-portal {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(90deg, var(--primary-blue), #2563eb);
+            border: none;
+            border-radius: 14px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 25px rgba(0, 242, 254, 0.3);
+        }
+
+        .btn-portal:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(0, 242, 254, 0.45);
+        }
+
+        /* --- PREMIUM FOOTER --- */
+        footer {
+            background: #010409;
+            padding: 50px 6%;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        footer p span {
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+        @media (max-width: 1024px) {
+            .hub-split-grid { grid-template-columns: 1fr; }
+            .offer-panel h1 { font-size: 3rem; }
+            .gateway-card { grid-template-columns: 1fr; }
+            .gateway-form { border-left: none; border-top: 1px solid rgba(255,255,255,0.06); }
+            .matrix-box { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: var(--nav-height);
+                left: 0;
+                width: 100%;
+                background: #030712;
+                border-radius: 0;
+                border: none;
+                border-bottom: 1px solid rgba(255,255,255,0.08);
+                padding: 25px;
+                gap: 15px;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            }
+            .nav-menu.open { display: flex; }
+            .nav-btn-whatsapp { display: none; }
+            .offer-panel h1 { font-size: 2.4rem; }
+            .price-left strong { font-size: 2.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ultra-Smooth Animated Background Ecosystem -->
+    <div class="cyber-grid"></div>
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Navigation Header -->
+    <nav>
+        <div class="logo-block" onclick="switchTab('home')">
+            <div class="logo-circle-wrapper">
+                <img src="logo.png" alt="Logic Art Logo" class="logo-img">
+            </div>
+            <span style="font-weight: 900; font-size: 1.6rem; letter-spacing: 1.5px;">LOGIC <span style="color:var(--accent-orange)">ART</span></span>
+        </div>
+        
+        <i class="fa-solid fa-bars hamburger" onclick="toggleNavMenu()"></i>
+        
+        <ul class="nav-menu" id="navMenu">
+            <li><a onclick="switchTab('home')" id="tab-home" class="active">Home</a></li>
+            <li><a onclick="switchTab('services')" id="tab-services">Services</a></li>
+            <li><a onclick="switchTab('perfect')" id="tab-perfect">Perfect For</a></li>
+            <li><a onclick="switchTab('contact')" id="tab-contact">Contact</a></li>
+        </ul>
+
+        <a href="https://wa.me/918275544003" target="_blank" class="nav-btn-whatsapp">
+            <i class="fa-brands fa-whatsapp"></i> Chat Live
+        </a>
+    </nav>
+
+    <!-- TAB 1: HOME (SPLIT LAYOUT: LEFT LIMITED OFFER & RIGHT SPECIFICATIONS) -->
+    <div id="view-home" class="page-view active">
+        <div class="hub-split-grid">
+            
+            <!-- LEFT PANEL: LIMITED NEW USER OFFER -->
+            <div class="offer-panel">
+                <div>
+                    <div class="badge-limited"><i class="fa-solid fa-bolt"></i> Limited New User Offer</div>
+                    <h1>Elite Digital <br><span class="gradient-text">Presence Agency</span></h1>
+                    <p>Engineered for high-end brands looking for lightning-fast speeds, bespoke UI layout grids, and conversion-optimized performance.</p>
+                </div>
+
+                <div>
+                    <div class="price-display-box">
+                        <div class="price-left">
+                            <span>INVESTMENT</span>
+                            <strong>₹1,999</strong>
+                        </div>
+                        <div class="price-right">
+                            <span class="new-user-pill">New Users Only</span>
+                            <small>Save 70% Off Standard Rates</small>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/918275544003" target="_blank" class="btn-offer-action">
+                        <i class="fa-brands fa-whatsapp"></i> CLAIM NEW USER OFFER NOW
+                    </a>
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL: DETAILED SPECIFICATIONS & ARCHITECTURE -->
+            <div class="details-panel">
+                <div>
+                    <h2><i class="fa-solid fa-microchip"></i> System Architecture</h2>
+                    <ul class="spec-list">
+                        <li class="spec-item">
+                            <i class="fa-solid fa-bolt"></i>
+                            <div>
+                                <strong>Sub-Second Load Engine</strong>
+                                <span>Ultra-lightweight codebase engineered for instant asset rendering.</span>
+                            </div>
+                        </li>
+                        <li class="spec-item">
+                            <i class="fa-solid fa-mobile-screen"></i>
+                            <div>
+                                <strong>Fluid Responsive Grid</strong>
+                                <span>Immaculate visual scaling across mobile, tablet, and desktop viewports.</span>
+                            </div>
+                        </li>
+                        <li class="spec-item">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <div>
+                                <strong>Direct Conversion Nodes</strong>
+                                <span>Seamless WhatsApp routing & instant communication channels integrated.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="preview-mini-box">
+                    <div class="left-info">
+                        <span>Live System Status</span>
+                        <strong>Logic Art V3 Engine Operational</strong>
+                    </div>
+                    <div class="status-dot-wrapper">
+                        <div class="status-dot"></div>
+                        <span>Active</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- TAB 2: SERVICES -->
+    <div id="view-services" class="page-view">
+        <div class="section-header">
+            <h2>Our Core Engine Capabilities</h2>
+            <p>Every deployment contains optimized core assets built from raw system code structures.</p>
+        </div>
+        <div class="deck-grid">
+            <div class="deck-card">
+                <i class="fa-solid fa-cubes deck-icon"></i>
+                <h3>Fluid Design Systems</h3>
+                <p>Layouts explicitly optimized for seamless performance scaling on viewport aspect ratios.</p>
+            </div>
+            <div class="deck-card">
+                <i class="fa-solid fa-bolt deck-icon"></i>
+                <h3>Instant Asset Loading</h3>
+                <p>Minimized file bundles that bypass heavy frame rendering layers to guarantee high speed metrics.</p>
+            </div>
+            <div class="deck-card">
+                <i class="fa-solid fa-route deck-icon"></i>
+                <h3>Unified Communications</h3>
+                <p>Directly routed custom forms and instantaneous live communication chat nodes integrated directly.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 3: PERFECT FOR -->
+    <div id="view-perfect" class="page-view">
+        <div class="section-header">
+            <h2>Optimized Domain Scaling</h2>
+            <p>We craft interfaces designed precisely for targeted commercial operations.</p>
+        </div>
+        <div class="matrix-box">
+            <div class="matrix-item">
+                <i class="fa-solid fa-shop"></i>
+                <div>
+                    <h4>Showrooms & Stores</h4>
+                    <p>Clean high-end interface portfolios to map product ranges elegantly.</p>
+                </div>
+            </div>
+            <div class="matrix-item">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <div>
+                    <h4>Training Academies</h4>
+                    <p>Structured info matrices to convert visitors into batch enrollments.</p>
+                </div>
+            </div>
+            <div class="matrix-item">
+                <i class="fa-solid fa-mug-saucer"></i>
+                <div>
+                    <h4>Premium Cafes</h4>
+                    <p>Frictionless dynamic menu views matching high corporate standards.</p>
+                </div>
+            </div>
+            <div class="matrix-item">
+                <i class="fa-solid fa-heart-pulse"></i>
+                <div>
+                    <h4>Fitness Hubs</h4>
+                    <p>Sleek pricing modules detailing structural plan architectures cleanly.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 4: CONTACT -->
+    <div id="view-contact" class="page-view">
+        <div class="section-header">
+            <h2>Initialize Project Pipeline</h2>
+            <p>Connect with the core team to discuss your digital workspace requirements.</p>
+        </div>
+        <div class="gateway-card">
+            <div class="gateway-meta">
+                <h3>Direct Gateways</h3>
+                <a href="https://wa.me/918275544003" target="_blank" class="channel-row">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <div>
+                        <strong style="display:block; font-size:1.1rem;">Engineering Deck</strong>
+                        <span style="font-size:0.9rem; color:var(--text-muted);">+91 8275544003</span>
+                    </div>
+                </a>
+                <a href="tel:+919420184273" class="channel-row">
+                    <i class="fa-solid fa-phone"></i>
+                    <div>
+                        <strong style="display:block; font-size:1.1rem;">Operations Desk</strong>
+                        <span style="font-size:0.9rem; color:var(--text-muted);">+91 9420184273</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="gateway-form">
+                <form onsubmit="alert('Project parameters successfully synced!'); return false;">
+                    <div class="field-group">
+                        <label>Identity / Company Name</label>
+                        <input type="text" required placeholder="e.g. Acme Labs">
+                    </div>
+                    <div class="field-group">
+                        <label>Project Parameters Description</label>
+                        <textarea rows="4" required placeholder="Provide design directives..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-portal">Transmit Direct Request</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Premium Footer -->
+    <footer>
+        <p>THANK YOU FOR SUPPORTING <span>LOGIC ART</span></p>
+        <p style="font-size:0.8rem; margin-top:12px; opacity:0.4;">&copy; 2026 Logic Art. Engineered for modern business ecosystems.</p>
+    </footer>
+
+    <!-- Client-Side Navigation & Ultra-Smooth Particle Background Engine -->
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.page-view').forEach(view => {
+                view.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            const selectedView = document.getElementById('view-' + tabId);
+            if(selectedView) {
+                selectedView.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            const activeAnchor = document.getElementById('tab-' + tabId);
+            if(activeAnchor) activeAnchor.classList.add('active');
+
+            document.getElementById('navMenu').classList.remove('open');
+        }
+
+        function toggleNavMenu() {
+            document.getElementById('navMenu').classList.toggle('open');
+        }
+
+        // --- ULTRA-SMOOTH CANVAS PARTICLE NETWORK ANIMATION ---
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let particlesArray = [];
+        const numberOfParticles = 60;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.6;
+                this.vy = (Math.random() - 0.5) * 0.6;
+                this.radius = Math.random() * 2 + 0.8;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
+                if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(0, 242, 254, 0.65)';
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function connectParticles() {
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a + 1; b < particlesArray.length; b++) {
+                    let dx = particlesArray[a].x - particlesArray[b].x;
+                    let dy = particlesArray[a].y - particlesArray[b].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 155) {
+                        let opacity = 1 - (distance / 155);
+                        ctx.strokeStyle = `rgba(0, 242, 254, ${opacity * 0.2})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            connectParticles();
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+    </script>
+</body>
+</html>
