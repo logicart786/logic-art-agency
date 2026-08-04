@@ -114,7 +114,6 @@
             cursor: pointer;
         }
 
-        /* Glowing Circular Logo Frame */
         .logo-circle-wrapper {
             position: relative;
             width: 52px;
@@ -202,11 +201,11 @@
         /* --- PAGES ARCHITECTURE --- */
         .page-view {
             display: none;
-            padding: calc(var(--nav-height) + 50px) 6% 80px 6%;
+            padding: calc(var(--nav-height) + 40px) 6% 80px 6%;
             min-height: 100vh;
             max-width: 1450px;
             margin: 0 auto;
-            animation: viewFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: viewFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         .page-view.active {
@@ -218,7 +217,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- SPLIT HERO LAYOUT (LEFT OFFER, RIGHT DETAILS) --- */
+        /* --- SPLIT HERO LAYOUT --- */
         .hub-split-grid {
             display: grid;
             grid-template-columns: 1.15fr 0.85fr;
@@ -227,7 +226,6 @@
             padding-top: 15px;
         }
 
-        /* LEFT PANEL: LIMITED OFFER & PRICING */
         .offer-panel {
             background: linear-gradient(145deg, rgba(13, 20, 38, 0.9) 0%, rgba(3, 7, 18, 0.95) 100%);
             border: 1px solid rgba(0, 242, 254, 0.25);
@@ -327,9 +325,7 @@
             line-height: 1;
         }
 
-        .price-right {
-            text-align: right;
-        }
+        .price-right { text-align: right; }
 
         .new-user-pill {
             background: rgba(37, 211, 102, 0.12);
@@ -366,6 +362,7 @@
             box-shadow: 0 12px 35px rgba(37, 211, 102, 0.4);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             text-align: center;
+            cursor: pointer;
         }
 
         .btn-offer-action:hover {
@@ -373,7 +370,6 @@
             box-shadow: 0 18px 45px rgba(37, 211, 102, 0.6);
         }
 
-        /* RIGHT PANEL: DETAILED SPECIFICATIONS PANEL */
         .details-panel {
             background: linear-gradient(145deg, rgba(13, 20, 38, 0.75) 0%, rgba(3, 7, 18, 0.85) 100%);
             border: 1px solid rgba(255, 255, 255, 0.07);
@@ -498,10 +494,10 @@
             100% { transform: scale(0.95); opacity: 0.8; }
         }
 
-        /* --- DECK / SERVICES --- */
+        /* --- DECK / SERVICES / DEMOS GRID --- */
         .section-header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
         }
 
         .section-header h2 {
@@ -525,7 +521,7 @@
         .deck-card {
             background: linear-gradient(135deg, var(--surface-glass) 0%, rgba(13,20,38,0.5) 100%);
             border: 1px solid rgba(255,255,255,0.06);
-            padding: 45px 35px;
+            padding: 40px 35px;
             border-radius: 24px;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
@@ -542,7 +538,7 @@
         .deck-icon {
             font-size: 2.8rem;
             color: var(--primary-blue);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             display: inline-block;
             filter: drop-shadow(0 0 12px rgba(0,242,254,0.4));
         }
@@ -557,6 +553,61 @@
             color: var(--text-muted);
             line-height: 1.65;
             font-size: 1rem;
+        }
+
+        /* --- DEMO INNER DETAILS PAGE CARDS --- */
+        .btn-back-demos {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.05);
+            color: var(--primary-blue);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+
+        .btn-back-demos:hover {
+            background: rgba(0, 242, 254, 0.15);
+            color: #fff;
+            transform: translateX(-4px);
+        }
+
+        .demo-hero-box {
+            background: linear-gradient(135deg, rgba(13,20,38,0.9), rgba(3,7,18,0.95));
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            border-radius: 28px;
+            padding: 40px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .demo-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .demo-feature-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+
+        .demo-feature-card:hover {
+            border-color: var(--primary-blue);
+            background: rgba(0, 242, 254, 0.03);
+            transform: translateY(-4px);
         }
 
         /* --- MATRIX / PERFECT FOR --- */
@@ -668,9 +719,7 @@
             border-left: 1px solid rgba(255,255,255,0.06);
         }
 
-        .field-group {
-            margin-bottom: 24px;
-        }
+        .field-group { margin-bottom: 24px; }
 
         .field-group label {
             display: block;
@@ -717,7 +766,6 @@
             box-shadow: 0 15px 35px rgba(0, 242, 254, 0.45);
         }
 
-        /* --- PREMIUM FOOTER --- */
         footer {
             background: #010409;
             padding: 50px 6%;
@@ -739,6 +787,7 @@
             .gateway-card { grid-template-columns: 1fr; }
             .gateway-form { border-left: none; border-top: 1px solid rgba(255,255,255,0.06); }
             .matrix-box { grid-template-columns: 1fr; }
+            .demo-hero-box { flex-direction: column; text-align: center; }
         }
 
         @media (max-width: 768px) {
@@ -763,6 +812,46 @@
             .offer-panel h1 { font-size: 2.4rem; }
             .price-left strong { font-size: 2.6rem; }
         }
+        /* --- PROJECT LAUNCHPAD FORM STYLES --- */
+.launchpad-card {
+    background: linear-gradient(135deg, rgba(13,20,38,0.95) 0%, #030712 100%);
+    border: 1px solid rgba(0, 242, 254, 0.25);
+    border-radius: 28px;
+    padding: 45px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.6);
+    backdrop-filter: blur(20px);
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+}
+
+.field-group select {
+    width: 100%;
+    padding: 16px;
+    background: #030712;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    color: white;
+    outline: none;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.field-group select:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+}
+
+.field-group select option {
+    background: #0b1329;
+    color: white;
+}
     </style>
 </head>
 <body>
@@ -786,6 +875,7 @@
         
         <ul class="nav-menu" id="navMenu">
             <li><a onclick="switchTab('home')" id="tab-home" class="active">Home</a></li>
+            <li><a onclick="switchTab('demos')" id="tab-demos">Live Demos</a></li>
             <li><a onclick="switchTab('services')" id="tab-services">Services</a></li>
             <li><a onclick="switchTab('perfect')" id="tab-perfect">Perfect For</a></li>
             <li><a onclick="switchTab('contact')" id="tab-contact">Contact</a></li>
@@ -796,7 +886,7 @@
         </a>
     </nav>
 
-    <!-- TAB 1: HOME (SPLIT LAYOUT: LEFT LIMITED OFFER & RIGHT SPECIFICATIONS) -->
+    <!-- TAB 1: HOME (SPLIT LAYOUT) -->
     <div id="view-home" class="page-view active">
         <div class="hub-split-grid">
             
@@ -826,7 +916,7 @@
                 </div>
             </div>
 
-           <!-- RIGHT PANEL: DETAILED SPECIFICATIONS & ARCHITECTURE -->
+            <!-- RIGHT PANEL: DETAILED SPECIFICATIONS & ARCHITECTURE -->
             <div class="details-panel">
                 <div>
                     <h2><i class="fa-solid fa-microchip"></i> System Architecture</h2>
@@ -865,76 +955,262 @@
                         <span>Active</span>
                     </div>
                 </div>
-            </div> <!-- details-panel ends -->
+            </div>
 
         </div> <!-- hub-split-grid ends -->
 
-        <!-- --- INTERACTIVE LIVE DEMOS ECOSYSTEM --- -->
-        <div style="margin-top: 90px;">
-            <div class="section-header" style="margin-bottom: 40px;">
+        <!-- --- HOME QUICK DEMO ACCESS --- -->
+        <div style="margin-top: 80px;">
+            <div class="section-header" style="margin-bottom: 35px;">
                 <h2><span class="gradient-text">Interactive Live Demos</span></h2>
-                <p>Test drive our fully functional web ecosystems engineered for real-world industries.</p>
+                <p>Click any industry node to instantly enter its dedicated live demo ecosystem.</p>
             </div>
-            
+
             <div class="deck-grid">
-                <!-- Demo 1: Hotel Booking System -->
-                <div class="deck-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(0, 242, 254, 0.15);">
-                    <div style="height: 190px; background: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80') center/cover;"></div>
-                    <div style="padding: 30px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
-                        <div>
-                            <span style="background: rgba(0, 242, 254, 0.1); color: var(--primary-blue); border: 1px solid rgba(0, 242, 254, 0.2); padding: 5px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 12px;">Hospitality</span>
-                            <h3 style="margin-bottom: 10px; font-size: 1.4rem;">Grand Palace Hotel</h3>
-                            <p style="font-size: 0.95rem; margin-bottom: 25px; color: var(--text-muted); line-height: 1.6;">Premium booking platform featuring dynamic room matrix, automated WhatsApp triggers, and an ultra-secure admin desk node.</p>
-                        </div>
-                        <a href="hotel-demo.html" target="_blank" class="btn-offer-action" style="padding: 14px 20px; font-size: 0.95rem; background: linear-gradient(135deg, var(--primary-blue), #2563eb); box-shadow: 0 4px 20px rgba(0, 242, 254, 0.25);">
-                            Launch Live System <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.85rem;"></i>
-                        </a>
-                    </div>
+                <!-- Card 1: Hospitality -->
+                <div class="deck-card" onclick="switchTab('demo-hotel')" style="cursor: pointer;">
+                    <i class="fa-solid fa-hotel deck-icon"></i>
+                    <h3>Hotels & Restaurants</h3>
+                    <p style="margin-bottom: 20px;">Dynamic room booking grids, table reservation matrices, and instant WhatsApp food order nodes.</p>
+                    <span style="color: var(--primary-blue); font-weight: 700; font-size: 0.9rem;">Explore Ecosystem <i class="fa-solid fa-arrow-right"></i></span>
                 </div>
 
-                <!-- Demo 2: Luxury Resort -->
-                <div class="deck-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(255, 94, 98, 0.15);">
-                    <div style="height: 190px; background: url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80') center/cover;"></div>
-                    <div style="padding: 30px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
-                        <div>
-                            <span style="background: rgba(255, 94, 98, 0.1); color: var(--accent-orange); border: 1px solid rgba(255, 94, 98, 0.2); padding: 5px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 12px;">Tourism & Leisure</span>
-                            <h3 style="margin-bottom: 10px; font-size: 1.4rem;">Paradise Valley Resort</h3>
-                            <p style="font-size: 0.95rem; margin-bottom: 25px; color: var(--text-muted); line-height: 1.6;">Designed for premium getaways. Built with fluid package calculators, outdoor activity schedulers, and high-end imagery sliders.</p>
-                        </div>
-                        <a href="resort-demo.html" target="_blank" class="btn-offer-action" style="padding: 14px 20px; font-size: 0.95rem; background: linear-gradient(135deg, var(--primary-blue), #2563eb); box-shadow: 0 4px 20px rgba(0, 242, 254, 0.25);">
-                            Launch Live System <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.85rem;"></i>
-                        </a>
-                    </div>
+                <!-- Card 2: Shopping Centers -->
+                <div class="deck-card" onclick="switchTab('demo-shop')" style="cursor: pointer;">
+                    <i class="fa-solid fa-bag-shopping deck-icon" style="color: var(--accent-orange);"></i>
+                    <h3>Shopping Centers</h3>
+                    <p style="margin-bottom: 20px;">Ultra-fast e-commerce catalogs, instant cart caches, category filters, and quick checkout flow.</p>
+                    <span style="color: var(--accent-orange); font-weight: 700; font-size: 0.9rem;">Explore Ecosystem <i class="fa-solid fa-arrow-right"></i></span>
                 </div>
 
-                <!-- Demo 3: Shopping Center -->
-                <div class="deck-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; border-color: rgba(37, 211, 102, 0.15);">
-                    <div style="height: 190px; background: url('https://images.unsplash.com/photo-1555529771-835f59fc5efe?auto=format&fit=crop&w=600&q=80') center/cover;"></div>
-                    <div style="padding: 30px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
-                        <div>
-                            <span style="background: rgba(37, 211, 102, 0.1); color: var(--whatsapp); border: 1px solid rgba(37, 211, 102, 0.2); padding: 5px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 12px;">Retail & Commerce</span>
-                            <h3 style="margin-bottom: 10px; font-size: 1.4rem;">Metro Shopping Hub</h3>
-                            <p style="font-size: 0.95rem; margin-bottom: 25px; color: var(--text-muted); line-height: 1.6;">Lightning-fast retail cataloging portal engine. Configured with instant grid filters, seamless cart caches, and fast checkout architecture.</p>
-                        </div>
-                        <a href="shop-demo.html" target="_blank" class="btn-offer-action" style="padding: 14px 20px; font-size: 0.95rem; background: linear-gradient(135deg, var(--primary-blue), #2563eb); box-shadow: 0 4px 20px rgba(0, 242, 254, 0.25);">
-                            Launch Live System <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.85rem;"></i>
-                        </a>
-                    </div>
+                <!-- Card 3: Custom Problem Solving -->
+                <div class="deck-card" onclick="switchTab('demo-problems')" style="cursor: pointer;">
+                    <i class="fa-solid fa-wand-magic-sparkles deck-icon" style="color: var(--whatsapp);"></i>
+                    <h3>Problem Solving & SaaS</h3>
+                    <p style="margin-bottom: 20px;">Custom business automation tools, stock trackers, CRM pipelines, and custom workflow solutions.</p>
+                    <span style="color: var(--whatsapp); font-weight: 700; font-size: 0.9rem;">Explore Ecosystem <i class="fa-solid fa-arrow-right"></i></span>
                 </div>
             </div>
         </div>
-                <div class="preview-mini-box">
-                    <div class="left-info">
-                        <span>Live System Status</span>
-                        <strong>Logic Art V3 Engine Operational</strong>
-                    </div>
-                    <div class="status-dot-wrapper">
-                        <div class="status-dot"></div>
-                        <span>Active</span>
-                    </div>
+    </div>
+
+    <!-- MAIN LIVE DEMOS OVERVIEW TAB -->
+    <div id="view-demos" class="page-view">
+        <div class="section-header">
+            <h2>Select An <span class="gradient-text">Industry Ecosystem</span></h2>
+            <p>Click any category to enter its customized interactive design demo workspace.</p>
+        </div>
+
+        <div class="deck-grid">
+            <!-- 1. Hotel & Restaurants -->
+            <div class="deck-card" onclick="switchTab('demo-hotel')" style="cursor: pointer; border-color: rgba(0, 242, 254, 0.2);">
+                <i class="fa-solid fa-utensils deck-icon"></i>
+                <h3>Hotels & Restaurants</h3>
+                <p style="margin-bottom: 20px;">Includes dynamic menu cards, room matrix systems, event hall bookings, and automated order routing.</p>
+                <div class="btn-offer-action" style="padding: 12px 20px; font-size: 0.9rem; background: linear-gradient(135deg, var(--primary-blue), #2563eb);">
+                    Enter Hotel Workspace <i class="fa-solid fa-arrow-right"></i>
                 </div>
             </div>
 
+            <!-- 2. Shopping Centers & E-Commerce -->
+            <div class="deck-card" onclick="switchTab('demo-shop')" style="cursor: pointer; border-color: rgba(255, 94, 98, 0.2);">
+                <i class="fa-solid fa-cart-shopping deck-icon" style="color: var(--accent-orange);"></i>
+                <h3>Shopping Centers & Malls</h3>
+                <p style="margin-bottom: 20px;">Multi-store directories, live deal showcases, inventory showcases, and ultra-fast mobile checkout engines.</p>
+                <div class="btn-offer-action" style="padding: 12px 20px; font-size: 0.9rem; background: linear-gradient(135deg, var(--accent-orange), #e11d48);">
+                    Enter Retail Workspace <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <!-- 3. Problem Solving & ERP -->
+            <div class="deck-card" onclick="switchTab('demo-problems')" style="cursor: pointer; border-color: rgba(37, 211, 102, 0.2);">
+                <i class="fa-solid fa-gears deck-icon" style="color: var(--whatsapp);"></i>
+                <h3>Problem Solving & SaaS</h3>
+                <p style="margin-bottom: 20px;">Solving real business bottlenecks: Inventory sync, automated WhatsApp receipts, and custom CRM dashboards.</p>
+                <div class="btn-offer-action" style="padding: 12px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #25d366, #059669);">
+                    Enter SaaS Workspace <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <!-- 4. Automotive & Fleet Hub (Extra) -->
+            <div class="deck-card" onclick="switchTab('demo-automotive')" style="cursor: pointer; border-color: rgba(255, 153, 102, 0.2);">
+                <i class="fa-solid fa-car-side deck-icon" style="color: var(--accent-amber);"></i>
+                <h3>Automotive & Fleet Hub</h3>
+                <p style="margin-bottom: 20px;">Vehicle showrooms, online test-drive booking nodes, spare part catalogs, and garage service schedulers.</p>
+                <div class="btn-offer-action" style="padding: 12px 20px; font-size: 0.9rem; background: linear-gradient(135deg, var(--accent-amber), #ea580c);">
+                    Enter Auto Workspace <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <!-- 5. Real Estate & Showrooms (Extra) -->
+            <div class="deck-card" onclick="switchTab('demo-realestate')" style="cursor: pointer; border-color: rgba(147, 51, 234, 0.2);">
+                <i class="fa-solid fa-building-user deck-icon" style="color: #a855f7;"></i>
+                <h3>Real Estate & Showrooms</h3>
+                <p style="margin-bottom: 20px;">Interactive floor plan viewers, virtual property walkthrough layouts, and direct agent inquiry pipelines.</p>
+                <div class="btn-offer-action" style="padding: 12px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #a855f7, #7c3aed);">
+                    Enter Estate Workspace <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DEMO SECTION 1: HOTEL & RESTAURANTS -->
+    <div id="view-demo-hotel" class="page-view">
+        <button class="btn-back-demos" onclick="switchTab('demos')"><i class="fa-solid fa-arrow-left"></i> Back To All Demos</button>
+        
+        <div class="demo-hero-box">
+            <div>
+                <span class="badge-limited" style="background: rgba(0,242,254,0.1); color: var(--primary-blue); border-color: rgba(0,242,254,0.3);">Hospitality Architecture</span>
+                <h1 style="font-size: 2.5rem; margin-top: 10px;">Grand Hospitality Engine</h1>
+                <p style="color: var(--text-muted); margin-top: 8px;">Designed for luxury hotels, fine dining, and resort booking management.</p>
+            </div>
+            <a href="https://wa.me/918275544003?text=I%20want%20a%20Hotel%20and%20Restaurant%20Website" target="_blank" class="btn-offer-action">
+                Build This For My Hotel <i class="fa-brands fa-whatsapp"></i>
+            </a>
+        </div>
+
+        <div class="demo-features-grid">
+            <div class="demo-feature-card">
+                <i class="fa-solid fa-bed" style="font-size: 2rem; color: var(--primary-blue); margin-bottom: 15px;"></i>
+                <h3>Dynamic Room Matrix</h3>
+                <p style="color: var(--text-muted); margin-top: 10px; font-size: 0.95rem;">Interactive suite selector with live price calculators and amenity filters.</p>
+            </div>
+            <div class="demo-feature-card">
+                <i class="fa-solid fa-qrcode" style="font-size: 2rem; color: var(--primary-blue); margin-bottom: 15px;"></i>
+                <h3>QR Menu & Order Node</h3>
+                <p style="color: var(--text-muted); margin-top: 10px; font-size: 0.95rem;">Instant digital menu for dine-in tables that routes orders directly to WhatsApp or KDT.</p>
+            </div>
+            <div class="demo-feature-card">
+                <i class="fa-solid fa-calendar-check" style="font-size: 2rem; color: var(--primary-blue); margin-bottom: 15px;"></i>
+                <h3>Banquet & Hall Booking</h3>
+                <p style="color: var(--text-muted); margin-top: 10px; font-size: 0.95rem;">Integrated event calendar for weddings, corporate meets, and party reservations.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- DEMO SECTION 2: SHOPPING CENTERS -->
+    <div id="view-demo-shop" class="page-view">
+        <button class="btn-back-demos" onclick="switchTab('demos')"><i class="fa-solid fa-arrow-left"></i> Back To All Demos</button>
+        
+        <div class="demo-hero-box" style="border-color: rgba(255, 94, 98, 0.3);">
+            <div>
+                <span class="badge-limited">Retail & E-Commerce</span>
+                <h1 style="font-size: 2.5rem; margin-top: 10px;">Metro Shopping & Retail Hub</h1>
+                <p style="color: var(--text-muted); margin-top: 8px;">Engineered for high-volume stores, shopping malls, and boutique product lines.</p>
+            </div>
+            <a href="https://wa.me/918275544003?text=I%20want%20a%20Shopping%20Center%20Website" target="_blank" class="btn-offer-action">
+                Build This For My Store <i class="fa-brands fa-whatsapp"></i>
+            </a>
+        </div>
+
+        <div class="demo-features-grid">
+            <div class="demo-feature-card">
+                <i class="fa-solid fa-bolt" style="font-size: 2rem; color: var(--accent-orange); margin-bottom: 15px;"></i>
+                <h3>Instant Search & Filter</h3>
+                <p style="color: var(--text-muted); margin-top: 10px; font-size: 0.95rem;">Zero-lag category filtering across thousands of inventory SKUs.</p>
+            </div>
+            <div class="demo-feature-card">
+                <i class="fa-solid fa-basket-shopping" style="font-size: 2rem; color: var(--accent-orange); margin-bottom: 15px;"></i>
+                <h3>Frictionless Cart Cache</h3>
+                <p style="color: var(--text-muted); margin-top: 10px; font-size: 0.95rem;">Saves user selections locally without requiring immediate tedious signups.</p>
+            </div>
+            <div class="demo-feature-card">
+                <i class="fa-solid fa-truck-fast" style="font-size: 2rem; color: var(--accent-orange); margin-bottom: 15px;"></i>
+                <h3>WhatsApp Direct Checkout</h3>
+                <p style="color: var(--text-muted); margin-top: 10px; font-size: 0.95rem;">Sends itemized receipt directly to seller's WhatsApp for instant payment confirmation.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- DEMO SECTION 3: PROBLEM SOLVING & ERP -->
+    <div id="view-demo-problems" class="page-view">
+        <button class="btn-back-demos" onclick="switchTab('demos')"><i class="fa-solid fa-arrow-left"></i> Back To All Demos</button>
+        
+        <div class="demo-hero-box" style="border-color: rgba(37, 211, 102, 0.3);">
+            <div>
+                <span class="badge-limited" style="background: rgba(37, 211, 102, 0.1); color: var(--whatsapp); border-color: rgba(37, 211, 102, 0.3);">Custom Business Automation</span>
+                <h1 style="font-size: 2.5rem; margin-top: 10px;">Problem Solving SaaS Engine</h1>
+                <p style="color: var(--text-muted); margin-top: 8px;">Bespoke workflow automation tools, internal dashboards, and custom client portals.</p>
+            </div>
+            <a href="https://wa.me/918275544003?text=I%20have%20a%20custom%20business%20problem%20to%20solve" target="_blank" class="btn-offer-action">
+                Discuss Custom Bottleneck <i class="fa-brands fa-whatsapp"></i>
+            </a>
+        </div>
+
+        <div class="demo-features-grid">
+            <div class="demo-feature-card">
+                <i class="fa-solid fa-chart-line" style="font-size: 2rem; color: var(--whatsapp); margin-bottom: 15px;"></i>
+                <h3>Automated Lead CRM</h3>
+                <p style="color: var(--text-muted); margin-top: 10px; font-size: 0.95rem;">Capture every website inquiry and organize them by sales pipeline stage automatically.</p>
+            </div>
+            <div class="demo-feature-card">
+                <i class="fa-solid fa-boxes-stacked" style="font-size: 2rem; color: var(--whatsapp); margin-bottom: 15px;"></i>
+                <h3>Live Stock & Inventory Sync</h3>
+                <p style="color: var(--text-muted); margin-top: 10px; font-size: 0.95rem;">Prevents over-booking or double-selling by locking inventory items in real-time.</p>
+            </div>
+            <div class="demo-feature-card">
+                <i class="fa-solid fa-file-invoice" style="font-size: 2rem; color: var(--whatsapp); margin-bottom: 15px;"></i>
+                <h3>Instant Invoice Generator</h3>
+                <p style="color: var(--text-muted); margin-top: 10px; font-size: 0.95rem;">Auto-creates PDF quotations and WhatsApp billing links on user purchase triggers.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- DEMO SECTION 4: AUTOMOTIVE & FLEET HUB -->
+    <div id="view-demo-automotive" class="page-view">
+        <button class="btn-back-demos" onclick="switchTab('demos')"><i class="fa-solid fa-arrow-left"></i> Back To All Demos</button>
+        
+        <div class="demo-hero-box" style="border-color: rgba(255, 153, 102, 0.3);">
+            <div>
+                <span class="badge-limited" style="background: rgba(255, 153, 102, 0.1); color: var(--accent-amber); border-color: rgba(255, 153, 102, 0.3);">Automotive & Mobility</span>
+                <h1 style="font-size: 2.5rem; margin-top: 10px;">Automotive & Fleet Portal</h1>
+                <p style="color: var(--text-muted); margin-top: 8px;">Tailored for car/bike dealerships, garage services, and transport agencies.</p>
+            </div>
+            <a href="https://wa.me/918275544003?text=I%20want%20an%20Automotive%20Website" target="_blank" class="btn-offer-action">
+                Build Auto Portal <i class="fa-brands fa-whatsapp"></i>
+            </a>
+        </div>
+
+        <div class="demo-features-grid">
+            <div class="demo-feature-card">
+                <i class="fa-solid fa-gauge-high" style="font-size: 2rem; color: var(--accent-amber); margin-bottom: 15px;"></i>
+                <h3>Vehicle Specs Inspector</h3>
+                <p style="color: var(--text-muted); margin-top: 10px; font-size: 0.95rem;">Detailed high-res car engine specs, color options switcher, and trim comparison tool.</p>
+            </div>
+            <div class="demo-feature-card">
+                <i class="fa-solid fa-key" style="font-size: 2rem; color: var(--accent-amber); margin-bottom: 15px;"></i>
+                <h3>Instant Test-Drive Scheduler</h3>
+                <p style="color: var(--text-muted); margin-top: 10px; font-size: 0.95rem;">Direct slot booking for customer test drives linked with auto SMS confirmations.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- DEMO SECTION 5: REAL ESTATE & SHOWROOMS -->
+    <div id="view-demo-realestate" class="page-view">
+        <button class="btn-back-demos" onclick="switchTab('demos')"><i class="fa-solid fa-arrow-left"></i> Back To All Demos</button>
+        
+        <div class="demo-hero-box" style="border-color: rgba(168, 85, 247, 0.3);">
+            <div>
+                <span class="badge-limited" style="background: rgba(168, 85, 247, 0.1); color: #a855f7; border-color: rgba(168, 85, 247, 0.3);">Real Estate & Showrooms</span>
+                <h1 style="font-size: 2.5rem; margin-top: 10px;">Luxury Property Showroom</h1>
+                <p style="color: var(--text-muted); margin-top: 8px;">Engineered for builders, architects, interior designers, and property brokers.</p>
+            </div>
+            <a href="https://wa.me/918275544003?text=I%20want%20a%20Real%20Estate%20Website" target="_blank" class="btn-offer-action">
+                Build Estate Showcase <i class="fa-brands fa-whatsapp"></i>
+            </a>
+        </div>
+
+        <div class="demo-features-grid">
+            <div class="demo-feature-card">
+                <i class="fa-solid fa-vr-cardboard" style="font-size: 2rem; color: #a855f7; margin-bottom: 15px;"></i>
+                <h3>3D Virtual Walkthrough Layout</h3>
+                <p style="color: var(--text-muted); margin-top: 10px; font-size: 0.95rem;">Seamless integration for 360-degree tour viewing and interactive floor planning.</p>
+            </div>
+            <div class="demo-feature-card">
+                <i class="fa-solid fa-calculator" style="font-size: 2rem; color: #a855f7; margin-bottom: 15px;"></i>
+                <h3>EMI & Mortgage Estimator</h3>
+                <p style="color: var(--text-muted); margin-top: 10px; font-size: 0.95rem;">Built-in instant loan tenure and installment calculator for prospective buyers.</p>
+            </div>
         </div>
     </div>
 
@@ -1001,46 +1277,85 @@
         </div>
     </div>
 
-    <!-- TAB 4: CONTACT -->
-    <div id="view-contact" class="page-view">
-        <div class="section-header">
-            <h2>Initialize Project Pipeline</h2>
-            <p>Connect with the core team to discuss your digital workspace requirements.</p>
-        </div>
-        <div class="gateway-card">
-            <div class="gateway-meta">
-                <h3>Direct Gateways</h3>
-                <a href="https://wa.me/918275544003" target="_blank" class="channel-row">
-                    <i class="fa-brands fa-whatsapp"></i>
-                    <div>
-                        <strong style="display:block; font-size:1.1rem;">Engineering Deck</strong>
-                        <span style="font-size:0.9rem; color:var(--text-muted);">+91 8275544003</span>
-                    </div>
-                </a>
-                <a href="tel:+919420184273" class="channel-row">
-                    <i class="fa-solid fa-phone"></i>
-                    <div>
-                        <strong style="display:block; font-size:1.1rem;">Operations Desk</strong>
-                        <span style="font-size:0.9rem; color:var(--text-muted);">+91 9420184273</span>
-                    </div>
-                </a>
-            </div>
-            
-            <div class="gateway-form">
-                <form onsubmit="alert('Project parameters successfully synced!'); return false;">
-                    <div class="field-group">
-                        <label>Identity / Company Name</label>
-                        <input type="text" required placeholder="e.g. Acme Labs">
-                    </div>
-                    <div class="field-group">
-                        <label>Project Parameters Description</label>
-                        <textarea rows="4" required placeholder="Provide design directives..."></textarea>
-                    </div>
-                    <button type="submit" class="btn-portal">Transmit Direct Request</button>
-                </form>
-            </div>
-        </div>
+   <!-- TAB 4: PROJECT LAUNCHPAD (CONTACT & INQUIRY FORM) -->
+<div id="view-contact" class="page-view">
+    <div class="section-header">
+        <h2>Project <span class="gradient-text">Launchpad</span></h2>
+        <p>Tell us about your business vision and get a customized design roadmap & quote instantly.</p>
     </div>
+
+    <div class="launchpad-card">
+        <form id="projectLaunchForm" onsubmit="handleFormSubmit(event)">
+            <div class="form-grid">
+                
+                <!-- Client Name -->
+                <div class="field-group">
+                    <label><i class="fa-solid fa-user"></i> Full Name *</label>
+                    <input type="text" id="custName" required placeholder="e.g. Rahul Sharma">
+                </div>
+
+                <!-- WhatsApp / Phone Number -->
+                <div class="field-group">
+                    <label><i class="fa-brands fa-whatsapp"></i> WhatsApp Number *</label>
+                    <input type="tel" id="custPhone" required placeholder="e.g. 9876543210">
+                </div>
+
+                <!-- Business Name -->
+                <div class="field-group">
+                    <label><i class="fa-solid fa-briefcase"></i> Business / Brand Name</label>
+                    <input type="text" id="custBusiness" placeholder="e.g. Royal Cafe / Speed Motors">
+                </div>
+
+                <!-- Website Type Category -->
+                <div class="field-group">
+                    <label><i class="fa-solid fa-laptop-code"></i> Website Category *</label>
+                    <select id="webType" required>
+                        <option value="" disabled selected>Select Website Type...</option>
+                        <option value="Hotel & Restaurant">Hotel & Restaurant (Booking & QR Menu)</option>
+                        <option value="Shopping & E-Commerce">Shopping Center & E-Commerce Store</option>
+                        <option value="Problem Solving & SaaS">Business Automation & Custom SaaS/ERP</option>
+                        <option value="Automotive & Fleet">Automotive & Garage Service Hub</option>
+                        <option value="Real Estate & Showroom">Real Estate & Property Showroom</option>
+                        <option value="Standard Business Site">Standard Company / Portfolio Site</option>
+                        <option value="Other Custom Idea">Other Custom Concept</option>
+                    </select>
+                </div>
+
+                <!-- Estimated Budget -->
+                <div class="field-group">
+                    <label><i class="fa-solid fa-indian-rupee-sign"></i> Estimated Budget</label>
+                    <select id="budgetRange">
+                        <option value="₹1,999 (New User Offer)">₹1,999 (New User Offer)</option>
+                        <option value="₹5,000 - ₹10,000">₹5,000 - ₹10,000 (Standard Site)</option>
+                        <option value="₹10,000 - ₹25,000">₹10,000 - ₹25,000 (Advanced Automation)</option>
+                        <option value="₹25,000+">₹25,000+ (Enterprise Custom System)</option>
+                    </select>
+                </div>
+
+                <!-- Expected Timeline -->
+                <div class="field-group">
+                    <label><i class="fa-solid fa-clock"></i> Preferred Delivery Time</label>
+                    <select id="timeline">
+                        <option value="Urgent (24-48 Hours)">Urgent (24 - 48 Hours)</option>
+                        <option value="Within 1 Week">Within 1 Week</option>
+                        <option value="2 Weeks or More">2 Weeks or More</option>
+                    </select>
+                </div>
+
+            </div> <!-- form-grid ends -->
+
+            <!-- Requirements Details -->
+            <div class="field-group" style="margin-top: 22px;">
+                <label><i class="fa-solid fa-pen-to-square"></i> Project Scope & Specific Requirements</label>
+                <textarea id="custMessage" rows="4" placeholder="Mention features you need (e.g., Online Payment Gateway, Admin Dashboard, WhatsApp Order Alert, Custom Color Scheme, etc.)..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-portal" style="margin-top: 15px;">
+                <i class="fa-solid fa-paper-plane"></i> TRANSMIT PROJECT PARAMETERS
+            </button>
+        </form>
+    </div>
+</div>
 
     <!-- Premium Footer -->
     <footer>
@@ -1051,22 +1366,29 @@
     <!-- Client-Side Navigation & Ultra-Smooth Particle Background Engine -->
     <script>
         function switchTab(tabId) {
+            // Hide all views
             document.querySelectorAll('.page-view').forEach(view => {
                 view.classList.remove('active');
             });
+            
+            // Unset all main active navbar links
             document.querySelectorAll('.nav-menu a').forEach(link => {
                 link.classList.remove('active');
             });
 
+            // Activate target view section
             const selectedView = document.getElementById('view-' + tabId);
             if(selectedView) {
                 selectedView.classList.add('active');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.scrollTo({ top: 0, behavior: 'instant' });
             }
 
-            const activeAnchor = document.getElementById('tab-' + tabId);
+            // Highlight corresponding navbar item if it exists
+            const mainTab = tabId.startsWith('demo-') ? 'demos' : tabId;
+            const activeAnchor = document.getElementById('tab-' + mainTab);
             if(activeAnchor) activeAnchor.classList.add('active');
 
+            // Close mobile hamburger menu
             document.getElementById('navMenu').classList.remove('open');
         }
 
@@ -1149,6 +1471,31 @@
             requestAnimationFrame(animateParticles);
         }
         animateParticles();
+        function handleFormSubmit(e) {
+    e.preventDefault();
+    
+    // Fetch input values
+    const name = document.getElementById('custName').value;
+    const phone = document.getElementById('custPhone').value;
+    const business = document.getElementById('custBusiness').value || 'Not Mentioned';
+    const webType = document.getElementById('webType').value;
+    const budget = document.getElementById('budgetRange').value;
+    const timeline = document.getElementById('timeline').value;
+    const msg = document.getElementById('custMessage').value || 'None';
+
+    // Build Whatsapp Pre-filled Message
+    const text = `*🚀 NEW PROJECT INQUIRY - LOGIC ART*%0A%0A` +
+                 `👤 *Client Name:* ${encodeURIComponent(name)}%0A` +
+                 `📞 *Contact Number:* ${encodeURIComponent(phone)}%0A` +
+                 `🏢 *Business Name:* ${encodeURIComponent(business)}%0A` +
+                 `💻 *Category Needed:* ${encodeURIComponent(webType)}%0A` +
+                 `💰 *Estimated Budget:* ${encodeURIComponent(budget)}%0A` +
+                 `⏱️ *Target Timeline:* ${encodeURIComponent(timeline)}%0A` +
+                 `📝 *Requirements Scope:* ${encodeURIComponent(msg)}`;
+
+    // Route directly to Agency WhatsApp
+    window.open(`https://wa.me/918275544003?text=${text}`, '_blank');
+}
     </script>
 </body>
 </html>
