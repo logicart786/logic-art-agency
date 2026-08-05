@@ -363,6 +363,7 @@
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             text-align: center;
             cursor: pointer;
+            border: none;
         }
 
         .btn-offer-action:hover {
@@ -812,46 +813,122 @@
             .offer-panel h1 { font-size: 2.4rem; }
             .price-left strong { font-size: 2.6rem; }
         }
+
         /* --- PROJECT LAUNCHPAD FORM STYLES --- */
-.launchpad-card {
-    background: linear-gradient(135deg, rgba(13,20,38,0.95) 0%, #030712 100%);
-    border: 1px solid rgba(0, 242, 254, 0.25);
-    border-radius: 28px;
-    padding: 45px;
-    box-shadow: 0 30px 70px rgba(0,0,0,0.6);
-    backdrop-filter: blur(20px);
-    max-width: 950px;
-    margin: 0 auto;
-}
+        .launchpad-card {
+            background: linear-gradient(135deg, rgba(13,20,38,0.95) 0%, #030712 100%);
+            border: 1px solid rgba(0, 242, 254, 0.25);
+            border-radius: 28px;
+            padding: 45px;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.6);
+            backdrop-filter: blur(20px);
+            max-width: 950px;
+            margin: 0 auto;
+        }
 
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 22px;
-}
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+        }
 
-.field-group select {
-    width: 100%;
-    padding: 16px;
-    background: #030712;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 14px;
-    color: white;
-    outline: none;
-    font-size: 0.95rem;
-    transition: all 0.3s;
-    cursor: pointer;
-}
+        .field-group select {
+            width: 100%;
+            padding: 16px;
+            background: #030712;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            color: white;
+            outline: none;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
 
-.field-group select:focus {
-    border-color: var(--primary-blue);
-    box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
-}
+        .field-group select:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+        }
 
-.field-group select option {
-    background: #0b1329;
-    color: white;
-}
+        .field-group select option {
+            background: #0b1329;
+            color: white;
+        }
+
+        /* --- LIVE DEMO EMBEDDED MODAL / VIEWER STYLES --- */
+        .demo-viewer-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(3, 7, 18, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 9999;
+            display: none;
+            flex-direction: column;
+            animation: fadeInModal 0.3s ease-in-out forwards;
+        }
+
+        @keyframes fadeInModal {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .demo-viewer-modal.active {
+            display: flex;
+        }
+
+        .demo-viewer-header {
+            height: 65px;
+            background: rgba(11, 19, 41, 0.95);
+            border-bottom: 1px solid rgba(0, 242, 254, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+        }
+
+        .demo-viewer-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-close-demo {
+            background: linear-gradient(135deg, var(--accent-orange), #e11d48);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-close-demo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 94, 98, 0.5);
+        }
+
+        .demo-iframe-container {
+            flex: 1;
+            width: 100%;
+            height: calc(100vh - 65px);
+            background: #fff;
+        }
+
+        .demo-iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
     </style>
 </head>
 <body>
@@ -959,7 +1036,7 @@
 
         </div> <!-- hub-split-grid ends -->
 
-        <!-- --- HOME QUICK DEMO ACCESS --- -->
+        <!-- HOME QUICK DEMO ACCESS -->
         <div style="margin-top: 80px;">
             <div class="section-header" style="margin-bottom: 35px;">
                 <h2><span class="gradient-text">Interactive Live Demos</span></h2>
@@ -1032,7 +1109,7 @@
                 </div>
             </div>
 
-            <!-- 4. Automotive & Fleet Hub (Extra) -->
+            <!-- 4. Automotive & Fleet Hub -->
             <div class="deck-card" onclick="switchTab('demo-automotive')" style="cursor: pointer; border-color: rgba(255, 153, 102, 0.2);">
                 <i class="fa-solid fa-car-side deck-icon" style="color: var(--accent-amber);"></i>
                 <h3>Automotive & Fleet Hub</h3>
@@ -1042,7 +1119,7 @@
                 </div>
             </div>
 
-            <!-- 5. Real Estate & Showrooms (Extra) -->
+            <!-- 5. Real Estate & Showrooms -->
             <div class="deck-card" onclick="switchTab('demo-realestate')" style="cursor: pointer; border-color: rgba(147, 51, 234, 0.2);">
                 <i class="fa-solid fa-building-user deck-icon" style="color: #a855f7;"></i>
                 <h3>Real Estate & Showrooms</h3>
@@ -1058,10 +1135,19 @@
     <div id="view-demo-hotel" class="page-view">
         <button class="btn-back-demos" onclick="switchTab('demos')"><i class="fa-solid fa-arrow-left"></i> Back To All Demos</button>
         
-        <!-- Ya Frame (Iframe) Ke Andar Chalane Ke Liye -->
-<div class="demo-iframe-wrapper">
-    <iframe src="hotel-demo.html"></iframe>
-</div>
+        <div class="demo-hero-box" style="border-color: rgba(0, 242, 254, 0.3);">
+            <div>
+                <span class="badge-limited" style="background: rgba(0, 242, 254, 0.1); color: var(--primary-blue); border-color: rgba(0, 242, 254, 0.3);">Hospitality Suite</span>
+                <h1 style="font-size: 2.5rem; margin-top: 10px;">Grand Hotel & Fine Dine Portal</h1>
+                <p style="color: var(--text-muted); margin-top: 8px;">Experience our full interactive live layout designed for luxury stay & dining.</p>
+            </div>
+            
+            <!-- BUTTON CLICK PAR USI SCREEN PE LIVE HOTEL DEMO OPEN HOGA -->
+            <button onclick="openLiveDemo('hotel-demo.html', 'Grand Hotel Demo 1')" class="btn-offer-action" style="background: linear-gradient(135deg, var(--primary-blue), #2563eb);">
+                <i class="fa-solid fa-eye"></i> HOTEL DEMO 1 (LIVE PREVIEW)
+            </button>
+        </div>
+
         <div class="demo-features-grid">
             <div class="demo-feature-card">
                 <i class="fa-solid fa-bed" style="font-size: 2rem; color: var(--primary-blue); margin-bottom: 15px;"></i>
@@ -1270,85 +1356,94 @@
         </div>
     </div>
 
-   <!-- TAB 4: PROJECT LAUNCHPAD (CONTACT & INQUIRY FORM) -->
-<div id="view-contact" class="page-view">
-    <div class="section-header">
-        <h2>Project <span class="gradient-text">Launchpad</span></h2>
-        <p>Tell us about your business vision and get a customized design roadmap & quote instantly.</p>
+    <!-- TAB 4: PROJECT LAUNCHPAD (CONTACT & INQUIRY FORM) -->
+    <div id="view-contact" class="page-view">
+        <div class="section-header">
+            <h2>Project <span class="gradient-text">Launchpad</span></h2>
+            <p>Tell us about your business vision and get a customized design roadmap & quote instantly.</p>
+        </div>
+
+        <div class="launchpad-card">
+            <form id="projectLaunchForm" onsubmit="handleFormSubmit(event)">
+                <div class="form-grid">
+                    
+                    <div class="field-group">
+                        <label><i class="fa-solid fa-user"></i> Full Name *</label>
+                        <input type="text" id="custName" required placeholder="e.g. Rahul Sharma">
+                    </div>
+
+                    <div class="field-group">
+                        <label><i class="fa-brands fa-whatsapp"></i> WhatsApp Number *</label>
+                        <input type="tel" id="custPhone" required placeholder="e.g. 9876543210">
+                    </div>
+
+                    <div class="field-group">
+                        <label><i class="fa-solid fa-briefcase"></i> Business / Brand Name</label>
+                        <input type="text" id="custBusiness" placeholder="e.g. Royal Cafe / Speed Motors">
+                    </div>
+
+                    <div class="field-group">
+                        <label><i class="fa-solid fa-laptop-code"></i> Website Category *</label>
+                        <select id="webType" required>
+                            <option value="" disabled selected>Select Website Type...</option>
+                            <option value="Hotel & Restaurant">Hotel & Restaurant (Booking & QR Menu)</option>
+                            <option value="Shopping & E-Commerce">Shopping Center & E-Commerce Store</option>
+                            <option value="Problem Solving & SaaS">Business Automation & Custom SaaS/ERP</option>
+                            <option value="Automotive & Fleet">Automotive & Garage Service Hub</option>
+                            <option value="Real Estate & Showroom">Real Estate & Property Showroom</option>
+                            <option value="Standard Business Site">Standard Company / Portfolio Site</option>
+                            <option value="Other Custom Idea">Other Custom Concept</option>
+                        </select>
+                    </div>
+
+                    <div class="field-group">
+                        <label><i class="fa-solid fa-indian-rupee-sign"></i> Estimated Budget</label>
+                        <select id="budgetRange">
+                            <option value="₹1,999 (New User Offer)">₹1,999 (New User Offer)</option>
+                            <option value="₹5,000 - ₹10,000">₹5,000 - ₹10,000 (Standard Site)</option>
+                            <option value="₹10,000 - ₹25,000">₹10,000 - ₹25,000 (Advanced Automation)</option>
+                            <option value="₹25,000+">₹25,000+ (Enterprise Custom System)</option>
+                        </select>
+                    </div>
+
+                    <div class="field-group">
+                        <label><i class="fa-solid fa-clock"></i> Preferred Delivery Time</label>
+                        <select id="timeline">
+                            <option value="Urgent (24-48 Hours)">Urgent (24 - 48 Hours)</option>
+                            <option value="Within 1 Week">Within 1 Week</option>
+                            <option value="2 Weeks or More">2 Weeks or More</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="field-group" style="margin-top: 22px;">
+                    <label><i class="fa-solid fa-pen-to-square"></i> Project Scope & Specific Requirements</label>
+                    <textarea id="custMessage" rows="4" placeholder="Mention features you need (e.g., Online Payment Gateway, Admin Dashboard, WhatsApp Order Alert, Custom Color Scheme, etc.)..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-portal" style="margin-top: 15px;">
+                    <i class="fa-solid fa-paper-plane"></i> TRANSMIT PROJECT PARAMETERS
+                </button>
+            </form>
+        </div>
     </div>
 
-    <div class="launchpad-card">
-        <form id="projectLaunchForm" onsubmit="handleFormSubmit(event)">
-            <div class="form-grid">
-                
-                <!-- Client Name -->
-                <div class="field-group">
-                    <label><i class="fa-solid fa-user"></i> Full Name *</label>
-                    <input type="text" id="custName" required placeholder="e.g. Rahul Sharma">
-                </div>
-
-                <!-- WhatsApp / Phone Number -->
-                <div class="field-group">
-                    <label><i class="fa-brands fa-whatsapp"></i> WhatsApp Number *</label>
-                    <input type="tel" id="custPhone" required placeholder="e.g. 9876543210">
-                </div>
-
-                <!-- Business Name -->
-                <div class="field-group">
-                    <label><i class="fa-solid fa-briefcase"></i> Business / Brand Name</label>
-                    <input type="text" id="custBusiness" placeholder="e.g. Royal Cafe / Speed Motors">
-                </div>
-
-                <!-- Website Type Category -->
-                <div class="field-group">
-                    <label><i class="fa-solid fa-laptop-code"></i> Website Category *</label>
-                    <select id="webType" required>
-                        <option value="" disabled selected>Select Website Type...</option>
-                        <option value="Hotel & Restaurant">Hotel & Restaurant (Booking & QR Menu)</option>
-                        <option value="Shopping & E-Commerce">Shopping Center & E-Commerce Store</option>
-                        <option value="Problem Solving & SaaS">Business Automation & Custom SaaS/ERP</option>
-                        <option value="Automotive & Fleet">Automotive & Garage Service Hub</option>
-                        <option value="Real Estate & Showroom">Real Estate & Property Showroom</option>
-                        <option value="Standard Business Site">Standard Company / Portfolio Site</option>
-                        <option value="Other Custom Idea">Other Custom Concept</option>
-                    </select>
-                </div>
-
-                <!-- Estimated Budget -->
-                <div class="field-group">
-                    <label><i class="fa-solid fa-indian-rupee-sign"></i> Estimated Budget</label>
-                    <select id="budgetRange">
-                        <option value="₹1,999 (New User Offer)">₹1,999 (New User Offer)</option>
-                        <option value="₹5,000 - ₹10,000">₹5,000 - ₹10,000 (Standard Site)</option>
-                        <option value="₹10,000 - ₹25,000">₹10,000 - ₹25,000 (Advanced Automation)</option>
-                        <option value="₹25,000+">₹25,000+ (Enterprise Custom System)</option>
-                    </select>
-                </div>
-
-                <!-- Expected Timeline -->
-                <div class="field-group">
-                    <label><i class="fa-solid fa-clock"></i> Preferred Delivery Time</label>
-                    <select id="timeline">
-                        <option value="Urgent (24-48 Hours)">Urgent (24 - 48 Hours)</option>
-                        <option value="Within 1 Week">Within 1 Week</option>
-                        <option value="2 Weeks or More">2 Weeks or More</option>
-                    </select>
-                </div>
-
-            </div> <!-- form-grid ends -->
-
-            <!-- Requirements Details -->
-            <div class="field-group" style="margin-top: 22px;">
-                <label><i class="fa-solid fa-pen-to-square"></i> Project Scope & Specific Requirements</label>
-                <textarea id="custMessage" rows="4" placeholder="Mention features you need (e.g., Online Payment Gateway, Admin Dashboard, WhatsApp Order Alert, Custom Color Scheme, etc.)..."></textarea>
+    <!-- FULL SCREEN EMBEDDED DEMO MODAL FRAME -->
+    <div id="demoViewerModal" class="demo-viewer-modal">
+        <div class="demo-viewer-header">
+            <div class="demo-viewer-title">
+                <i class="fa-solid fa-laptop-code"></i>
+                <span id="demoViewerTitleText">Hotel Demo 1</span>
             </div>
-
-            <button type="submit" class="btn-portal" style="margin-top: 15px;">
-                <i class="fa-solid fa-paper-plane"></i> TRANSMIT PROJECT PARAMETERS
+            <button class="btn-close-demo" onclick="closeLiveDemo()">
+                <i class="fa-solid fa-xmark"></i> Close Preview
             </button>
-        </form>
+        </div>
+        <div class="demo-iframe-container">
+            <iframe id="demoIframe" src="" title="Live Demo Preview"></iframe>
+        </div>
     </div>
-</div>
 
     <!-- Premium Footer -->
     <footer>
@@ -1356,32 +1451,27 @@
         <p style="font-size:0.8rem; margin-top:12px; opacity:0.4;">&copy; 2026 Logic Art. Engineered for modern business ecosystems.</p>
     </footer>
 
-    <!-- Client-Side Navigation & Ultra-Smooth Particle Background Engine -->
+    <!-- Client-Side Navigation & Script Logic -->
     <script>
         function switchTab(tabId) {
-            // Hide all views
             document.querySelectorAll('.page-view').forEach(view => {
                 view.classList.remove('active');
             });
             
-            // Unset all main active navbar links
             document.querySelectorAll('.nav-menu a').forEach(link => {
                 link.classList.remove('active');
             });
 
-            // Activate target view section
             const selectedView = document.getElementById('view-' + tabId);
             if(selectedView) {
                 selectedView.classList.add('active');
                 window.scrollTo({ top: 0, behavior: 'instant' });
             }
 
-            // Highlight corresponding navbar item if it exists
             const mainTab = tabId.startsWith('demo-') ? 'demos' : tabId;
             const activeAnchor = document.getElementById('tab-' + mainTab);
             if(activeAnchor) activeAnchor.classList.add('active');
 
-            // Close mobile hamburger menu
             document.getElementById('navMenu').classList.remove('open');
         }
 
@@ -1389,7 +1479,28 @@
             document.getElementById('navMenu').classList.toggle('open');
         }
 
-        // --- ULTRA-SMOOTH CANVAS PARTICLE NETWORK ANIMATION ---
+        /* --- EMBEDDED LIVE DEMO VIEWER FUNCTIONS --- */
+        function openLiveDemo(fileUrl, titleText) {
+            const modal = document.getElementById('demoViewerModal');
+            const iframe = document.getElementById('demoIframe');
+            const title = document.getElementById('demoViewerTitleText');
+
+            iframe.src = fileUrl;
+            title.innerText = titleText;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Stop page scrolling background
+        }
+
+        function closeLiveDemo() {
+            const modal = document.getElementById('demoViewerModal');
+            const iframe = document.getElementById('demoIframe');
+
+            modal.classList.remove('active');
+            iframe.src = '';
+            document.body.style.overflow = 'auto'; // Re-enable main scrolling
+        }
+
+        /* --- CANVAS PARTICLE NETWORK ANIMATION --- */
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
 
@@ -1464,31 +1575,29 @@
             requestAnimationFrame(animateParticles);
         }
         animateParticles();
+
         function handleFormSubmit(e) {
-    e.preventDefault();
-    
-    // Fetch input values
-    const name = document.getElementById('custName').value;
-    const phone = document.getElementById('custPhone').value;
-    const business = document.getElementById('custBusiness').value || 'Not Mentioned';
-    const webType = document.getElementById('webType').value;
-    const budget = document.getElementById('budgetRange').value;
-    const timeline = document.getElementById('timeline').value;
-    const msg = document.getElementById('custMessage').value || 'None';
+            e.preventDefault();
+            
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
+            const business = document.getElementById('custBusiness').value || 'Not Mentioned';
+            const webType = document.getElementById('webType').value;
+            const budget = document.getElementById('budgetRange').value;
+            const timeline = document.getElementById('timeline').value;
+            const msg = document.getElementById('custMessage').value || 'None';
 
-    // Build Whatsapp Pre-filled Message
-    const text = `*🚀 NEW PROJECT INQUIRY - LOGIC ART*%0A%0A` +
-                 `👤 *Client Name:* ${encodeURIComponent(name)}%0A` +
-                 `📞 *Contact Number:* ${encodeURIComponent(phone)}%0A` +
-                 `🏢 *Business Name:* ${encodeURIComponent(business)}%0A` +
-                 `💻 *Category Needed:* ${encodeURIComponent(webType)}%0A` +
-                 `💰 *Estimated Budget:* ${encodeURIComponent(budget)}%0A` +
-                 `⏱️ *Target Timeline:* ${encodeURIComponent(timeline)}%0A` +
-                 `📝 *Requirements Scope:* ${encodeURIComponent(msg)}`;
+            const text = `*🚀 NEW PROJECT INQUIRY - LOGIC ART*%0A%0A` +
+                         `👤 *Client Name:* ${encodeURIComponent(name)}%0A` +
+                         `📞 *Contact Number:* ${encodeURIComponent(phone)}%0A` +
+                         `🏢 *Business Name:* ${encodeURIComponent(business)}%0A` +
+                         `💻 *Category Needed:* ${encodeURIComponent(webType)}%0A` +
+                         `💰 *Estimated Budget:* ${encodeURIComponent(budget)}%0A` +
+                         `⏱️ *Target Timeline:* ${encodeURIComponent(timeline)}%0A` +
+                         `📝 *Requirements Scope:* ${encodeURIComponent(msg)}`;
 
-    // Route directly to Agency WhatsApp
-    window.open(`https://wa.me/918275544003?text=${text}`, '_blank');
-}
+            window.open(`https://wa.me/918275544003?text=${text}`, '_blank');
+        }
     </script>
 </body>
 </html>
