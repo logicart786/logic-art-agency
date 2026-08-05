@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRON EDGE FITNESS</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:#0b0b0b;
+color:white;
+overflow-x:hidden;
+}
+
+/* =========================
+   LOADING SCREEN
+========================= */
+
+#loader{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:#0b0b0b;
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+z-index:9999;
+
+transition:opacity .8s ease, visibility .8s ease;
+
+}
+
+.loader-content{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
+.loader-content h1{
+
+font-size:60px;
+
+font-weight:800;
+
+letter-spacing:2px;
+
+}
+
+.loader-content span{
+
+color:#ff3c00;
+
+}
+
+.loader-content p{
+
+margin:20px 0;
+
+color:#aaa;
+
+}
+
+.loader-bar{
+
+  
+width:250px;
+
+height:6px;
+  
+
+background:#222;
+
+border-radius:10px;
+
+overflow:hidden;
+  
+
+}
+
+.loader-progress{
+
+width:0;
+
+height:100%;
+
+background:#ff3c00;
+
+animation:loading 2s linear forwards;
+
+}
+
+@keyframes loading{
+
+from{
+
+width:0;
+
+}
+
+to{
+
+width:100%;
+
+}
+
+}
+/* Animated Background */
+
+body::before{
+content:"";
+position:fixed;
+width:500px;
+height:500px;
+background:#ff2d20;
+filter:blur(180px);
+top:-150px;
+left:-100px;
+opacity:.3;
+z-index:-2;
+}
+
+body::after{
+content:"";
+position:fixed;
+width:400px;
+height:400px;
+background:#ff9900;
+filter:blur(170px);
+right:-100px;
+bottom:-100px;
+opacity:.25;
+z-index:-2;
+}
+
+/* NAVBAR */
+
+nav{
+
+position:fixed;
+top:0;
+left:0;
+width:100%;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:22px 8%;
+
+background:rgba(0,0,0,.45);
+backdrop-filter:blur(12px);
+
+z-index:1000;
+
+}
+/* ACTIVE NAVIGATION */
+
+nav a.active{
+
+color:#ff3c00;
+
+font-weight:700;
+
+}
+
+.logo{
+
+font-size:32px;
+font-weight:800;
+letter-spacing:2px;
+
+}
+
+.logo span{
+
+color:#ff3c00;
+
+}
+
+nav ul{
+
+display:flex;
+gap:35px;
+list-style:none;
+
+}
+
+nav a{
+
+color:white;
+text-decoration:none;
+font-weight:500;
+transition:.3s;
+
+}
+
+nav a:hover{
+
+color:#ff3c00;
+
+}
+
+.join{
+
+background:#ff3c00;
+padding:12px 25px;
+border-radius:30px;
+
+}
+
+/* HERO */
+
+.hero{
+
+min-height:100vh;
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+align-items:center;
+
+padding:120px 8%;
+
+gap:40px;
+
+}
+
+.hero h1{
+
+font-size:68px;
+line-height:1.05;
+margin-bottom:25px;
+
+}
+
+.hero h1 span{
+
+color:#ff3c00;
+
+}
+
+.hero p{
+
+font-size:19px;
+color:#c9c9c9;
+margin-bottom:35px;
+
+}
+
+.buttons{
+
+display:flex;
+gap:20px;
+
+}
+
+.btn{
+
+padding:15px 34px;
+
+border-radius:40px;
+
+text-decoration:none;
+
+font-weight:600;
+
+transition:.35s;
+
+}
+
+.primary{
+
+background:#ff3c00;
+color:white;
+
+}
+
+.secondary{
+
+border:2px solid white;
+color:white;
+
+}
+
+.btn:hover{
+
+transform:translateY(-5px);
+
+}
+
+.right{
+
+display:flex;
+justify-content:center;
+
+}
+
+.glass{
+
+width:360px;
+height:430px;
+
+border-radius:25px;
+
+background:rgba(255,255,255,.05);
+
+border:1px solid rgba(255,255,255,.15);
+
+backdrop-filter:blur(18px);
+
+padding:35px;
+
+box-shadow:0 30px 60px rgba(0,0,0,.4);
+
+animation:float 5s ease-in-out infinite;
+
+}
+
+.glass h2{
+
+font-size:28px;
+margin-bottom:20px;
+
+}
+
+.stat{
+
+display:flex;
+justify-content:space-between;
+
+padding:15px 0;
+
+border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+/* ABOUT */
+
+.about{
+
+padding:100px 8%;
+
+}
+
+.section-title{
+
+font-size:44px;
+margin-bottom:20px;
+
+}
+
+.about p{
+
+max-width:850px;
+
+line-height:1.8;
+
+color:#bbbbbb;
+
+font-size:18px;
+
+}
+
+.features{
+
+margin-top:50px;
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:25px;
+
+}
+
+.feature{
+
+background:#171717;
+
+padding:30px;
+
+border-radius:18px;
+
+transition:.35s;
+
+}
+
+.feature:hover{
+
+transform:translateY(-10px);
+background:#202020;
+
+}
+
+.feature h3{
+
+margin-bottom:15px;
+
+color:#ff3c00;
+
+}
+/* =========================
+   WORKOUT PROGRAMS
+========================= */
+
+.programs{
+
+padding:100px 8%;
+
+}
+
+.program-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:25px;
+
+margin-top:50px;
+
+}
+
+
+.program-card{
+
+background:#171717;
+
+padding:35px;
+
+border-radius:20px;
+
+border:1px solid rgba(255,255,255,.08);
+
+transition:.35s;
+
+}
+
+
+.program-card:hover{
+
+transform:translateY(-12px);
+
+box-shadow:0 20px 40px rgba(255,60,0,.2);
+
+border-color:#ff3c00;
+
+}
+
+
+.program-card h3{
+
+color:#ff3c00;
+
+font-size:24px;
+
+margin-bottom:15px;
+
+}
+
+
+.program-card p{
+
+color:#bbb;
+
+line-height:1.7;
+
+}
+
+
+
+/* =========================
+   TRAINERS
+========================= */
+
+
+.trainers{
+
+padding:100px 8%;
+
+}
+
+
+.trainer-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:30px;
+
+margin-top:50px;
+
+}
+
+
+.trainer-card{
+
+background:#171717;
+
+border-radius:20px;
+
+overflow:hidden;
+
+transition:.35s;
+
+}
+
+
+.trainer-card:hover{
+
+transform:translateY(-10px);
+
+}
+
+
+.trainer-card img{
+
+width:100%;
+
+height:280px;
+
+object-fit:cover;
+
+}
+
+
+.trainer-info{
+
+padding:25px;
+
+}
+
+
+.trainer-info h3{
+
+color:#ff3c00;
+
+margin-bottom:10px;
+
+}
+
+
+.trainer-info p{
+
+color:#bbb;
+
+line-height:1.6;
+
+}
+/* PRICING */
+
+.pricing{
+
+padding:100px 8%;
+
+}
+
+
+.price-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+gap:30px;
+
+margin-top:50px;
+
+}
+
+
+.price-card{
+
+background:#171717;
+
+padding:40px;
+
+border-radius:25px;
+
+text-align:center;
+
+transition:.35s;
+
+border:1px solid rgba(255,255,255,.1);
+
+}
+
+
+.price-card:hover{
+
+transform:translateY(-12px);
+
+}
+
+
+.price-card h3{
+
+color:#ff3c00;
+
+font-size:28px;
+
+}
+
+
+.price-card h2{
+
+font-size:35px;
+
+margin:20px 0;
+
+}
+
+
+.price-card span{
+
+font-size:16px;
+
+color:#aaa;
+
+}
+
+
+.price-card p{
+
+line-height:2;
+
+color:#ccc;
+
+margin-bottom:30px;
+
+}
+
+
+.popular{
+
+border:2px solid #ff3c00;
+
+}
+/* CONTACT */
+
+.contact{
+
+padding:100px 8%;
+
+}
+
+.contact-text{
+
+color:#bbb;
+
+margin-bottom:35px;
+
+max-width:700px;
+
+line-height:1.7;
+
+}
+
+#contactForm{
+
+display:flex;
+
+flex-direction:column;
+
+gap:20px;
+
+max-width:700px;
+
+}
+
+#contactForm input,
+#contactForm textarea{
+
+background:#171717;
+
+border:1px solid rgba(255,255,255,.15);
+
+padding:18px;
+
+border-radius:15px;
+
+color:white;
+
+font-size:16px;
+
+outline:none;
+
+}
+
+#contactForm input:focus,
+#contactForm textarea:focus{
+
+border-color:#ff3c00;
+
+}
+
+#contactForm button{
+
+width:220px;
+
+cursor:pointer;
+
+}
+/* =========================
+   SCROLL REVEAL
+========================= */
+
+.reveal{
+
+opacity:0;
+
+transform:translateY(60px);
+
+transition:all .8s ease;
+
+}
+
+.reveal.active{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+@keyframes float{
+
+50%{
+transform:translateY(-15px);
+}
+
+}
+
+@media(max-width:900px){
+
+.hero{
+
+grid-template-columns:1fr;
+text-align:center;
+
+}
+
+.buttons{
+
+justify-content:center;
+
+}
+
+nav ul{
+
+display:none;
+
+}
+
+.hero h1{
+
+font-size:48px;
+
+}
+
+.glass{
+
+width:100%;
+
+}
+/* MOBILE MENU */
+
+.menu-btn{
+
+display:none;
+
+font-size:32px;
+
+cursor:pointer;
+
+}
+
+
+.mobile-menu{
+
+display:none;
+
+position:fixed;
+
+top:80px;
+
+right:20px;
+
+background:#171717;
+
+padding:25px;
+
+border-radius:20px;
+
+border:1px solid rgba(255,255,255,.15);
+
+z-index:2000;
+
+}
+
+
+.mobile-menu a{
+
+display:block;
+
+color:white;
+
+text-decoration:none;
+
+padding:12px 0;
+
+}
+
+
+.mobile-menu a:hover{
+
+color:#ff3c00;
+
+}
+
+
+@media(max-width:900px){
+
+.menu-btn{
+
+display:block;
+
+}
+
+.mobile-menu.active{
+
+display:block;
+
+}
+
+}
+
+}
+</style>
+</head>
+
+<body>
+<div id="loader">
+
+    <div class="loader-content">
+
+        <h1>IRON<span>EDGE</span></h1>
+
+        <p>Loading...</p>
+
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+
+    </div>
+
+</div>
+<nav>
+
+<div class="logo">
+IRON<span>EDGE</span>
+</div>
+
+<ul>
+
+<li><a href="#">Home</a></li>
+
+<li><a href="#about">About</a></li>
+
+<li><a href="#programs">Programs</a></li>
+
+<li><a href="#trainers">Trainers</a></li>
+
+<li><a href="#pricing">Pricing</a></li>
+
+<li><a href="#contact">Contact</a></li>
+
+</ul>
+
+<a href="#pricing" class="join">Join Now</a>
+
+<div class="menu-btn" onclick="openMenu()">
+⋮
+</div>
+
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+
+<a href="#home">Home</a>
+
+<a href="#about">About</a>
+
+<a href="#programs">Programs</a>
+
+<a href="#trainers">Trainers</a>
+
+<a href="#pricing">Membership</a>
+
+<a href="#contact">Contact</a>
+
+</div>
+
+<section class="hero reveal" id="home">
+
+<div>
+
+<h1>
+BUILD YOUR
+<span>DREAM BODY</span>
+</h1>
+
+<p>
+
+Train with certified coaches, world-class equipment,
+and personalized workout plans designed to help you
+reach your fitness goals.
+
+</p>
+
+<div class="buttons">
+
+<a href="#pricing" class="btn primary">
+Start Today
+</a>
+
+<a href="#about" class="btn secondary">
+Explore
+</a>
+
+</div>
+
+</div>
+
+<div class="right">
+
+<div class="glass">
+
+<h2>Gym Statistics</h2>
+
+<div class="stat">
+
+<span>Members</span>
+
+<strong id="m1">0</strong>
+
+</div>
+
+<div class="stat">
+
+<span>Trainers</span>
+
+<strong id="m2">0</strong>
+
+</div>
+
+<div class="stat">
+
+<span>Programs</span>
+
+<strong id="m3">0</strong>
+
+</div>
+
+<div class="stat">
+
+<span>Years</span>
+
+<strong id="m4">0</strong>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="about reveal" id="about">
+
+<h2 class="section-title">
+Why Choose Iron Edge?
+</h2>
+
+<p>
+
+At Iron Edge Fitness, we combine cutting-edge equipment,
+expert coaching, and a motivating environment to help
+you transform your body and lifestyle. Whether you're
+a beginner or an experienced athlete, our customized
+training programs are designed to keep you progressing.
+
+</p>
+
+<div class="features">
+
+<div class="feature">
+
+<h3>Modern Equipment</h3>
+
+<p>
+Latest strength and cardio machines.
+</p>
+
+</div>
+
+<div class="feature">
+
+<h3>Expert Trainers</h3>
+
+<p>
+Certified professionals to guide every workout.
+</p>
+
+</div>
+
+<div class="feature">
+
+<h3>Nutrition Plans</h3>
+
+<p>
+Customized meal plans for every fitness goal.
+</p>
+
+</div>
+
+<div class="feature">
+
+<h3>Open 24/7</h3>
+
+<p>
+Train whenever it fits your schedule.
+</p>
+
+</div>
+
+</div>
+
+</section>
+<!-- WORKOUT PROGRAMS -->
+
+<section class="programs reveal" id="programs">
+
+<h2 class="section-title">
+Our Workout Programs
+</h2>
+
+
+<div class="program-grid">
+
+
+<div class="program-card">
+
+<h3>Strength Training</h3>
+
+<p>
+Build power and increase muscle strength with expert guided workouts.
+</p>
+
+</div>
+
+
+<div class="program-card">
+
+<h3>Weight Loss</h3>
+
+<p>
+Burn fat and achieve your fitness goals with personalized plans.
+</p>
+
+</div>
+
+
+<div class="program-card">
+
+<h3>Muscle Building</h3>
+
+<p>
+Advanced training programs designed for maximum muscle growth.
+</p>
+
+</div>
+
+
+<div class="program-card">
+
+<h3>CrossFit</h3>
+
+<p>
+High intensity workouts to improve endurance and performance.
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+
+<!-- TRAINERS -->
+
+
+<section class="trainers reveal" id="trainers">
+
+
+<h2 class="section-title">
+Meet Our Trainers
+</h2>
+
+
+<div class="trainer-grid">
+
+
+<div class="trainer-card">
+
+
+<img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e">
+
+
+<div class="trainer-info">
+
+<h3>Alex Carter</h3>
+
+<p>
+Strength Coach<br>
+8 Years Experience
+</p>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="trainer-card">
+
+
+<img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48">
+
+
+<div class="trainer-info">
+
+<h3>Mike Wilson</h3>
+
+<p>
+Body Transformation Coach<br>
+10 Years Experience
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+<section class="pricing reveal" id="pricing">
+
+<h2 class="section-title">
+Membership Plans
+</h2>
+
+
+<div class="price-grid">
+
+
+<div class="price-card">
+
+<h3>Basic</h3>
+
+<h2>₹999<span>/month</span></h2>
+
+<p>
+✓ Gym Access<br>
+✓ Cardio Area<br>
+✓ Locker Facility
+</p>
+
+<a href="#checkout" class="btn primary">
+Choose Plan
+</a>
+
+</div>
+
+
+
+<div class="price-card popular">
+
+<h3>Premium</h3>
+
+<h2>₹1999<span>/month</span></h2>
+
+<p>
+✓ Everything Basic<br>
+✓ Trainer Support<br>
+✓ Diet Plan
+</p>
+
+<a href="#checkout" class="btn primary">
+Choose Plan
+</a>
+
+</div>
+
+
+
+<div class="price-card">
+
+<h3>Elite</h3>
+
+<h2>₹2999<span>/month</span></h2>
+
+<p>
+✓ Personal Coach<br>
+✓ Custom Workout<br>
+✓ 24/7 Support
+</p>
+
+<a href="#checkout" class="btn primary">
+Choose Plan
+</a>
+
+</div>
+
+
+</div>
+
+</section>
+<section class="contact reveal" id="contact">
+
+<h2 class="section-title">Contact Us</h2>
+
+<p class="contact-text">
+Have questions or want to join Iron Edge? Fill out the form below and send your details directly to us on WhatsApp.
+</p>
+
+<form id="contactForm">
+
+<input type="text" id="name" placeholder="Full Name" required>
+
+<input type="tel" id="phone" placeholder="Phone Number" required>
+
+<input type="email" id="email" placeholder="Email Address" required>
+
+<textarea id="message" placeholder="Message (Optional)" rows="5"></textarea>
+
+<button type="button" class="btn primary" onclick="sendWhatsApp()">
+Send
+</button>
+
+</form>
+
+</section>
+
+<script>
+function animate(id,target){
+
+let count=0;
+
+let speed=Math.ceil(target/80);
+
+let interval=setInterval(()=>{
+
+count+=speed;
+
+if(count>=target){
+
+count=target;
+clearInterval(interval);
+
+}
+
+document.getElementById(id).innerHTML=count+"+";
+
+},20);
+
+}
+
+window.onload=()=>{
+
+animate("m1",500);
+animate("m2",18);
+animate("m3",25);
+animate("m4",12);
+
+}
+
+function openMenu(){
+
+document.getElementById("mobileMenu")
+.classList.toggle("active");
+
+}
+
+function sendWhatsApp(){
+
+let name=document.getElementById("name").value;
+
+let phone=document.getElementById("phone").value;
+
+let email=document.getElementById("email").value;
+
+let message=document.getElementById("message").value;
+
+let text=
+`🏋️ Iron Edge Enquiry
+
+Name: ${name}
+
+Phone: ${phone}
+
+Email: ${email}
+
+Message: ${message}`;
+
+let url="https://wa.me/919420184273?text="+encodeURIComponent(text);
+
+window.open(url,"_blank");
+
+}
+
+window.addEventListener("load",()=>{
+
+setTimeout(()=>{
+
+document.getElementById("loader").style.opacity="0";
+
+document.getElementById("loader").style.visibility="hidden";
+
+},1800);
+
+});
+
+const reveals=document.querySelectorAll(".reveal");
+
+function revealSections(){
+
+const windowHeight=window.innerHeight;
+
+reveals.forEach(section=>{
+
+const top=section.getBoundingClientRect().top;
+
+if(top<windowHeight-120){
+
+section.classList.add("active");
+
+}
+
+});
+
+}
+
+window.addEventListener("scroll",revealSections);
+
+window.addEventListener("load",revealSections);
+
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll("nav ul li a");
+
+window.addEventListener("scroll", () => {
+
+    let current = "";
+
+    sections.forEach(section => {
+
+        const sectionTop = section.offsetTop - 120;
+        const sectionHeight = section.offsetHeight;
+
+        if (window.scrollY >= sectionTop &&
+            window.scrollY < sectionTop + sectionHeight) {
+
+            current = section.getAttribute("id");
+        }
+
+    });
+
+    navLinks.forEach(link => {
+
+        link.classList.remove("active");
+
+        if (link.getAttribute("href") === "#" + current) {
+
+            link.classList.add("active");
+
+        }
+
+    });
+
+});
+</script>
+
+</body>
+</html>
