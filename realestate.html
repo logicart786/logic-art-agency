@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aurevia Estates curates exceptional residential and commercial real estate across India's most coveted locations.">
+  <meta name="theme-color" content="#11241e">
+  <title>Aurevia Estates | Exceptional Properties, Expertly Curated</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    :root {
+      --ink: #17352d;
+      --deep: #0d211b;
+      --pine: #1f4a3d;
+      --sage: #bfc8ae;
+      --mist: #f5f5ef;
+      --paper: #fffef9;
+      --line: rgba(23, 53, 45, .14);
+      --gold: #be935b;
+      --gold-soft: #e9d6ba;
+      --muted: #66736d;
+      --white: #ffffff;
+      --shadow: 0 22px 60px rgba(19, 52, 43, .12);
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "Manrope", Arial, sans-serif;
+      --mono: "DM Mono", monospace;
+    }
+
+    body.dark {
+      --ink: #eaf0e8;
+      --deep: #08130f;
+      --pine: #abc5ad;
+      --sage: #778a7c;
+      --mist: #11241e;
+      --paper: #102018;
+      --line: rgba(234, 240, 232, .16);
+      --gold: #dfb878;
+      --gold-soft: #5a472e;
+      --muted: #b0bcb2;
+      --white: #162b22;
+      --shadow: 0 22px 60px rgba(0, 0, 0, .3);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body { margin: 0; background: var(--mist); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; overflow-x: hidden; }
+    body.menu-open { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+    img { display: block; width: 100%; }
+    ::selection { background: var(--gold); color: #fff; }
+    .container { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
+    .section { padding: 112px 0; position: relative; }
+    .section-quiet { background: var(--paper); }
+    .eyebrow { display: flex; align-items: center; gap: 10px; margin: 0 0 15px; color: var(--gold); font: 500 10px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+    .display { margin: 0; color: var(--ink); font: 600 clamp(34px, 4vw, 57px)/1.12 var(--serif); letter-spacing: -.035em; }
+    .lead { max-width: 520px; margin: 18px 0 0; color: var(--muted); font-size: 16px; }
+    .section-intro { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 50px; }
+    .section-intro .lead { max-width: 420px; }
+    .text-link { display: inline-flex; align-items: center; gap: 10px; color: var(--pine); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; transition: gap .25s ease; }
+    .text-link:hover { gap: 15px; }
+    .icon { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+    .small-icon { width: 15px; height: 15px; }
+
+    /* Loading screen */
+    .loader { position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; background: var(--deep); color: #fff; transition: opacity .55s ease, visibility .55s ease; }
+    .loader.done { opacity: 0; visibility: hidden; }
+    .loader-inner { text-align: center; }
+    .loader-mark { width: 50px; height: 50px; margin: 0 auto 20px; border: 1px solid rgba(255,255,255,.4); border-top-color: var(--gold); border-radius: 50%; animation: spin 1.1s linear infinite; }
+    .loader-name { font: 600 25px/1 var(--serif); letter-spacing: .05em; }
+    .loader p { margin: 9px 0 0; color: var(--sage); font: 500 10px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Navigation */
+    .site-header { position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; border-bottom: 1px solid transparent; transition: background .3s ease, border-color .3s ease, box-shadow .3s ease; }
+    .site-header.scrolled { background: color-mix(in srgb, var(--paper) 90%, transparent); border-color: var(--line); box-shadow: 0 6px 28px rgba(14, 36, 29, .05); backdrop-filter: blur(16px); }
+    .nav { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 25px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); }
+    .brand-mark { width: 31px; height: 35px; position: relative; display: grid; place-items: center; color: var(--gold); border: 1px solid currentColor; clip-path: polygon(50% 0, 100% 25%, 100% 100%, 0 100%, 0 25%); }
+    .brand-mark::after { content: "A"; margin-top: 4px; font: 600 17px/1 var(--serif); }
+    .brand-name { font: 600 19px/1 var(--serif); letter-spacing: .04em; }
+    .brand-sub { display: block; margin-top: 4px; color: var(--muted); font: 500 7px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 24px; margin-left: auto; }
+    .nav-links a { position: relative; padding: 31px 0; color: var(--ink); font-size: 11px; font-weight: 800; letter-spacing: .025em; }
+    .nav-links a::after { content: ""; position: absolute; bottom: 23px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width .25s ease; }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .round-btn, .theme-btn, .menu-btn { display: grid; place-items: center; width: 38px; height: 38px; padding: 0; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 50%; transition: color .2s, border-color .2s, background .2s, transform .2s; }
+    .round-btn:hover, .theme-btn:hover, .menu-btn:hover { color: var(--paper); background: var(--pine); border-color: var(--pine); transform: translateY(-2px); }
+    .nav-whatsapp { display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 14px; color: #fff; background: var(--pine); border: 0; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; transition: background .2s, transform .2s; }
+    .nav-whatsapp:hover { background: var(--gold); transform: translateY(-2px); }
+    .menu-btn { display: none; border-radius: 0; }
+    .mobile-menu { display: none; }
+
+    /* Hero */
+    .hero { position: relative; min-height: 770px; display: flex; align-items: end; color: #fff; overflow: hidden; background: var(--deep); }
+    .hero-media { position: absolute; inset: 0; background: url("https://images.pexels.com/photos/7031600/pexels-photo-7031600.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1500&w=2200") center/cover; animation: heroScale 12s ease-out both; }
+    .hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7, 24, 18, .88) 0%, rgba(10, 30, 23, .58) 48%, rgba(8, 25, 19, .12) 100%), linear-gradient(0deg, rgba(7, 21, 16, .78), transparent 52%); }
+    @keyframes heroScale { from { transform: scale(1.07); } to { transform: scale(1); } }
+    .hero .container { position: relative; z-index: 1; width: min(1180px, calc(100% - 48px)); padding: 150px 0 78px; }
+    .hero-copy { max-width: 720px; animation: liftIn .8s .2s both; }
+    @keyframes liftIn { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: none; } }
+    .hero .eyebrow { color: var(--gold-soft); }
+    .hero-title { max-width: 690px; margin: 0; color: #fff; font: 600 clamp(48px, 6vw, 86px)/.98 var(--serif); letter-spacing: -.045em; }
+    .hero-title em { color: var(--gold-soft); font-style: italic; }
+    .hero-text { max-width: 530px; margin: 24px 0 0; color: rgba(255,255,255,.79); font-size: 16px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 50px; padding: 0 21px; overflow: hidden; border: 1px solid transparent; border-radius: 0; font-size: 11px; font-weight: 800; letter-spacing: .085em; text-transform: uppercase; isolation: isolate; transition: color .25s, border-color .25s, background .25s, transform .25s; }
+    .btn::after { content: ""; position: absolute; z-index: -1; width: 10px; height: 10px; border-radius: 50%; background: currentColor; opacity: .12; transform: scale(0); transition: transform .5s ease; }
+    .btn:hover::after { transform: scale(24); }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary { color: var(--deep); background: var(--gold-soft); border-color: var(--gold-soft); }
+    .btn-secondary { color: #fff; background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.55); backdrop-filter: blur(10px); }
+    .btn-secondary:hover { color: var(--deep); background: #fff; border-color: #fff; }
+    .btn-dark { color: #fff; background: var(--pine); border-color: var(--pine); }
+    .btn-outline { color: var(--pine); background: transparent; border-color: var(--pine); }
+    .hero-bottom { position: relative; z-index: 1; display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-top: 85px; }
+    .hero-stats { display: flex; align-items: center; gap: 0; }
+    .hero-stat { min-width: 125px; padding-right: 27px; margin-right: 27px; border-right: 1px solid rgba(255,255,255,.26); }
+    .hero-stat:last-child { padding: 0; margin: 0; border: 0; }
+    .hero-stat strong { display: block; color: #fff; font: 600 27px/1 var(--serif); }
+    .hero-stat span { display: block; margin-top: 7px; color: rgba(255,255,255,.66); font: 500 9px/1.2 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .hero-scroll { display: inline-flex; align-items: center; gap: 10px; color: rgba(255,255,255,.65); font: 500 9px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+    .scroll-line { width: 44px; height: 1px; background: var(--gold-soft); position: relative; overflow: hidden; }
+    .scroll-line::after { content: ""; position: absolute; width: 18px; height: 1px; background: #fff; animation: scan 1.8s ease-in-out infinite; }
+    @keyframes scan { 0% { transform: translateX(-20px); } 100% { transform: translateX(44px); } }
+
+    /* Search */
+    .search-wrap { position: relative; z-index: 4; margin-top: -43px; }
+    .search-panel { padding: 14px; background: var(--paper); box-shadow: var(--shadow); border: 1px solid var(--line); }
+    .search-tabs { display: flex; align-items: center; gap: 4px; margin-bottom: 11px; }
+    .search-tab { padding: 9px 14px; color: var(--muted); background: none; border: 0; font: 800 10px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; }
+    .search-tab.active { color: #fff; background: var(--pine); }
+    .search-fields { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); }
+    .field { min-width: 0; padding: 12px 15px; background: var(--paper); }
+    .field label { display: block; margin-bottom: 6px; color: var(--muted); font: 500 8px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .field select, .field input { width: 100%; padding: 0; color: var(--ink); background: transparent; border: 0; outline: none; font-size: 12px; font-weight: 700; appearance: none; }
+    .field select { cursor: pointer; }
+    .search-submit { min-width: 130px; color: #fff; background: var(--pine); border: 0; font: 800 10px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; transition: background .2s; }
+    .search-submit:hover { background: var(--gold); }
+    .search-result { min-height: 20px; margin: 13px 1px 0; color: var(--muted); font-size: 11px; }
+
+    /* Properties */
+    .property-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 23px; }
+    .property { position: relative; background: var(--paper); border: 1px solid var(--line); transition: transform .3s ease, box-shadow .3s ease; }
+    .property:hover { transform: translateY(-7px); box-shadow: var(--shadow); }
+    .property.hidden { display: none; }
+    .property-image { position: relative; height: 230px; overflow: hidden; background: var(--sage); }
+    .property-image img { height: 100%; object-fit: cover; transition: transform .55s ease; }
+    .property:hover .property-image img { transform: scale(1.07); }
+    .property-label { position: absolute; top: 15px; left: 15px; padding: 7px 9px; color: #fff; background: var(--pine); font: 500 8px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .property-label.gold { color: var(--deep); background: var(--gold-soft); }
+    .favorite { position: absolute; top: 13px; right: 13px; display: grid; place-items: center; width: 34px; height: 34px; padding: 0; color: var(--deep); background: rgba(255,255,255,.88); border: 0; border-radius: 50%; backdrop-filter: blur(7px); transition: color .2s, transform .2s; }
+    .favorite:hover, .favorite.saved { color: #b64d4d; transform: scale(1.1); }
+    .favorite.saved .icon { fill: currentColor; }
+    .property-body { padding: 21px; }
+    .property-kind { margin: 0 0 7px; color: var(--gold); font: 500 9px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .property-title { margin: 0; font: 600 23px/1.18 var(--serif); letter-spacing: -.025em; }
+    .property-address { display: flex; align-items: center; gap: 6px; margin: 9px 0 17px; color: var(--muted); font-size: 11px; }
+    .property-price { margin-bottom: 16px; color: var(--pine); font-size: 17px; font-weight: 800; }
+    .property-price small { color: var(--muted); font-size: 10px; font-weight: 500; }
+    .property-facts { display: grid; grid-template-columns: repeat(4, 1fr); padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .fact { text-align: center; color: var(--muted); font-size: 9px; }
+    .fact + .fact { border-left: 1px solid var(--line); }
+    .fact b { display: block; color: var(--ink); font-size: 11px; }
+    .property-desc { min-height: 42px; margin: 15px 0; color: var(--muted); font-size: 11px; line-height: 1.65; }
+    .property-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .property-actions .btn { min-height: 39px; padding: 0 6px; font-size: 9px; }
+    .show-more { display: flex; justify-content: center; margin-top: 36px; }
+
+    /* Projects */
+    .project-layout { display: grid; grid-template-columns: 1.08fr .92fr; min-height: 600px; background: var(--deep); }
+    .project-image { min-height: 470px; background: url("https://images.pexels.com/photos/8134745/pexels-photo-8134745.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1200") center/cover; }
+    .project-content { display: flex; flex-direction: column; justify-content: center; padding: clamp(35px, 6vw, 84px); color: #fff; }
+    .project-content .eyebrow { color: var(--gold-soft); }
+    .project-content .display { color: #fff; }
+    .project-content .lead { color: rgba(255,255,255,.69); }
+    .project-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 25px; margin: 30px 0 36px; }
+    .project-meta span { display: block; color: var(--gold-soft); font: 500 9px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .project-meta strong { display: block; margin-top: 5px; color: #fff; font-size: 13px; }
+    .project-nav { display: flex; gap: 10px; }
+    .project-nav button { display: grid; place-items: center; width: 43px; height: 43px; color: #fff; background: transparent; border: 1px solid rgba(255,255,255,.4); transition: background .2s, color .2s; }
+    .project-nav button:hover { color: var(--deep); background: var(--gold-soft); border-color: var(--gold-soft); }
+
+    /* Categories */
+    .category-grid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-bottom: 0; border-right: 0; }
+    .category { position: relative; min-height: 230px; padding: 23px; overflow: hidden; color: #fff; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--deep); }
+    .category img { position: absolute; inset: 0; height: 100%; object-fit: cover; opacity: .55; transition: opacity .3s ease, transform .5s ease; }
+    .category::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(7,25,19,.86), rgba(7,25,19,.05)); }
+    .category:hover img { opacity: .8; transform: scale(1.08); }
+    .category-content { position: absolute; z-index: 1; inset: auto 23px 22px; }
+    .category-number { display: block; margin-bottom: 43px; color: var(--gold-soft); font: 500 9px/1 var(--mono); letter-spacing: .12em; }
+    .category h3 { margin: 0; color: #fff; font: 600 27px/1 var(--serif); letter-spacing: -.025em; }
+    .category p { margin: 5px 0 0; color: rgba(255,255,255,.7); font-size: 10px; }
+
+    /* Services */
+    .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; border: 1px solid var(--line); background: var(--line); }
+    .feature { min-height: 220px; padding: 26px 23px; background: var(--paper); transition: background .25s, color .25s; }
+    .feature:hover { color: #fff; background: var(--pine); }
+    .feature-icon { display: grid; place-items: center; width: 42px; height: 42px; margin-bottom: 35px; color: var(--gold); border: 1px solid currentColor; border-radius: 50%; }
+    .feature h3 { margin: 0; font-size: 14px; }
+    .feature p { margin: 8px 0 0; color: var(--muted); font-size: 11px; line-height: 1.65; transition: color .25s; }
+    .feature:hover p { color: rgba(255,255,255,.72); }
+
+    /* Stats */
+    .stats-section { color: #fff; background: var(--pine); }
+    .stats-section .eyebrow { color: var(--gold-soft); }
+    .stats-section .display { color: #fff; }
+    .stats-section .lead { color: rgba(255,255,255,.65); }
+    .stats-top { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 54px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid rgba(255,255,255,.25); border-bottom: 1px solid rgba(255,255,255,.25); }
+    .big-stat { padding: 28px 23px 30px; border-right: 1px solid rgba(255,255,255,.25); }
+    .big-stat:last-child { border-right: 0; }
+    .big-stat strong { display: block; color: var(--gold-soft); font: 600 clamp(36px, 4vw, 56px)/1 var(--serif); letter-spacing: -.05em; }
+    .big-stat span { display: block; margin-top: 10px; color: rgba(255,255,255,.75); font: 500 9px/1 var(--mono); letter-spacing: .11em; text-transform: uppercase; }
+
+    /* Agents */
+    .agent-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 23px; }
+    .agent { background: var(--paper); border: 1px solid var(--line); }
+    .agent-photo { height: 315px; overflow: hidden; background: var(--sage); }
+    .agent-photo img { height: 100%; object-fit: cover; object-position: top; transition: transform .4s; }
+    .agent:hover .agent-photo img { transform: scale(1.04); }
+    .agent-body { padding: 22px; }
+    .agent-role { margin: 0 0 7px; color: var(--gold); font: 500 9px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .agent h3 { margin: 0; font: 600 25px/1.15 var(--serif); }
+    .agent-experience { margin: 9px 0 18px; color: var(--muted); font-size: 11px; }
+    .agent-lines { display: grid; gap: 5px; padding-top: 15px; border-top: 1px solid var(--line); }
+    .agent-lines a { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 10px; transition: color .2s; }
+    .agent-lines a:hover { color: var(--gold); }
+    .agent-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 18px; }
+    .agent-socials { display: flex; gap: 5px; }
+    .agent-socials a { display: grid; place-items: center; width: 27px; height: 27px; color: var(--pine); border: 1px solid var(--line); border-radius: 50%; transition: background .2s, color .2s; }
+    .agent-socials a:hover { color: #fff; background: var(--pine); }
+
+    /* Testimonials */
+    .testimonials { overflow: hidden; }
+    .testimonial-wrap { position: relative; min-height: 350px; padding: clamp(40px, 6vw, 80px); background: var(--paper); border: 1px solid var(--line); }
+    .quote-mark { position: absolute; right: 45px; top: 20px; color: var(--gold-soft); font: 100px/.75 var(--serif); }
+    .testimonial { display: none; max-width: 810px; animation: fadeSlide .45s ease both; }
+    .testimonial.active { display: block; }
+    @keyframes fadeSlide { from { opacity: 0; transform: translateX(15px); } to { opacity: 1; transform: none; } }
+    .testimonial blockquote { margin: 0; font: 500 clamp(24px, 3vw, 39px)/1.35 var(--serif); letter-spacing: -.026em; }
+    .testimonial-person { display: flex; align-items: center; gap: 13px; margin-top: 31px; }
+    .testimonial-person img { width: 44px; height: 44px; object-fit: cover; border-radius: 50%; }
+    .testimonial-person strong { display: block; font-size: 12px; }
+    .testimonial-person span { display: block; margin-top: 2px; color: var(--muted); font-size: 10px; }
+    .testimonial-controls { position: absolute; bottom: 42px; right: clamp(35px, 5vw, 70px); display: flex; gap: 8px; }
+    .control { display: grid; place-items: center; width: 39px; height: 39px; color: var(--pine); background: transparent; border: 1px solid var(--line); transition: color .2s, background .2s; }
+    .control:hover { color: #fff; background: var(--pine); }
+
+    /* Gallery */
+    .gallery { display: grid; grid-template-columns: 1.2fr .8fr .8fr; grid-template-rows: 235px 235px; gap: 12px; }
+    .gallery-item { position: relative; overflow: hidden; background: var(--deep); }
+    .gallery-item:first-child { grid-row: span 2; }
+    .gallery-item:nth-child(4) { grid-column: span 2; }
+    .gallery-item img { height: 100%; object-fit: cover; transition: transform .55s ease, opacity .3s; }
+    .gallery-item::after { content: "View property"; position: absolute; inset: 0; display: grid; place-items: center; color: #fff; background: rgba(17, 53, 45, .7); opacity: 0; font: 500 10px/1 var(--mono); letter-spacing: .13em; text-transform: uppercase; transition: opacity .3s; }
+    .gallery-item:hover img { transform: scale(1.08); }
+    .gallery-item:hover::after { opacity: 1; }
+
+    /* Video */
+    .video-section { padding: 0; background: var(--deep); }
+    .video-wrap { display: grid; grid-template-columns: .85fr 1.15fr; min-height: 465px; }
+    .video-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(35px, 6vw, 80px); color: #fff; }
+    .video-copy .display { color: #fff; }
+    .video-copy .eyebrow { color: var(--gold-soft); }
+    .video-copy .lead { color: rgba(255,255,255,.65); }
+    .video-frame { position: relative; min-height: 350px; overflow: hidden; background: #09150f; }
+    .video-frame iframe { width: 100%; height: 100%; min-height: 465px; border: 0; }
+
+    /* FAQ */
+    .faq-layout { display: grid; grid-template-columns: .7fr 1.3fr; gap: 88px; align-items: start; }
+    .faq-list { border-top: 1px solid var(--line); }
+    .faq-item { border-bottom: 1px solid var(--line); }
+    .faq-question { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 20px; padding: 21px 0; color: var(--ink); background: none; border: 0; text-align: left; font-size: 14px; font-weight: 800; }
+    .faq-question .icon { transition: transform .25s; }
+    .faq-item.open .faq-question .icon { transform: rotate(45deg); color: var(--gold); }
+    .faq-answer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .28s ease; }
+    .faq-answer > div { overflow: hidden; }
+    .faq-answer p { margin: 0; padding: 0 28px 0 0; color: var(--muted); font-size: 12px; }
+    .faq-item.open .faq-answer { grid-template-rows: 1fr; }
+    .faq-item.open .faq-answer p { padding-bottom: 21px; }
+
+    /* Blog */
+    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 23px; }
+    .article { border-bottom: 1px solid var(--line); }
+    .article-image { height: 225px; overflow: hidden; }
+    .article-image img { height: 100%; object-fit: cover; transition: transform .45s; }
+    .article:hover img { transform: scale(1.06); }
+    .article-meta { display: flex; gap: 12px; margin: 18px 0 9px; color: var(--gold); font: 500 9px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .article h3 { margin: 0; font: 600 24px/1.2 var(--serif); letter-spacing: -.025em; }
+    .article p { margin: 10px 0 17px; color: var(--muted); font-size: 11px; }
+    .article .text-link { margin-bottom: 20px; }
+
+    /* Contact */
+    .contact-section { color: #fff; background: var(--deep); }
+    .contact-layout { display: grid; grid-template-columns: .78fr 1.22fr; gap: 80px; align-items: start; }
+    .contact-section .eyebrow { color: var(--gold-soft); }
+    .contact-section .display { color: #fff; }
+    .contact-section .lead { color: rgba(255,255,255,.68); }
+    .contact-details { display: grid; gap: 23px; margin-top: 40px; }
+    .contact-detail { display: flex; align-items: flex-start; gap: 13px; color: rgba(255,255,255,.75); font-size: 12px; }
+    .contact-detail .icon { margin-top: 2px; color: var(--gold-soft); }
+    .contact-detail strong { display: block; margin-bottom: 2px; color: #fff; font-size: 11px; }
+    .enquiry-form { padding: clamp(25px, 4vw, 43px); background: #fffef9; color: var(--ink); }
+    body.dark .enquiry-form { background: #e8eee6; color: #17352d; }
+    .form-title { margin: 0 0 25px; font: 600 29px/1 var(--serif); letter-spacing: -.025em; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-field { position: relative; }
+    .form-field.full { grid-column: 1 / -1; }
+    .form-field label { display: block; margin-bottom: 7px; color: #59685f; font: 500 9px/1 var(--mono); letter-spacing: .09em; text-transform: uppercase; }
+    .form-field input, .form-field select, .form-field textarea { width: 100%; padding: 12px 0; color: #17352d; background: transparent; border: 0; border-bottom: 1px solid rgba(23,53,45,.25); outline: none; font-size: 12px; transition: border-color .2s; }
+    .form-field textarea { min-height: 65px; resize: vertical; }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--gold); }
+    .form-field.invalid input, .form-field.invalid select, .form-field.invalid textarea { border-color: #bf4b4b; }
+    .field-error { display: none; margin-top: 4px; color: #b73f3f; font-size: 9px; }
+    .form-field.invalid .field-error { display: block; }
+    .form-note { margin: 14px 0 0; color: #637168; font-size: 10px; }
+    .form-status { min-height: 18px; margin: 13px 0 0; color: #3f7f5a; font-size: 11px; }
+
+    /* Map */
+    .map-section { padding: 0; height: 410px; background: var(--sage); }
+    .map-section iframe { width: 100%; height: 100%; border: 0; filter: grayscale(.9) saturate(.7) contrast(.94); }
+    body.dark .map-section iframe { filter: grayscale(1) invert(.87) hue-rotate(145deg) contrast(.88); }
+
+    /* Footer */
+    .site-footer { color: rgba(255,255,255,.68); background: #091812; }
+    .footer-main { display: grid; grid-template-columns: 1.4fr .85fr .85fr 1.05fr; gap: 45px; padding: 70px 0 50px; }
+    .footer-brand .brand { color: #fff; }
+    .footer-brand .brand-sub { color: rgba(255,255,255,.48); }
+    .footer-desc { max-width: 300px; margin: 20px 0; font-size: 11px; line-height: 1.8; }
+    .footer-socials { display: flex; gap: 7px; }
+    .footer-socials a { display: grid; place-items: center; width: 31px; height: 31px; color: var(--gold-soft); border: 1px solid rgba(255,255,255,.2); border-radius: 50%; transition: color .2s, background .2s; }
+    .footer-socials a:hover { color: var(--deep); background: var(--gold-soft); }
+    .footer-title { margin: 4px 0 18px; color: #fff; font: 600 16px/1 var(--serif); }
+    .footer-list { display: grid; gap: 9px; list-style: none; margin: 0; padding: 0; }
+    .footer-list a, .footer-list li { font-size: 11px; transition: color .2s; }
+    .footer-list a:hover { color: var(--gold-soft); }
+    .hours { display: grid; gap: 10px; }
+    .hours div { display: flex; justify-content: space-between; gap: 10px; font-size: 10px; }
+    .hours span:last-child { color: #fff; }
+    .newsletter { margin-top: 26px; }
+    .newsletter label { display: block; margin-bottom: 8px; color: #fff; font-size: 10px; font-weight: 800; }
+    .newsletter-form { display: flex; border-bottom: 1px solid rgba(255,255,255,.35); }
+    .newsletter-form input { width: 100%; min-width: 0; padding: 9px 0; color: #fff; background: transparent; border: 0; outline: 0; font-size: 11px; }
+    .newsletter-form button { padding: 0; color: var(--gold-soft); background: transparent; border: 0; }
+    .newsletter-status { min-height: 16px; margin: 7px 0 0; color: var(--gold-soft); font-size: 9px; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 21px 0; border-top: 1px solid rgba(255,255,255,.13); font-size: 9px; }
+    .legal-links { display: flex; gap: 17px; }
+    .legal-links a:hover { color: var(--gold-soft); }
+
+    /* Floating actions, cookie, and back-to-top */
+    .float-actions { position: fixed; z-index: 900; right: 20px; bottom: 22px; display: grid; gap: 9px; }
+    .float-btn { display: grid; place-items: center; width: 45px; height: 45px; color: #fff; background: var(--pine); border: 0; border-radius: 50%; box-shadow: 0 7px 18px rgba(13,33,27,.23); transition: transform .2s, background .2s; }
+    .float-btn:hover { background: var(--gold); transform: translateY(-3px); }
+    .float-btn.call { background: #335d8e; }
+    .float-btn.email { background: #8a5f44; }
+    .to-top { opacity: 0; visibility: hidden; transform: translateY(8px); }
+    .to-top.show { opacity: 1; visibility: visible; transform: none; }
+    .cookie-banner { position: fixed; z-index: 1200; left: 24px; bottom: 24px; display: flex; align-items: center; gap: 17px; max-width: 450px; padding: 17px 18px; color: var(--ink); background: color-mix(in srgb, var(--paper) 95%, transparent); border: 1px solid var(--line); box-shadow: var(--shadow); backdrop-filter: blur(16px); transition: transform .35s, opacity .35s; }
+    .cookie-banner.hide { opacity: 0; transform: translateY(15px); pointer-events: none; }
+    .cookie-icon { display: grid; place-items: center; width: 34px; height: 34px; color: var(--gold); border: 1px solid currentColor; border-radius: 50%; flex: none; }
+    .cookie-copy { font-size: 10px; line-height: 1.55; }
+    .cookie-copy strong { display: block; color: var(--ink); font-size: 11px; }
+    .cookie-banner button { padding: 8px 10px; color: #fff; background: var(--pine); border: 0; font: 800 9px/1 var(--sans); letter-spacing: .06em; text-transform: uppercase; }
+
+    /* Reveal animations */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .property.reveal:nth-child(2), .feature.reveal:nth-child(2), .agent.reveal:nth-child(2), .article.reveal:nth-child(2) { transition-delay: .1s; }
+    .property.reveal:nth-child(3), .feature.reveal:nth-child(3), .agent.reveal:nth-child(3), .article.reveal:nth-child(3) { transition-delay: .2s; }
+    .feature.reveal:nth-child(4) { transition-delay: .3s; }
+    .feature.reveal:nth-child(5) { transition-delay: .05s; }
+    .feature.reveal:nth-child(6) { transition-delay: .15s; }
+    .feature.reveal:nth-child(7) { transition-delay: .25s; }
+    .feature.reveal:nth-child(8) { transition-delay: .35s; }
+
+    @media (max-width: 1080px) {
+      .nav-links { gap: 15px; }
+      .nav-links a { font-size: 10px; }
+      .search-fields { grid-template-columns: repeat(4, 1fr); }
+      .property-grid { gap: 15px; }
+      .feature-grid { grid-template-columns: repeat(4, 1fr); }
+      .contact-layout, .faq-layout { gap: 45px; }
+    }
+    @media (max-width: 860px) {
+      .section { padding: 82px 0; }
+      .nav-links, .nav-whatsapp { display: none; }
+      .menu-btn { display: grid; }
+      .mobile-menu { position: fixed; z-index: 990; top: 82px; left: 0; display: grid; width: 100%; max-height: 0; overflow: hidden; background: var(--paper); border-bottom: 1px solid transparent; transition: max-height .35s ease, border-color .35s ease; }
+      .mobile-menu.open { max-height: 600px; border-color: var(--line); box-shadow: var(--shadow); }
+      .mobile-menu a { padding: 15px 24px; border-bottom: 1px solid var(--line); font-size: 11px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
+      .mobile-menu a:last-child { color: #fff; background: var(--pine); }
+      .hero { min-height: 720px; }
+      .hero-bottom { margin-top: 65px; }
+      .hero-scroll { display: none; }
+      .search-fields { grid-template-columns: repeat(2, 1fr); }
+      .search-submit { min-height: 58px; }
+      .property-grid, .agent-grid, .blog-grid { grid-template-columns: repeat(2, 1fr); }
+      .project-layout, .video-wrap { grid-template-columns: 1fr; }
+      .project-image { min-height: 390px; }
+      .category-grid { grid-template-columns: repeat(2, 1fr); }
+      .feature-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: repeat(3, 1fr); }
+      .big-stat:nth-child(3) { border-right: 0; }
+      .big-stat:nth-child(n+4) { border-top: 1px solid rgba(255,255,255,.25); }
+      .faq-layout, .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+      .footer-main { grid-template-columns: 1.3fr 1fr 1fr; }
+      .footer-main > :last-child { grid-column: span 3; max-width: 350px; }
+    }
+    @media (max-width: 560px) {
+      .container { width: min(100% - 34px, 1180px); }
+      .section { padding: 65px 0; }
+      .section-intro, .stats-top { display: block; margin-bottom: 35px; }
+      .section-intro .text-link { margin-top: 20px; }
+      .hero { min-height: 670px; }
+      .hero .container { width: min(100% - 34px, 1180px); padding-bottom: 46px; }
+      .hero-title { font-size: 48px; }
+      .hero-text { font-size: 14px; }
+      .hero-bottom { margin-top: 45px; }
+      .hero-stats { width: 100%; justify-content: space-between; }
+      .hero-stat { min-width: auto; padding-right: 11px; margin-right: 11px; }
+      .hero-stat strong { font-size: 21px; }
+      .hero-stat span { font-size: 7px; }
+      .search-wrap { margin-top: 0; background: var(--paper); padding: 15px 0; }
+      .search-panel { padding: 0; border: 0; box-shadow: none; }
+      .search-fields { grid-template-columns: 1fr 1fr; }
+      .search-fields .field { padding: 11px; }
+      .search-submit { grid-column: span 2; min-height: 50px; }
+      .property-grid, .agent-grid, .blog-grid { grid-template-columns: 1fr; }
+      .project-image { min-height: 300px; }
+      .project-content { padding: 38px 25px; }
+      .category-grid, .feature-grid { grid-template-columns: 1fr 1fr; }
+      .category { min-height: 180px; padding: 15px; }
+      .category-content { inset: auto 15px 15px; }
+      .category-number { margin-bottom: 25px; }
+      .category h3 { font-size: 22px; }
+      .feature { min-height: 190px; padding: 20px 16px; }
+      .feature-icon { margin-bottom: 25px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .big-stat:nth-child(3) { border-right: 1px solid rgba(255,255,255,.25); }
+      .big-stat:nth-child(even) { border-right: 0; }
+      .big-stat:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,.25); }
+      .big-stat:last-child { grid-column: span 2; }
+      .testimonial-wrap { min-height: 385px; padding: 38px 23px 82px; }
+      .quote-mark { right: 20px; }
+      .testimonial-controls { bottom: 25px; right: 23px; }
+      .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: 180px 180px 160px; gap: 8px; }
+      .gallery-item:first-child { grid-row: span 2; }
+      .gallery-item:nth-child(4) { grid-column: span 2; }
+      .video-frame iframe { min-height: 290px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-field.full { grid-column: auto; }
+      .enquiry-form { padding: 28px 20px; }
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 35px 22px; padding-top: 52px; }
+      .footer-brand { grid-column: span 2; }
+      .footer-main > :last-child { grid-column: span 2; }
+      .footer-bottom { align-items: flex-start; flex-direction: column; }
+      .float-actions { right: 13px; bottom: 14px; }
+      .cookie-banner { left: 13px; bottom: 13px; right: 13px; max-width: none; padding: 14px; }
+      .cookie-banner button { align-self: stretch; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Reusable inline icon set -->
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.8a5.3 5.3 0 0 0-7.5 0L12 6.1l-1.3-1.3a5.3 5.3 0 0 0-7.5 7.5L12 21l8.8-8.7a5.3 5.3 0 0 0 0-7.5Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M20.5 11.8a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.2-4.1A8.5 8.5 0 1 1 20.5 11.8Z"/><path d="M8.5 7.4c.2-.5.4-.5.7-.5h.6c.2 0 .4.1.5.4l.9 2c.1.3.1.5-.1.7l-.6.7c.5 1 1.2 1.8 2.3 2.3l.7-.7c.2-.2.4-.2.7-.1l2 .9c.2.1.4.3.4.5v.6c0 .3 0 .5-.5.7-.3.1-1 .3-1.8-.1-1-.4-2.3-1.2-3.6-2.5-1.3-1.3-2.1-2.6-2.5-3.6-.4-.8-.2-1.5-.1-1.8Z"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M21 16.7v2.7a1.8 1.8 0 0 1-2 1.8A17.8 17.8 0 0 1 3 5a1.8 1.8 0 0 1 1.8-2H7.5a1.8 1.8 0 0 1 1.8 1.5c.1 1 .4 2 .8 2.9a1.8 1.8 0 0 1-.4 1.9L8.5 10.5a14 14 0 0 0 5 5l1.2-1.2a1.8 1.8 0 0 1 1.9-.4c.9.4 1.9.7 2.9.8a1.8 1.8 0 0 1 1.5 2Z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 6 9-6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 15.2A8.5 8.5 0 0 1 8.8 3.5 8.5 8.5 0 1 0 20.5 15.2Z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 20 6v5c0 5-3.4 8.3-8 10-4.6-1.7-8-5-8-10V6l8-3Z"/><path d="m8.5 12 2.2 2.2 4.7-4.7"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-9Z"/><path d="M9 21v-6h6v6"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m11 12 8-8M16 5l3 3M14 7l3 3"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18M5 6h14M7 6 3 14h8L7 6ZM17 6l-4 8h8l-4-8Z"/></symbol>
+    <symbol id="i-bank" viewBox="0 0 24 24"><path d="m3 9 9-5 9 5H3ZM5 10v7M9.5 10v7M14.5 10v7M19 10v7M3 21h18M3 17h18"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.4-4 2.6-6 6.5-6s6.1 2 6.5 6M16 5.2a3.4 3.4 0 0 1 0 6.6M18 14c2.2.6 3.4 2.6 3.5 5"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></symbol>
+    <symbol id="i-headset" viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><path d="M4 14v4h3v-5H4ZM20 14v4h-3v-5h3ZM17 20c-.5 1-1.5 1.5-3 1.5h-2"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5Z"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><rect x="4" y="9" width="3" height="11"/><circle cx="5.5" cy="5.5" r="1.5"/><path d="M11 20v-6a3.5 3.5 0 0 1 7 0v6M11 9v11"/></symbol>
+    <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M14 21v-8h3l.5-3H14V8.3c0-.9.3-1.6 1.7-1.6H18V4a26 26 0 0 0-2.1-.1C12.8 3.9 11 5.7 11 8.8V10H8v3h3v8"/></symbol>
+  </svg>
+
+  <div class="loader" id="loader" aria-label="Loading Aurevia Estates"><div class="loader-inner"><div class="loader-mark"></div><div class="loader-name">AUREVIA</div><p>Opening exceptional spaces</p></div></div>
+
+  <header class="site-header" id="siteHeader">
+    <nav class="nav container" aria-label="Primary navigation">
+      <a class="brand" href="#home" aria-label="Aurevia Estates home"><span class="brand-mark"></span><span class="brand-name">AUREVIA<span class="brand-sub">Estates and Advisory</span></span></a>
+      <div class="nav-links">
+        <a class="active" href="#home">Home</a><a href="#properties">Properties</a><a href="#projects">Projects</a><a href="#services">Services</a><a href="#about">About</a><a href="#testimonials">Stories</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-btn" id="themeToggle" aria-label="Switch color theme"><svg class="icon"><use href="#i-moon"></use></svg></button>
+        <a class="nav-whatsapp" href="https://wa.me/919999999999" target="_blank" rel="noopener"><svg class="icon small-icon"><use href="#i-whatsapp"></use></svg> WhatsApp</a>
+        <button class="menu-btn" id="menuToggle" aria-label="Open menu"><svg class="icon"><use href="#i-menu"></use></svg></button>
+      </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu"><a href="#home">Home</a><a href="#properties">Properties</a><a href="#projects">Projects</a><a href="#services">Services</a><a href="#about">About</a><a href="#testimonials">Testimonials</a><a href="#faq">FAQ</a><a href="#contact">Contact our team</a></div>
+  </header>
+
+  <main>
+    <section class="hero" id="home" aria-label="Aurevia Estates introduction">
+      <div class="hero-media"></div>
+      <div class="container">
+        <div class="hero-copy">
+          <p class="eyebrow">Curated real estate since 2008</p>
+          <h1 class="hero-title">Find a place that feels <em>entirely</em> yours.</h1>
+          <p class="hero-text">Aurevia brings rare homes, considered investments and insightful advice together for people who expect more from where they live.</p>
+          <div class="hero-actions"><a class="btn btn-primary ripple" href="#search">Search property <svg class="icon small-icon"><use href="#i-search"></use></svg></a><a class="btn btn-secondary ripple" href="#contact">Contact an agent <svg class="icon small-icon"><use href="#i-arrow"></use></svg></a></div>
+        </div>
+        <div class="hero-bottom">
+          <div class="hero-stats">
+            <div class="hero-stat"><strong>1,850+</strong><span>Homes transacted</span></div>
+            <div class="hero-stat"><strong>18</strong><span>Prime cities</span></div>
+            <div class="hero-stat"><strong>16 yrs</strong><span>Local expertise</span></div>
+          </div>
+          <a class="hero-scroll" href="#search">Explore opportunities <span class="scroll-line"></span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="search-wrap" id="search" aria-label="Property search">
+      <div class="container">
+        <form class="search-panel" id="propertySearch">
+          <div class="search-tabs" role="tablist" aria-label="Transaction type"><button class="search-tab active" type="button" data-mode="Buy">Buy</button><button class="search-tab" type="button" data-mode="Rent">Rent</button></div>
+          <div class="search-fields">
+            <div class="field"><label for="searchLocation">Location</label><select id="searchLocation"><option value="">Any location</option><option value="Mumbai">Mumbai</option><option value="Goa">Goa</option><option value="Bengaluru">Bengaluru</option><option value="Delhi">Delhi NCR</option></select></div>
+            <div class="field"><label for="searchCategory">Category</label><select id="searchCategory"><option value="">Residential / Commercial</option><option value="Residential">Residential</option><option value="Commercial">Commercial</option><option value="Luxury">Luxury</option></select></div>
+            <div class="field"><label for="searchType">Property type</label><select id="searchType"><option value="">Any type</option><option>Villa</option><option>Apartment</option><option>Office</option><option>Plot</option><option>Farmhouse</option></select></div>
+            <div class="field"><label for="searchPrice">Price range</label><select id="searchPrice"><option value="">Any budget</option><option value="2">Up to Rs 2 Cr</option><option value="5">Rs 2 - 5 Cr</option><option value="10">Rs 5 - 10 Cr</option><option value="50">Above Rs 10 Cr</option></select></div>
+            <div class="field"><label for="searchBeds">Bedrooms</label><select id="searchBeds"><option value="">Any bedrooms</option><option value="2">2+ Beds</option><option value="3">3+ Beds</option><option value="4">4+ Beds</option><option value="5">5+ Beds</option></select></div>
+            <div class="field"><label for="searchBaths">Bathrooms</label><select id="searchBaths"><option value="">Any bathrooms</option><option value="2">2+ Baths</option><option value="3">3+ Baths</option><option value="4">4+ Baths</option><option value="5">5+ Baths</option></select></div>
+            <div class="field"><label for="searchArea">Area</label><select id="searchArea"><option value="">Any area</option><option value="2000">2,000+ sq ft</option><option value="4000">4,000+ sq ft</option><option value="7000">7,000+ sq ft</option><option value="10000">10,000+ sq ft</option></select></div>
+            <button class="search-submit" type="submit">Find a property</button>
+          </div>
+          <div class="search-result" id="searchResult" aria-live="polite">Explore a handpicked collection across India's most desirable addresses.</div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" id="properties">
+      <div class="container">
+        <div class="section-intro reveal"><div><p class="eyebrow">Selected residences</p><h2 class="display">Properties with a point of view.</h2></div><div><p class="lead">Every listing is personally reviewed for its setting, design integrity and long-term potential.</p><a class="text-link" href="#contact">View all listings <svg class="icon small-icon"><use href="#i-arrow"></use></svg></a></div></div>
+        <div class="property-grid" id="propertyGrid">
+          <article class="property reveal" data-mode="Buy" data-location="Mumbai" data-category="Luxury Residential" data-type="Villa" data-price="38" data-beds="5" data-baths="6" data-area="7200">
+            <div class="property-image"><img loading="lazy" src="https://images.pexels.com/photos/8134745/pexels-photo-8134745.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=600&w=800" alt="Contemporary villa with pool in Alibaug"><span class="property-label">For sale</span><button class="favorite" aria-label="Save Serenity House"><svg class="icon small-icon"><use href="#i-heart"></use></svg></button></div>
+            <div class="property-body"><p class="property-kind">Luxury villa</p><h3 class="property-title">Serenity House</h3><p class="property-address"><svg class="icon small-icon"><use href="#i-pin"></use></svg> Alibaug, Mumbai</p><div class="property-price">Rs 38 Cr <small>Guide price</small></div><div class="property-facts"><div class="fact"><b>5</b>Beds</div><div class="fact"><b>6</b>Baths</div><div class="fact"><b>3</b>Park</div><div class="fact"><b>7,200</b>Sq ft</div></div><p class="property-desc">A private, light-filled coastal retreat with a pool pavilion and landscaped grounds.</p><div class="property-actions"><a class="btn btn-outline" href="#contact">View details</a><a class="btn btn-dark property-wa" href="#contact" data-property="Serenity House, Alibaug">WhatsApp enquiry</a></div></div>
+          </article>
+          <article class="property reveal" data-mode="Buy" data-location="Bengaluru" data-category="Residential" data-type="Apartment" data-price="5" data-beds="4" data-baths="4" data-area="3180">
+            <div class="property-image"><img loading="lazy" src="https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=600&w=800" alt="Elegant city apartment interior"><span class="property-label gold">New launch</span><button class="favorite" aria-label="Save The Linden"><svg class="icon small-icon"><use href="#i-heart"></use></svg></button></div>
+            <div class="property-body"><p class="property-kind">Signature apartment</p><h3 class="property-title">The Linden</h3><p class="property-address"><svg class="icon small-icon"><use href="#i-pin"></use></svg> Indiranagar, Bengaluru</p><div class="property-price">Rs 5.4 Cr <small>Starting from</small></div><div class="property-facts"><div class="fact"><b>4</b>Beds</div><div class="fact"><b>4</b>Baths</div><div class="fact"><b>2</b>Park</div><div class="fact"><b>3,180</b>Sq ft</div></div><p class="property-desc">Limited collection of deeply considered homes overlooking mature tree canopies.</p><div class="property-actions"><a class="btn btn-outline" href="#contact">View details</a><a class="btn btn-dark property-wa" href="#contact" data-property="The Linden, Indiranagar">WhatsApp enquiry</a></div></div>
+          </article>
+          <article class="property reveal" data-mode="Rent" data-location="Mumbai" data-category="Commercial" data-type="Office" data-price="2" data-beds="0" data-baths="4" data-area="9800">
+            <div class="property-image"><img loading="lazy" src="https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=600&w=800" alt="Modern commercial office lobby"><span class="property-label">For lease</span><button class="favorite" aria-label="Save One Horizon"><svg class="icon small-icon"><use href="#i-heart"></use></svg></button></div>
+            <div class="property-body"><p class="property-kind">Grade A office</p><h3 class="property-title">One Horizon</h3><p class="property-address"><svg class="icon small-icon"><use href="#i-pin"></use></svg> BKC, Mumbai</p><div class="property-price">Rs 380 / sq ft <small>per month</small></div><div class="property-facts"><div class="fact"><b>Open</b>Plan</div><div class="fact"><b>4</b>Meeting</div><div class="fact"><b>12</b>Park</div><div class="fact"><b>9,800</b>Sq ft</div></div><p class="property-desc">A ready-to-occupy, LEED Gold office with bay views and a curated amenity floor.</p><div class="property-actions"><a class="btn btn-outline" href="#contact">View details</a><a class="btn btn-dark property-wa" href="#contact" data-property="One Horizon, BKC">WhatsApp enquiry</a></div></div>
+          </article>
+          <article class="property reveal" data-mode="Buy" data-location="Goa" data-category="Luxury Residential" data-type="Farmhouse" data-price="50" data-beds="5" data-baths="5" data-area="43560">
+            <div class="property-image"><img loading="lazy" src="https://images.pexels.com/photos/18971223/pexels-photo-18971223.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=600&w=800" alt="Resort style farmhouse with a swimming pool"><span class="property-label">For sale</span><button class="favorite" aria-label="Save Casa Verde"><svg class="icon small-icon"><use href="#i-heart"></use></svg></button></div>
+            <div class="property-body"><p class="property-kind">Private estate</p><h3 class="property-title">Casa Verde</h3><p class="property-address"><svg class="icon small-icon"><use href="#i-pin"></use></svg> Assagao, Goa</p><div class="property-price">Rs 14.8 Cr <small>Guide price</small></div><div class="property-facts"><div class="fact"><b>5</b>Beds</div><div class="fact"><b>5</b>Baths</div><div class="fact"><b>4</b>Park</div><div class="fact"><b>1 ac</b>Land</div></div><p class="property-desc">A contemporary tropical residence set among old fruit trees and quiet village lanes.</p><div class="property-actions"><a class="btn btn-outline" href="#contact">View details</a><a class="btn btn-dark property-wa" href="#contact" data-property="Casa Verde, Assagao">WhatsApp enquiry</a></div></div>
+          </article>
+          <article class="property reveal" data-mode="Buy" data-location="Delhi" data-category="Residential" data-type="Plot" data-price="10" data-beds="0" data-baths="0" data-area="12000">
+            <div class="property-image"><img loading="lazy" src="https://images.pexels.com/photos/7031602/pexels-photo-7031602.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=600&w=800" alt="Green residential plots near a modern home"><span class="property-label gold">Verified title</span><button class="favorite" aria-label="Save The Grove Plots"><svg class="icon small-icon"><use href="#i-heart"></use></svg></button></div>
+            <div class="property-body"><p class="property-kind">Premium plot</p><h3 class="property-title">The Grove Plots</h3><p class="property-address"><svg class="icon small-icon"><use href="#i-pin"></use></svg> Chattarpur, Delhi NCR</p><div class="property-price">Rs 8.2 Cr <small>From</small></div><div class="property-facts"><div class="fact"><b>Clear</b>Title</div><div class="fact"><b>Gated</b>Estate</div><div class="fact"><b>2</b>Park</div><div class="fact"><b>12k</b>Sq ft</div></div><p class="property-desc">A rare opportunity to build within a low-density, nature-led private enclave.</p><div class="property-actions"><a class="btn btn-outline" href="#contact">View details</a><a class="btn btn-dark property-wa" href="#contact" data-property="The Grove Plots, Chattarpur">WhatsApp enquiry</a></div></div>
+          </article>
+          <article class="property reveal" data-mode="Rent" data-location="Bengaluru" data-category="Commercial" data-type="Office" data-price="2" data-beds="0" data-baths="3" data-area="6400">
+            <div class="property-image"><img loading="lazy" src="https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=600&w=800" alt="Creative contemporary office space"><span class="property-label">For lease</span><button class="favorite" aria-label="Save Studio Commons"><svg class="icon small-icon"><use href="#i-heart"></use></svg></button></div>
+            <div class="property-body"><p class="property-kind">Creative office</p><h3 class="property-title">Studio Commons</h3><p class="property-address"><svg class="icon small-icon"><use href="#i-pin"></use></svg> Koramangala, Bengaluru</p><div class="property-price">Rs 210 / sq ft <small>per month</small></div><div class="property-facts"><div class="fact"><b>Open</b>Plan</div><div class="fact"><b>3</b>Meeting</div><div class="fact"><b>8</b>Park</div><div class="fact"><b>6,400</b>Sq ft</div></div><p class="property-desc">Warm, flexible workspace designed for teams that value culture, light and movement.</p><div class="property-actions"><a class="btn btn-outline" href="#contact">View details</a><a class="btn btn-dark property-wa" href="#contact" data-property="Studio Commons, Koramangala">WhatsApp enquiry</a></div></div>
+          </article>
+        </div>
+        <div class="show-more"><button class="btn btn-outline" id="showMore">View more properties <svg class="icon small-icon"><use href="#i-arrow"></use></svg></button></div>
+      </div>
+    </section>
+
+    <section class="section section-quiet" id="projects">
+      <div class="container"><div class="project-layout reveal"><div class="project-image" role="img" aria-label="Aurevia Horizon contemporary residential project"></div><div class="project-content"><p class="eyebrow">Aurevia signature project</p><h2 class="display">Horizon House,<br>Alibaug.</h2><p class="lead">Twenty-one private residences, conceived around the rhythm of the sea. Architecture by a celebrated studio. A life beyond the ordinary.</p><div class="project-meta"><div><span>Configuration</span><strong>4 and 5 bedroom villas</strong></div><div><span>Possession</span><strong>December 2027</strong></div><div><span>From</span><strong>Rs 11.5 Cr</strong></div><div><span>Location</span><strong>Kihim Beach, Alibaug</strong></div></div><a class="btn btn-primary" href="#contact">Request a private preview <svg class="icon small-icon"><use href="#i-arrow"></use></svg></a><div class="project-nav" style="margin-top:30px"><button aria-label="Previous project"><svg class="icon"><use href="#i-arrow"></use></svg></button><button aria-label="Next project"><svg class="icon" style="transform:rotate(180deg)"><use href="#i-arrow"></use></svg></button></div></div></div></div>
+    </section>
+
+    <section class="section" id="categories">
+      <div class="container"><div class="section-intro reveal"><div><p class="eyebrow">Explore by lifestyle</p><h2 class="display">The right setting<br>changes everything.</h2></div><p class="lead">From first plots to once-in-a-generation homes, find property that meets the moment you are building toward.</p></div>
+        <div class="category-grid reveal">
+          <a class="category" href="#properties"><img loading="lazy" src="https://images.pexels.com/photos/7031602/pexels-photo-7031602.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=600" alt="Residential plots"><div class="category-content"><span class="category-number">01</span><h3>Plots</h3><p>Build your own story</p></div></a>
+          <a class="category" href="#properties"><img loading="lazy" src="https://images.pexels.com/photos/7031594/pexels-photo-7031594.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=600" alt="Architectural villa"><div class="category-content"><span class="category-number">02</span><h3>Villas</h3><p>Space with a signature</p></div></a>
+          <a class="category" href="#properties"><img loading="lazy" src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=600" alt="Luxury apartment"><div class="category-content"><span class="category-number">03</span><h3>Apartments</h3><p>City living, elevated</p></div></a>
+          <a class="category" href="#properties"><img loading="lazy" src="https://images.pexels.com/photos/8143683/pexels-photo-8143683.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=600" alt="Large elegant mansion"><div class="category-content"><span class="category-number">04</span><h3>Mansions</h3><p>Built to be remembered</p></div></a>
+          <a class="category" href="#properties"><img loading="lazy" src="https://images.pexels.com/photos/18971223/pexels-photo-18971223.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=600" alt="Farmhouse with landscaped gardens"><div class="category-content"><span class="category-number">05</span><h3>Farmhouses</h3><p>Room to breathe</p></div></a>
+          <a class="category" href="#properties"><img loading="lazy" src="https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=600" alt="Commercial building lobby"><div class="category-content"><span class="category-number">06</span><h3>Commercial</h3><p>Business, well placed</p></div></a>
+          <a class="category" href="#properties"><img loading="lazy" src="https://images.pexels.com/photos/20200291/pexels-photo-20200291.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=600" alt="Luxury home with swimming pool"><div class="category-content"><span class="category-number">07</span><h3>Luxury homes</h3><p>Exceptional by nature</p></div></a>
+          <a class="category" href="#properties"><img loading="lazy" src="https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=600" alt="Modern office interior"><div class="category-content"><span class="category-number">08</span><h3>Offices</h3><p>Made for momentum</p></div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-quiet" id="services">
+      <div class="container"><div class="section-intro reveal"><div><p class="eyebrow">The Aurevia difference</p><h2 class="display">Advice that moves<br>with intention.</h2></div><p class="lead">Real estate is never only a transaction. Our work is designed to make every decision feel more informed and more certain.</p></div>
+        <div class="feature-grid">
+          <article class="feature reveal"><div class="feature-icon"><svg class="icon"><use href="#i-shield"></use></svg></div><h3>Trusted company</h3><p>More than sixteen years of responsible, relationship-led advice.</p></article>
+          <article class="feature reveal"><div class="feature-icon"><svg class="icon"><use href="#i-check"></use></svg></div><h3>Verified properties</h3><p>Rigorous title, quality and market checks before a home reaches you.</p></article>
+          <article class="feature reveal"><div class="feature-icon"><svg class="icon"><use href="#i-scale"></use></svg></div><h3>Legal assistance</h3><p>Clear, independent guidance through every document and due diligence step.</p></article>
+          <article class="feature reveal"><div class="feature-icon"><svg class="icon"><use href="#i-bank"></use></svg></div><h3>Home loan support</h3><p>Access to leading lending partners and a simpler route to financing.</p></article>
+          <article class="feature reveal"><div class="feature-icon"><svg class="icon"><use href="#i-users"></use></svg></div><h3>Expert agents</h3><p>Specialists who understand the nuances of the neighbourhoods they serve.</p></article>
+          <article class="feature reveal"><div class="feature-icon"><svg class="icon"><use href="#i-eye"></use></svg></div><h3>Transparent pricing</h3><p>Honest comparables and direct advice, from first viewing to completion.</p></article>
+          <article class="feature reveal"><div class="feature-icon"><svg class="icon"><use href="#i-key"></use></svg></div><h3>Best investment</h3><p>Strategic guidance focused on lasting value, not short-term noise.</p></article>
+          <article class="feature reveal"><div class="feature-icon"><svg class="icon"><use href="#i-headset"></use></svg></div><h3>24/7 support</h3><p>A trusted point of contact whenever a question or opportunity arises.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section stats-section" id="about">
+      <div class="container"><div class="stats-top reveal"><div><p class="eyebrow">Measured in trust</p><h2 class="display">A legacy of considered<br>moves.</h2></div><p class="lead">We are proud of the numbers, but more proud of the people and places behind every one.</p></div>
+        <div class="stats-grid reveal"><div class="big-stat"><strong class="counter" data-target="2400" data-suffix="+">0</strong><span>Happy clients</span></div><div class="big-stat"><strong class="counter" data-target="1850" data-suffix="+">0</strong><span>Properties sold</span></div><div class="big-stat"><strong class="counter" data-target="18">0</strong><span>Cities covered</span></div><div class="big-stat"><strong class="counter" data-target="16" data-suffix=" yrs">0</strong><span>Years experience</span></div><div class="big-stat"><strong class="counter" data-target="72">0</strong><span>Projects completed</span></div></div>
+      </div>
+    </section>
+
+    <section class="section section-quiet" id="agents">
+      <div class="container"><div class="section-intro reveal"><div><p class="eyebrow">People who know places</p><h2 class="display">Meet your advisors.</h2></div><div><p class="lead">Our team combines local fluency, discreet service and a genuine eye for what makes a property exceptional.</p><a class="text-link" href="#contact">Speak to an advisor <svg class="icon small-icon"><use href="#i-arrow"></use></svg></a></div></div>
+        <div class="agent-grid">
+          <article class="agent reveal"><div class="agent-photo"><img loading="lazy" src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=700&w=700" alt="Anika Mehra, Managing Partner"></div><div class="agent-body"><p class="agent-role">Managing Partner</p><h3>Anika Mehra</h3><p class="agent-experience">14 years in luxury residential advisory</p><div class="agent-lines"><a href="tel:+919999999999"><svg class="icon small-icon"><use href="#i-phone"></use></svg> +91 99999 99999</a><a href="mailto:anika@aurevia.in"><svg class="icon small-icon"><use href="#i-mail"></use></svg> anika@aurevia.in</a></div><div class="agent-footer"><a class="text-link" href="https://wa.me/919999999999" target="_blank" rel="noopener">WhatsApp</a><div class="agent-socials"><a href="#contact" aria-label="Anika on LinkedIn"><svg class="icon small-icon"><use href="#i-linkedin"></use></svg></a><a href="#contact" aria-label="Anika on Instagram"><svg class="icon small-icon"><use href="#i-instagram"></use></svg></a></div></div></div></article>
+          <article class="agent reveal"><div class="agent-photo"><img loading="lazy" src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=700&w=700" alt="Rohan Kapoor, Commercial Director"></div><div class="agent-body"><p class="agent-role">Commercial Director</p><h3>Rohan Kapoor</h3><p class="agent-experience">12 years shaping commercial strategy</p><div class="agent-lines"><a href="tel:+919999999999"><svg class="icon small-icon"><use href="#i-phone"></use></svg> +91 99999 99999</a><a href="mailto:rohan@aurevia.in"><svg class="icon small-icon"><use href="#i-mail"></use></svg> rohan@aurevia.in</a></div><div class="agent-footer"><a class="text-link" href="https://wa.me/919999999999" target="_blank" rel="noopener">WhatsApp</a><div class="agent-socials"><a href="#contact" aria-label="Rohan on LinkedIn"><svg class="icon small-icon"><use href="#i-linkedin"></use></svg></a><a href="#contact" aria-label="Rohan on Instagram"><svg class="icon small-icon"><use href="#i-instagram"></use></svg></a></div></div></div></article>
+          <article class="agent reveal"><div class="agent-photo"><img loading="lazy" src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=700&w=700" alt="Mira Shah, Investment Advisor"></div><div class="agent-body"><p class="agent-role">Investment Advisor</p><h3>Mira Shah</h3><p class="agent-experience">9 years in investment and land advisory</p><div class="agent-lines"><a href="tel:+919999999999"><svg class="icon small-icon"><use href="#i-phone"></use></svg> +91 99999 99999</a><a href="mailto:mira@aurevia.in"><svg class="icon small-icon"><use href="#i-mail"></use></svg> mira@aurevia.in</a></div><div class="agent-footer"><a class="text-link" href="https://wa.me/919999999999" target="_blank" rel="noopener">WhatsApp</a><div class="agent-socials"><a href="#contact" aria-label="Mira on LinkedIn"><svg class="icon small-icon"><use href="#i-linkedin"></use></svg></a><a href="#contact" aria-label="Mira on Instagram"><svg class="icon small-icon"><use href="#i-instagram"></use></svg></a></div></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section testimonials" id="testimonials">
+      <div class="container"><div class="section-intro reveal"><div><p class="eyebrow">Client stories</p><h2 class="display">The feeling of<br>finding the one.</h2></div><p class="lead">We believe the best measure of our work is how our clients feel when the keys are in their hands.</p></div>
+        <div class="testimonial-wrap reveal"><div class="quote-mark">&ldquo;</div>
+          <article class="testimonial active"><blockquote>"Aurevia saw what we were looking for before we had the language for it. Their patience, judgement and instinct gave us a home that continues to surprise us every day."</blockquote><div class="testimonial-person"><img loading="lazy" src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=200&w=200" alt="Kavya and Arjun Rao"><div><strong>Kavya and Arjun Rao</strong><span>Purchased Serenity House, Alibaug</span></div></div></article>
+          <article class="testimonial"><blockquote>"The commercial team made a difficult expansion decision feel remarkably clear. We found a space that reflects how our business works now, while leaving room for the future."</blockquote><div class="testimonial-person"><img loading="lazy" src="https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=200&w=200" alt="Dev Malhotra"><div><strong>Dev Malhotra</strong><span>Founder, Northfield Studio</span></div></div></article>
+          <article class="testimonial"><blockquote>"From the first call to the final signing, every detail was anticipated. Aurevia made our move to Goa feel like a considered beginning rather than a complicated process."</blockquote><div class="testimonial-person"><img loading="lazy" src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=200&w=200" alt="Neelam Iyer"><div><strong>Neelam Iyer</strong><span>Purchased Casa Verde, Assagao</span></div></div></article>
+          <div class="testimonial-controls"><button class="control" id="testimonialPrev" aria-label="Previous testimonial"><svg class="icon" style="transform:rotate(180deg)"><use href="#i-arrow"></use></svg></button><button class="control" id="testimonialNext" aria-label="Next testimonial"><svg class="icon"><use href="#i-arrow"></use></svg></button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-quiet" id="gallery">
+      <div class="container"><div class="section-intro reveal"><div><p class="eyebrow">In focus</p><h2 class="display">Spaces worth<br>looking closer at.</h2></div><a class="text-link" href="#contact">Arrange a viewing <svg class="icon small-icon"><use href="#i-arrow"></use></svg></a></div>
+        <div class="gallery reveal"><a class="gallery-item" href="#contact"><img loading="lazy" src="https://images.pexels.com/photos/7031593/pexels-photo-7031593.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1000&w=850" alt="Contemporary villa courtyard"></a><a class="gallery-item" href="#contact"><img loading="lazy" src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=650" alt="Luxury modern living room"></a><a class="gallery-item" href="#contact"><img loading="lazy" src="https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=650" alt="High end kitchen"></a><a class="gallery-item" href="#contact"><img loading="lazy" src="https://images.pexels.com/photos/20200291/pexels-photo-20200291.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=1200" alt="Poolside luxury residence"></a></div>
+      </div>
+    </section>
+
+    <section class="video-section" id="video">
+      <div class="video-wrap"><div class="video-copy reveal"><p class="eyebrow">A different perspective</p><h2 class="display">There is no substitute for being there.</h2><p class="lead">Walk through the natural textures, shifting light and thoughtful details that make Horizon House an address apart.</p><a class="btn btn-primary" href="#contact" style="align-self:flex-start;margin-top:30px">Book a site visit <svg class="icon small-icon"><use href="#i-arrow"></use></svg></a></div><div class="video-frame reveal"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/VTy1FutW1WY?rel=0&modestbranding=1" title="Aurevia luxury homes showcase" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container"><div class="faq-layout"><div class="reveal"><p class="eyebrow">Frequently asked</p><h2 class="display">Answers, without<br>the runaround.</h2><p class="lead">If your question is not here, our advisors are always happy to talk it through.</p><a class="text-link" href="#contact" style="margin-top:22px">Talk to our team <svg class="icon small-icon"><use href="#i-arrow"></use></svg></a></div>
+        <div class="faq-list reveal">
+          <article class="faq-item open"><button class="faq-question" type="button">How does Aurevia verify a property?<svg class="icon"><use href="#i-plus"></use></svg></button><div class="faq-answer"><div><p>Every property passes a structured due-diligence process. We review ownership documents, approvals, market comparables, physical condition and developer or seller credentials before inviting a client to view.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button">Can you help with home loans and legal work?<svg class="icon"><use href="#i-plus"></use></svg></button><div class="faq-answer"><div><p>Yes. We coordinate with trusted loan partners and independent legal professionals, giving you a clear view of the financial and legal route from offer to registration.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button">Do you work with overseas buyers?<svg class="icon"><use href="#i-plus"></use></svg></button><div class="faq-answer"><div><p>Absolutely. Our dedicated NRI advisory desk manages virtual viewings, documentation, power of attorney coordination and an informed purchase process across time zones.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button">What types of commercial property do you handle?<svg class="icon"><use href="#i-plus"></use></svg></button><div class="faq-answer"><div><p>We advise on Grade A offices, boutique workplaces, retail, land and investment buildings. Our commercial team handles leasing, acquisition, disposal and portfolio strategy.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button">Is there a fee for a first consultation?<svg class="icon"><use href="#i-plus"></use></svg></button><div class="faq-answer"><div><p>No. An initial conversation with an Aurevia advisor is complimentary and confidential. It is simply a chance to understand your brief and determine how we can be useful.</p></div></div></article>
+        </div></div>
+      </div>
+    </section>
+
+    <section class="section section-quiet" id="blog">
+      <div class="container"><div class="section-intro reveal"><div><p class="eyebrow">Journal</p><h2 class="display">Intelligence for<br>your next move.</h2></div><a class="text-link" href="#contact">Read the journal <svg class="icon small-icon"><use href="#i-arrow"></use></svg></a></div>
+        <div class="blog-grid"><article class="article reveal"><div class="article-meta"><span>Market guide</span><span>6 min read</span></div><h3>What makes a home hold its value?</h3><p>A closer look at the quiet qualities that distinguish a resilient residential investment.</p><a class="text-link" href="#contact">Read article <svg class="icon small-icon"><use href="#i-arrow"></use></svg></a></article><article class="article reveal"><div class="article-meta"><span>Neighbourhoods</span><span>5 min read</span></div><h3>Why Alibaug has become the considered escape.</h3><p>The evolving culture, connectivity and character behind the coast's enduring appeal.</p><a class="text-link" href="#contact">Read article <svg class="icon small-icon"><use href="#i-arrow"></use></svg></a></article><article class="article reveal"><div class="article-meta"><span>Workplace</span><span>4 min read</span></div><h3>The office is changing. So is the brief.</h3><p>How thoughtful workplace design is becoming a serious strategic advantage.</p><a class="text-link" href="#contact">Read article <svg class="icon small-icon"><use href="#i-arrow"></use></svg></a></article></div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="container"><div class="contact-layout"><div class="reveal"><p class="eyebrow">Start a conversation</p><h2 class="display">A better move begins with a good question.</h2><p class="lead">Tell us what you are considering. One of our advisors will be in touch within one business day.</p><div class="contact-details"><div class="contact-detail"><svg class="icon"><use href="#i-pin"></use></svg><div><strong>Visit the studio</strong>42, Turner Road, Bandra West<br>Mumbai 400050</div></div><div class="contact-detail"><svg class="icon"><use href="#i-phone"></use></svg><div><strong>Call our advisory desk</strong><a href="tel:+919999999999">+91 99999 99999</a></div></div><div class="contact-detail"><svg class="icon"><use href="#i-mail"></use></svg><div><strong>Write to us</strong><a href="mailto:hello@aurevia.in">hello@aurevia.in</a></div></div></div></div>
+        <form class="enquiry-form reveal" id="enquiryForm" novalidate><h3 class="form-title">Tell us a little more.</h3><div class="form-grid"><div class="form-field"><label for="fullName">Full name *</label><input id="fullName" name="name" type="text" placeholder="Your full name" required><span class="field-error">Please enter your name.</span></div><div class="form-field"><label for="mobile">Mobile number *</label><input id="mobile" name="phone" type="tel" placeholder="Your contact number" required><span class="field-error">Enter a valid mobile number.</span></div><div class="form-field"><label for="email">Email address *</label><input id="email" name="email" type="email" placeholder="you@example.com" required><span class="field-error">Enter a valid email address.</span></div><div class="form-field"><label for="interest">Property interested in *</label><select id="interest" name="property" required><option value="">Choose a property type</option><option>Residential Plot</option><option>Villa or Luxury Home</option><option>Apartment</option><option>Commercial Office</option><option>Shop or Retail</option><option>Investment Property</option></select><span class="field-error">Please select a property type.</span></div><div class="form-field"><label for="budget">Budget *</label><select id="budget" name="budget" required><option value="">Choose your budget</option><option>Up to Rs 2 Cr</option><option>Rs 2 Cr - Rs 5 Cr</option><option>Rs 5 Cr - Rs 10 Cr</option><option>Rs 10 Cr - Rs 25 Cr</option><option>Above Rs 25 Cr</option></select><span class="field-error">Please select a budget.</span></div><div class="form-field"><label for="preferredLocation">Preferred location *</label><input id="preferredLocation" name="location" type="text" placeholder="City or neighbourhood" required><span class="field-error">Please add a preferred location.</span></div><div class="form-field full"><label for="message">Message *</label><textarea id="message" name="message" placeholder="Tell us about your ideal property and timeline" required></textarea><span class="field-error">Please include a short message.</span></div></div><button class="btn btn-dark" type="submit" style="margin-top:26px;width:100%">Send enquiry on WhatsApp <svg class="icon small-icon"><use href="#i-whatsapp"></use></svg></button><p class="form-note">By submitting, you agree to be contacted by Aurevia Estates about your enquiry.</p><p class="form-status" id="formStatus" aria-live="polite"></p></form>
+      </div></div>
+    </section>
+
+    <section class="map-section" aria-label="Aurevia Estates Mumbai location"><iframe loading="lazy" src="https://www.google.com/maps?q=Bandra%20West%20Mumbai&output=embed" title="Aurevia Estates location in Bandra West, Mumbai"></iframe></section>
+  </main>
+
+  <footer class="site-footer"><div class="container"><div class="footer-main"><div class="footer-brand"><a class="brand" href="#home"><span class="brand-mark"></span><span class="brand-name">AUREVIA<span class="brand-sub">Estates and Advisory</span></span></a><p class="footer-desc">Aurevia is an independent real estate advisory for people seeking exceptional homes, thoughtful investments and a more personal way to move.</p><div class="footer-socials"><a href="#contact" aria-label="Instagram"><svg class="icon small-icon"><use href="#i-instagram"></use></svg></a><a href="#contact" aria-label="LinkedIn"><svg class="icon small-icon"><use href="#i-linkedin"></use></svg></a><a href="#contact" aria-label="Facebook"><svg class="icon small-icon"><use href="#i-facebook"></use></svg></a></div></div><div><h3 class="footer-title">Explore</h3><ul class="footer-list"><li><a href="#properties">Featured properties</a></li><li><a href="#projects">New projects</a></li><li><a href="#categories">Residential plots</a></li><li><a href="#categories">Commercial spaces</a></li><li><a href="#blog">Market journal</a></li></ul></div><div><h3 class="footer-title">Services</h3><ul class="footer-list"><li><a href="#services">Property advisory</a></li><li><a href="#services">Investment strategy</a></li><li><a href="#services">Legal coordination</a></li><li><a href="#services">Home loan support</a></li><li><a href="#contact">NRI services</a></li></ul></div><div><h3 class="footer-title">Contact and hours</h3><ul class="footer-list"><li><a href="tel:+919999999999">+91 99999 99999</a></li><li><a href="mailto:hello@aurevia.in">hello@aurevia.in</a></li><li>42, Turner Road, Bandra West</li></ul><div class="hours" style="margin-top:18px"><div><span>Mon - Fri</span><span>9:30 - 18:30</span></div><div><span>Saturday</span><span>10:00 - 16:00</span></div><div><span>Sunday</span><span>By appointment</span></div></div><div class="newsletter"><label for="newsletterEmail">The Aurevia edit</label><form class="newsletter-form" id="newsletterForm"><input id="newsletterEmail" type="email" placeholder="Your email address" required><button aria-label="Subscribe to newsletter"><svg class="icon"><use href="#i-arrow"></use></svg></button></form><p class="newsletter-status" id="newsletterStatus" aria-live="polite"></p></div></div></div><div class="footer-bottom"><span>Copyright <span id="year"></span> Aurevia Estates. All rights reserved.</span><div class="legal-links"><a href="#contact">Privacy policy</a><a href="#contact">Terms and conditions</a></div></div></div></footer>
+
+  <div class="float-actions" aria-label="Quick contact options"><button class="float-btn to-top" id="toTop" aria-label="Back to top"><svg class="icon"><use href="#i-arrow"></use></svg></button><a class="float-btn email" href="mailto:hello@aurevia.in" aria-label="Email Aurevia"><svg class="icon"><use href="#i-mail"></use></svg></a><a class="float-btn call" href="tel:+919999999999" aria-label="Call Aurevia"><svg class="icon"><use href="#i-phone"></use></svg></a><a class="float-btn" href="https://wa.me/919999999999" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg class="icon"><use href="#i-whatsapp"></use></svg></a></div>
+  <div class="cookie-banner" id="cookieBanner"><div class="cookie-icon"><svg class="icon small-icon"><use href="#i-check"></use></svg></div><div class="cookie-copy"><strong>Your privacy, respected.</strong>We use essential cookies to make this site work smoothly.</div><button id="acceptCookies">Accept</button></div>
+
+  <script>
+    /* Change this one variable to use your business WhatsApp number, including country code. */
+    const WHATSAPP_NUMBER = "919999999999";
+
+    const $ = (selector, scope = document) => scope.querySelector(selector);
+    const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
+
+    // Loader is kept brief so the page feels intentional without delaying access.
+    window.addEventListener("load", () => setTimeout(() => $("#loader").classList.add("done"), 500));
+
+    // Theme preference persists for the next visit.
+    const themeToggle = $("#themeToggle");
+    const savedTheme = localStorage.getItem("aurevia-theme");
+    if (savedTheme === "dark") document.body.classList.add("dark");
+    function updateThemeIcon() { themeToggle.innerHTML = `<svg class="icon"><use href="#${document.body.classList.contains("dark") ? "i-sun" : "i-moon"}"></use></svg>`; }
+    updateThemeIcon();
+    themeToggle.addEventListener("click", () => { document.body.classList.toggle("dark"); localStorage.setItem("aurevia-theme", document.body.classList.contains("dark") ? "dark" : "light"); updateThemeIcon(); });
+
+    // Responsive navigation.
+    const menuToggle = $("#menuToggle");
+    const mobileMenu = $("#mobileMenu");
+    menuToggle.addEventListener("click", () => { const open = mobileMenu.classList.toggle("open"); document.body.classList.toggle("menu-open", open); menuToggle.innerHTML = `<svg class="icon"><use href="#${open ? "i-close" : "i-menu"}"></use></svg>`; });
+    $$(".mobile-menu a").forEach(link => link.addEventListener("click", () => { mobileMenu.classList.remove("open"); document.body.classList.remove("menu-open"); menuToggle.innerHTML = '<svg class="icon"><use href="#i-menu"></use></svg>'; }));
+
+    const header = $("#siteHeader");
+    const toTop = $("#toTop");
+    window.addEventListener("scroll", () => { header.classList.toggle("scrolled", window.scrollY > 20); toTop.classList.toggle("show", window.scrollY > 550); }, { passive: true });
+    toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+    // Scroll reveal, navigation highlighting, and counter animation use a shared observer.
+    const navLinks = $$(".nav-links a");
+    const sections = $$('main section[id]');
+    const navObserver = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) navLinks.forEach(link => link.classList.toggle("active", link.getAttribute("href") === `#${entry.target.id}`)); }), { rootMargin: "-35% 0px -55% 0px", threshold: 0 });
+    sections.forEach(section => navObserver.observe(section));
+    const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add("visible"); revealObserver.unobserve(entry.target); } }), { threshold: .12 });
+    $$(".reveal").forEach(item => revealObserver.observe(item));
+
+    function animateCounter(element) {
+      const target = Number(element.dataset.target); const suffix = element.dataset.suffix || ""; const start = performance.now(); const duration = 1450;
+      function tick(now) { const progress = Math.min((now - start) / duration, 1); const eased = 1 - Math.pow(1 - progress, 4); element.textContent = Math.floor(target * eased).toLocaleString("en-IN") + suffix; if (progress < 1) requestAnimationFrame(tick); }
+      requestAnimationFrame(tick);
+    }
+    const counterObserver = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { $$(".counter", entry.target).forEach(animateCounter); counterObserver.unobserve(entry.target); } }), { threshold: .45 });
+    const statsGrid = $(".stats-grid"); if (statsGrid) counterObserver.observe(statsGrid);
+
+    // Property filters work across the search panel and property card data attributes.
+    let activeMode = "Buy";
+    const propertyCards = $$(".property");
+    const searchResult = $("#searchResult");
+    function applyPropertyFilters() {
+      const location = $("#searchLocation").value; const category = $("#searchCategory").value; const type = $("#searchType").value; const maxPrice = $("#searchPrice").value; const beds = $("#searchBeds").value; const baths = $("#searchBaths").value; const area = $("#searchArea").value;
+      let count = 0;
+      propertyCards.forEach(card => {
+        const cardCategory = card.dataset.category;
+        const categoryMatch = !category || cardCategory.includes(category);
+        const price = Number(card.dataset.price);
+        const priceMatch = !maxPrice || (maxPrice === "50" ? price >= 10 : price <= Number(maxPrice));
+        const match = card.dataset.mode === activeMode && (!location || card.dataset.location === location) && categoryMatch && (!type || card.dataset.type === type) && priceMatch && (!beds || Number(card.dataset.beds) >= Number(beds)) && (!baths || Number(card.dataset.baths) >= Number(baths)) && (!area || Number(card.dataset.area) >= Number(area));
+        card.classList.toggle("hidden", !match); if (match) count++;
+      });
+      searchResult.textContent = count ? `${count} curated ${count === 1 ? "property" : "properties"} found. Explore the matching residences below.` : "No exact matches yet. Contact our advisors for off-market opportunities.";
+      $("#properties").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    $$(".search-tab").forEach(tab => tab.addEventListener("click", () => { activeMode = tab.dataset.mode; $$(".search-tab").forEach(button => button.classList.toggle("active", button === tab)); }));
+    $("#propertySearch").addEventListener("submit", event => { event.preventDefault(); applyPropertyFilters(); });
+    $("#showMore").addEventListener("click", () => { propertyCards.forEach(card => card.classList.remove("hidden")); searchResult.textContent = "Showing all currently featured properties."; });
+    $$(".favorite").forEach(button => button.addEventListener("click", () => { button.classList.toggle("saved"); button.setAttribute("aria-label", button.classList.contains("saved") ? "Remove saved property" : "Save property"); }));
+
+    // Property quick enquiries take visitors directly to WhatsApp with the listing included.
+    $$(".property-wa").forEach(link => link.addEventListener("click", event => { event.preventDefault(); const property = link.dataset.property; const message = `Hello,\n\nI am interested in ${property}.\n\nPlease contact me with more details.\n\nThank you.`; window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank", "noopener"); }));
+
+    // Testimonials automatically rotate but remain fully controllable.
+    const testimonials = $$(".testimonial"); let testimonialIndex = 0; let testimonialTimer;
+    function showTestimonial(index) { testimonialIndex = (index + testimonials.length) % testimonials.length; testimonials.forEach((item, i) => item.classList.toggle("active", i === testimonialIndex)); }
+    function resetTestimonialTimer() { clearInterval(testimonialTimer); testimonialTimer = setInterval(() => showTestimonial(testimonialIndex + 1), 6500); }
+    $("#testimonialPrev").addEventListener("click", () => { showTestimonial(testimonialIndex - 1); resetTestimonialTimer(); });
+    $("#testimonialNext").addEventListener("click", () => { showTestimonial(testimonialIndex + 1); resetTestimonialTimer(); }); resetTestimonialTimer();
+
+    // Accordion behavior keeps the answer list compact and readable.
+    $$(".faq-question").forEach(button => button.addEventListener("click", () => { const item = button.closest(".faq-item"); $$(".faq-item").forEach(other => { if (other !== item) other.classList.remove("open"); }); item.classList.toggle("open"); }));
+
+    // Validate enquiry fields, then open a professionally formatted WhatsApp message.
+    const enquiryForm = $("#enquiryForm");
+    function validateField(field) { const wrapper = field.closest(".form-field"); let valid = field.value.trim() !== ""; if (field.type === "email") valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value); if (field.name === "phone") valid = /^[0-9+()\s-]{8,}$/.test(field.value); wrapper.classList.toggle("invalid", !valid); return valid; }
+    $$("input, select, textarea", enquiryForm).forEach(field => field.addEventListener("input", () => validateField(field)));
+    enquiryForm.addEventListener("submit", event => { event.preventDefault(); const fields = $$("input, select, textarea", enquiryForm); const isValid = fields.map(validateField).every(Boolean); const status = $("#formStatus"); if (!isValid) { status.textContent = "Please review the highlighted fields before sending your enquiry."; status.style.color = "#b73f3f"; return; }
+      const data = new FormData(enquiryForm); const message = `Hello,\n\nI am interested in a property.\n\nName: ${data.get("name")}\nPhone: ${data.get("phone")}\nEmail: ${data.get("email")}\nProperty: ${data.get("property")}\nBudget: ${data.get("budget")}\nPreferred Location: ${data.get("location")}\nMessage: ${data.get("message")}\n\nPlease contact me.`; status.textContent = "Opening WhatsApp with your enquiry..."; status.style.color = "#3f7f5a"; window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank", "noopener"); });
+
+    // Newsletter uses client-side confirmation because no backend is required to run this file.
+    $("#newsletterForm").addEventListener("submit", event => { event.preventDefault(); const email = $("#newsletterEmail"); const status = $("#newsletterStatus"); if (!email.validity.valid) { status.textContent = "Please enter a valid email address."; return; } status.textContent = "Thank you. You are on the list."; email.value = ""; });
+
+    // Cookie acknowledgement is stored locally, avoiding repeat prompts.
+    const cookieBanner = $("#cookieBanner"); if (localStorage.getItem("aurevia-cookies") === "accepted") cookieBanner.remove(); $("#acceptCookies").addEventListener("click", () => { localStorage.setItem("aurevia-cookies", "accepted"); cookieBanner.classList.add("hide"); setTimeout(() => cookieBanner.remove(), 400); });
+    $("#year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
