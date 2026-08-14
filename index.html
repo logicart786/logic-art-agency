@@ -840,6 +840,54 @@
         }
     </style>
 </head>
+    <!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+<script>
+  // Apni Firebase Config yahan paste karein
+  const firebaseConfig = {
+    apiKey: "AIzaSyCeEpQu1wxGwzwtbnJsygfjeES2CILSKrY",
+    authDomain: "logic-art-admin.firebaseapp.com",
+    projectId: "logic-art-admin",
+    storageBucket: "logic-art-admin.firebasestorage.app",
+    messagingSenderId: "967896338750",
+    appId: "1:967896338750:web:d11cbc8dc9c36531569c6f"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  // Firestore se Dynamic Live Demos Fetch karne ka code
+  function loadDemosFromFirebase() {
+    db.collection("demos").get().then((querySnapshot) => {
+      const deckGrid = document.querySelector("#view-demos .deck-grid");
+      if (!deckGrid) return;
+
+      // Agar Firebase me demos hain toh grid update karein
+      if (!querySnapshot.empty) {
+        deckGrid.innerHTML = ""; // Hardcoded items ko clear karein
+        querySnapshot.forEach((doc) => {
+          const demo = doc.data();
+          const cardHTML = `
+            <div class="deck-card" onclick="openLiveDemo('${demo.url}', '${demo.title}')" style="cursor: pointer;">
+                <i class="${demo.icon || 'fa-solid fa-laptop-code'} deck-icon"></i>
+                <h3>${demo.title}</h3>
+                <p style="margin-bottom: 20px;">${demo.description}</p>
+                <div class="btn-offer-action" style="padding: 12px 20px; font-size: 0.9rem;">
+                    Preview Demo <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+          `;
+          deckGrid.innerHTML += cardHTML;
+        });
+      }
+    });
+  }
+
+  // Page Load par run karein
+  document.addEventListener("DOMContentLoaded", loadDemosFromFirebase);
+</script>
 <body>
 
     <div class="cyber-grid"></div>
