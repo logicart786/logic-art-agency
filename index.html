@@ -7,12 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="logo.png">
-<link rel="apple-touch-icon" href="logo.png">
-      <!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-
-<script>
+    <link rel="apple-touch-icon" href="logo.png">
+    <script>
   // Apni Firebase Config yahan paste karein
   const firebaseConfig = {
     apiKey: "AIzaSyCeEpQu1wxGwzwtbnJsygfjeES2CILSKrY",
@@ -66,8 +62,28 @@
             --accent-amber: #ff9966;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
+            --nav-bg: rgba(3, 7, 18, 0.85);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            --grid-line: rgba(0, 242, 254, 0.04);
             --whatsapp: #25d366;
-            --nav-height: 90px;
+            --nav-height: 85px;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f8fafc;
+            --surface-glass: rgba(255, 255, 255, 0.85);
+            --surface-solid: #ffffff;
+            --primary-blue: #0284c7;
+            --primary-cyan: #0ea5e9;
+            --accent-orange: #e11d48;
+            --accent-amber: #ea580c;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --nav-bg: rgba(255, 255, 255, 0.9);
+            --border-color: rgba(0, 0, 0, 0.08);
+            --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08);
+            --grid-line: rgba(2, 132, 199, 0.06);
         }
 
         * {
@@ -83,6 +99,7 @@
             color: var(--text-main);
             overflow-x: hidden;
             min-height: 100vh;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
         #particleCanvas {
@@ -93,7 +110,6 @@
             height: 100vh;
             z-index: -1;
             pointer-events: none;
-            background: radial-gradient(circle at 50% 20%, #060d24 0%, #030712 100%);
         }
 
         .cyber-grid {
@@ -104,10 +120,10 @@
             left: -50vw;
             z-index: -2;
             background-image: 
-                linear-gradient(rgba(0, 242, 254, 0.035) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 242, 254, 0.035) 1px, transparent 1px);
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
             background-size: 60px 60px;
-            transform: perspective(800px) rotateX(60deg);
+            transform: perspective(700px) rotateX(60deg);
             animation: gridMove 25s linear infinite;
             pointer-events: none;
         }
@@ -119,12 +135,12 @@
 
         .ambient-orb {
             position: fixed;
-            width: 600px;
-            height: 600px;
+            width: clamp(250px, 35vw, 550px);
+            height: clamp(250px, 35vw, 550px);
             border-radius: 50%;
-            filter: blur(150px);
+            filter: blur(120px);
             z-index: -2;
-            opacity: 0.12;
+            opacity: 0.15;
             pointer-events: none;
             animation: orbFloat 15s ease-in-out infinite alternate;
         }
@@ -134,50 +150,55 @@
 
         @keyframes orbFloat {
             0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(40px, 40px) scale(1.15); }
+            100% { transform: translate(30px, 30px) scale(1.1); }
         }
 
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            will-change: transform;
+        }
+
+        .tilt-content-3d {
+            transform: translateZ(25px);
+        }
+
+        /* Nav Header */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 6%;
+            padding: 0 5%;
             height: var(--nav-height);
-            background: rgba(3, 7, 18, 0.82);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.4s ease;
         }
 
         .logo-block {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
             cursor: pointer;
         }
 
         .logo-circle-wrapper {
             position: relative;
-            width: 52px;
-            height: 52px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            padding: 2.5px;
+            padding: 2px;
             background: linear-gradient(135deg, var(--primary-blue), var(--accent-orange));
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .logo-circle-wrapper:hover {
-            transform: scale(1.1) rotate(8deg);
-            box-shadow: 0 0 30px rgba(255, 94, 98, 0.6);
         }
 
         .logo-img {
@@ -185,109 +206,165 @@
             height: 100%;
             object-fit: cover;
             border-radius: 50%;
-            background: #060d24;
+            background: var(--surface-solid);
+        }
+
+        .logo-fallback {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--surface-solid);
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1rem;
         }
 
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.03);
+            gap: 6px;
+            background: var(--surface-glass);
             padding: 6px 10px;
             border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(15px);
+            border: 1px solid var(--border-color);
         }
 
         .nav-menu li a {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.92rem;
+            font-size: 0.88rem;
             font-weight: 600;
-            padding: 10px 22px;
+            padding: 8px 16px;
             border-radius: 30px;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s ease;
             cursor: pointer;
             display: inline-block;
         }
 
         .nav-menu li a:hover, .nav-menu li a.active {
-            color: #fff;
+            color: var(--text-main);
             background: linear-gradient(135deg, rgba(0, 242, 254, 0.15), rgba(255, 94, 98, 0.15));
-            box-shadow: inset 0 0 15px rgba(0, 242, 254, 0.15);
             border: 1px solid rgba(0, 242, 254, 0.3);
+        }
+
+        .nav-right-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theme-toggle-btn {
+            background: var(--surface-glass);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.08) rotate(15deg);
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
         }
 
         .nav-btn-whatsapp {
             background: linear-gradient(135deg, #25d366, #128c7e);
             color: #fff;
-            padding: 12px 28px;
+            padding: 10px 20px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 0.92rem;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
         }
 
         .nav-btn-whatsapp:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.55);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
         }
 
         .hamburger {
             display: none;
-            font-size: 1.6rem;
-            color: white;
+            font-size: 1.4rem;
+            color: var(--text-main);
             cursor: pointer;
         }
 
+        /* Floating Sticky WhatsApp Button */
+        .sticky-whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 58px;
+            height: 58px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+            z-index: 999;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .sticky-whatsapp-float:hover {
+            transform: scale(1.12);
+        }
+
+        /* Page Layouts */
         .page-view {
             display: none;
-            padding: calc(var(--nav-height) + 40px) 6% 80px 6%;
+            padding: calc(var(--nav-height) + 25px) 5% 80px 5%;
             min-height: 100vh;
-            max-width: 1450px;
+            max-width: 1400px;
             margin: 0 auto;
-            animation: viewFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: viewFadeIn 0.35s ease forwards;
         }
 
         .page-view.active { display: block; }
 
         @keyframes viewFadeIn {
-            from { opacity: 0; transform: translateY(15px); }
+            from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Hub Layout Grid */
         .hub-split-grid {
             display: grid;
             grid-template-columns: 1.15fr 0.85fr;
-            gap: 40px;
+            gap: 25px;
             align-items: stretch;
-            padding-top: 15px;
         }
 
         .offer-panel {
-            background: linear-gradient(145deg, rgba(13, 20, 38, 0.9) 0%, rgba(3, 7, 18, 0.95) 100%);
-            border: 1px solid rgba(0, 242, 254, 0.25);
-            border-radius: 30px;
-            padding: 45px;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6), inset 0 0 30px rgba(0, 242, 254, 0.05);
-            backdrop-filter: blur(20px);
+            background: var(--surface-glass);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: clamp(25px, 4vw, 40px);
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(15px);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
             overflow: hidden;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
-        }
-
-        .offer-panel:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 35px 80px rgba(0, 242, 254, 0.12), inset 0 0 40px rgba(0, 242, 254, 0.08);
-            border-color: rgba(0, 242, 254, 0.4);
         }
 
         .offer-panel::before {
@@ -301,70 +378,67 @@
         }
 
         .badge-limited {
-            background: linear-gradient(90deg, rgba(255, 94, 98, 0.15), rgba(255, 153, 102, 0.15));
+            background: rgba(255, 94, 98, 0.12);
             color: var(--accent-amber);
             border: 1px solid rgba(255, 94, 98, 0.3);
-            padding: 8px 18px;
+            padding: 6px 14px;
             border-radius: 30px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 25px;
+            margin-bottom: 18px;
             width: fit-content;
-            box-shadow: 0 0 20px rgba(255, 94, 98, 0.15);
         }
 
         .offer-panel h1 {
-            font-size: 3.4rem;
-            line-height: 1.12;
+            font-size: clamp(2rem, 3.8vw, 3.2rem);
+            line-height: 1.15;
             font-weight: 800;
-            margin-bottom: 20px;
-            letter-spacing: -1.5px;
+            margin-bottom: 18px;
+            letter-spacing: -0.5px;
         }
 
         .gradient-text {
             background: linear-gradient(135deg, var(--primary-blue), var(--primary-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(0, 242, 254, 0.3);
         }
 
         .offer-panel p {
-            font-size: 1.12rem;
+            font-size: clamp(0.92rem, 1.4vw, 1.05rem);
             color: var(--text-muted);
-            margin-bottom: 35px;
-            line-height: 1.65;
+            margin-bottom: 25px;
+            line-height: 1.6;
         }
 
         .price-display-box {
-            background: rgba(255, 255, 255, 0.025);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 24px 30px;
-            border-radius: 18px;
+            background: var(--surface-solid);
+            border: 1px solid var(--border-color);
+            padding: 18px 22px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 30px;
-            backdrop-filter: blur(10px);
+            margin-bottom: 20px;
         }
 
         .price-left span {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: var(--primary-blue);
-            letter-spacing: 2.5px;
+            letter-spacing: 1.5px;
             display: block;
             font-weight: 700;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .price-left strong {
-            font-size: 3.2rem;
+            font-size: clamp(2rem, 3vw, 2.8rem);
             font-weight: 900;
-            color: #fff;
+            color: var(--text-main);
             line-height: 1;
         }
 
@@ -374,339 +448,446 @@
             background: rgba(37, 211, 102, 0.12);
             color: var(--whatsapp);
             border: 1px solid rgba(37, 211, 102, 0.3);
-            padding: 5px 14px;
+            padding: 4px 10px;
             border-radius: 20px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
             display: inline-block;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .price-right small {
             display: block;
             color: var(--text-muted);
-            font-size: 0.85rem;
+            font-size: 0.78rem;
         }
 
         .btn-offer-action {
             background: linear-gradient(135deg, #25d366, #128c7e);
             color: #fff;
-            padding: 18px 35px;
+            padding: 15px 28px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.4);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+            transition: all 0.3s ease;
             text-align: center;
             cursor: pointer;
             border: none;
+            width: 100%;
         }
 
         .btn-offer-action:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 18px 45px rgba(37, 211, 102, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(37, 211, 102, 0.45);
         }
 
         .details-panel {
-            background: linear-gradient(145deg, rgba(13, 20, 38, 0.75) 0%, rgba(3, 7, 18, 0.85) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 30px;
-            padding: 40px;
+            background: var(--surface-glass);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: clamp(22px, 3vw, 35px);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(20px);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .details-panel:hover {
-            transform: translateY(-4px);
-            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(15px);
         }
 
         .details-panel h2 {
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-weight: 800;
-            margin-bottom: 25px;
-            letter-spacing: -0.5px;
+            margin-bottom: 18px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .details-panel h2 i {
-            color: var(--primary-blue);
-            font-size: 1.7rem;
-        }
+        .details-panel h2 i { color: var(--primary-blue); }
 
         .spec-list {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 16px;
-            margin-bottom: 25px;
+            gap: 12px;
+            margin-bottom: 20px;
         }
 
         .spec-item {
             display: flex;
             align-items: flex-start;
-            gap: 16px;
-            background: rgba(255, 255, 255, 0.02);
-            padding: 16px 20px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .spec-item:hover {
-            background: rgba(0, 242, 254, 0.04);
-            border-color: rgba(0, 242, 254, 0.2);
-            transform: translateX(6px);
+            gap: 12px;
+            background: var(--surface-solid);
+            padding: 12px 16px;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
         }
 
         .spec-item i {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: var(--primary-blue);
-            margin-top: 2px;
+            margin-top: 3px;
         }
 
         .spec-item strong {
             display: block;
-            font-size: 1.05rem;
-            margin-bottom: 3px;
-            color: #fff;
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+            color: var(--text-main);
         }
 
         .spec-item span {
-            font-size: 0.9rem;
+            font-size: 0.82rem;
             color: var(--text-muted);
-            line-height: 1.45;
+            line-height: 1.4;
         }
 
-        .preview-mini-box {
-            background: #050b1a;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 18px 22px;
+        /* Metrics Counter Bar */
+        .metrics-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 40px 0;
+            background: var(--surface-glass);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .metric-box h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+        }
+
+        .metric-box p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* Testimonials Cards */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .testimonial-card {
+            background: var(--surface-glass);
+            border: 1px solid var(--border-color);
+            padding: 22px;
+            border-radius: 18px;
+            position: relative;
+        }
+
+        .stars-row {
+            color: #fbbf24;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .client-info {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 10px;
         }
 
-        .preview-mini-box .left-info span {
+        .client-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-orange));
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.85rem;
+        }
+
+        .client-details h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .client-details span {
             font-size: 0.75rem;
             color: var(--text-muted);
             display: block;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        .preview-mini-box .left-info strong {
-            font-size: 1rem;
-            color: #fff;
-        }
-
-        .status-dot-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
-            color: var(--whatsapp);
-            font-weight: 600;
-        }
-
-        .status-dot {
-            width: 10px;
-            height: 10px;
-            background: var(--whatsapp);
-            border-radius: 50%;
-            box-shadow: 0 0 12px var(--whatsapp);
-            animation: pulseDot 2s infinite;
-        }
-
-        @keyframes pulseDot {
-            0% { transform: scale(0.95); opacity: 0.8; }
-            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 20px var(--whatsapp); }
-            100% { transform: scale(0.95); opacity: 0.8; }
-        }
-
+        /* Section Layouts */
         .section-header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 35px;
         }
 
         .section-header h2 {
-            font-size: 3rem;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
             font-weight: 800;
-            margin-bottom: 15px;
-            letter-spacing: -0.5px;
+            margin-bottom: 10px;
         }
 
         .section-header p {
             color: var(--text-muted);
-            font-size: 1.15rem;
+            font-size: 0.98rem;
         }
 
         .deck-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
         }
 
         .deck-card {
-            background: linear-gradient(135deg, var(--surface-glass) 0%, rgba(13,20,38,0.5) 100%);
-            border: 1px solid rgba(255,255,255,0.06);
-            padding: 40px 35px;
-            border-radius: 24px;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            backdrop-filter: blur(15px);
+            background: var(--surface-glass);
+            border: 1px solid var(--border-color);
+            padding: 30px 24px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--card-shadow);
         }
 
         .deck-card:hover {
-            transform: translateY(-8px);
-            background: var(--surface-solid);
-            border-color: rgba(0, 242, 254, 0.35);
-            box-shadow: 0 30px 60px rgba(0, 242, 254, 0.1);
+            border-color: var(--primary-blue);
         }
 
         .deck-icon {
-            font-size: 2.8rem;
+            font-size: 2.2rem;
             color: var(--primary-blue);
-            margin-bottom: 25px;
+            margin-bottom: 16px;
             display: inline-block;
-            filter: drop-shadow(0 0 12px rgba(0,242,254,0.4));
         }
 
         .deck-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+            font-size: 1.25rem;
+            margin-bottom: 10px;
             font-weight: 700;
         }
 
         .deck-card p {
             color: var(--text-muted);
-            line-height: 1.65;
-            font-size: 1rem;
+            line-height: 1.5;
+            font-size: 0.9rem;
         }
 
         .btn-back-demos {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            background: rgba(255,255,255,0.05);
+            gap: 8px;
+            background: var(--surface-glass);
             color: var(--primary-blue);
-            border: 1px solid rgba(0, 242, 254, 0.2);
-            padding: 10px 22px;
+            border: 1px solid var(--border-color);
+            padding: 9px 18px;
             border-radius: 30px;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             cursor: pointer;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             transition: all 0.3s;
         }
 
         .btn-back-demos:hover {
-            background: rgba(0, 242, 254, 0.15);
+            background: var(--primary-blue);
             color: #fff;
-            transform: translateX(-4px);
         }
 
         .demo-hero-box {
-            background: linear-gradient(135deg, rgba(13,20,38,0.9), rgba(3,7,18,0.95));
-            border: 1px solid rgba(0, 242, 254, 0.2);
-            border-radius: 28px;
-            padding: 40px;
-            margin-bottom: 40px;
+            background: var(--surface-glass);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: clamp(22px, 3vw, 35px);
+            margin-bottom: 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 30px;
+            gap: 20px;
         }
 
-        .demo-features-grid {
+        /* Form / Launchpad */
+        .launchpad-card {
+            background: var(--surface-glass);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: clamp(22px, 3.5vw, 40px);
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(15px);
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
         }
 
-        .demo-feature-card {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 20px;
-            padding: 30px;
+        .field-group { margin-bottom: 16px; }
+
+        .field-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .field-group input, .field-group textarea, .field-group select {
+            width: 100%;
+            padding: 12px 14px;
+            background: var(--surface-solid);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-main);
+            outline: none;
+            font-size: 0.9rem;
             transition: all 0.3s;
         }
 
-        .demo-feature-card:hover {
-            border-color: var(--primary-blue);
-            background: rgba(0, 242, 254, 0.03);
-            transform: translateY(-4px);
-        }
-
-        .matrix-box {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-        }
-
-        .matrix-item {
-            background: linear-gradient(135deg, var(--surface-glass) 0%, rgba(13,20,38,0.3) 100%);
-            padding: 30px;
-            border-radius: 20px;
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            backdrop-filter: blur(15px);
-        }
-
-        .matrix-item:hover {
-            border-color: rgba(255, 94, 98, 0.4);
+        .field-group select option {
             background: var(--surface-solid);
-            transform: translateY(-4px);
+            color: var(--text-main);
         }
 
-        .matrix-item i {
-            font-size: 1.8rem;
-            color: var(--accent-orange);
-            background: rgba(255, 94, 98, 0.1);
-            padding: 18px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 94, 98, 0.25);
-            filter: drop-shadow(0 0 10px rgba(255,94,98,0.35));
+        .field-group input:focus, .field-group textarea:focus, .field-group select:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 12px rgba(0, 242, 254, 0.2);
         }
 
-        .matrix-item h4 {
-            font-size: 1.3rem;
-            margin-bottom: 6px;
-            font-weight: 700;
-        }
-
-        .matrix-item p {
-            color: var(--text-muted);
+        .btn-portal {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, var(--primary-blue), #2563eb);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
             font-size: 0.95rem;
-            line-height: 1.55;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(0, 242, 254, 0.25);
+        }
+
+        .btn-portal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(0, 242, 254, 0.35);
+        }
+
+        /* Live Demo Modal with Loading Spinner */
+        .demo-viewer-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg-color);
+            z-index: 9999;
+            display: none;
+            flex-direction: column;
+        }
+
+        .demo-viewer-modal.active { display: flex; }
+
+        .demo-viewer-header {
+            height: 58px;
+            background: var(--surface-solid);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .demo-viewer-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-close-demo {
+            background: linear-gradient(135deg, var(--accent-orange), #e11d48);
+            color: white;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.82rem;
+        }
+
+        .demo-iframe-container {
+            flex: 1;
+            width: 100%;
+            height: calc(100vh - 58px);
+            position: relative;
+            background: #fff;
+        }
+
+        .iframe-loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            color: #0f172a;
+            z-index: 2;
+            transition: opacity 0.3s;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 242, 254, 0.2);
+            border-top: 4px solid var(--primary-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .demo-iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            position: relative;
+            z-index: 3;
         }
 
         footer {
-            background: #010409;
-            padding: 50px 6%;
+            background: var(--surface-solid);
+            padding: 35px 5%;
             text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.06);
+            border-top: 1px solid var(--border-color);
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.85rem;
         }
 
         footer p span {
@@ -714,11 +895,11 @@
             font-weight: 700;
         }
 
+        /* Responsive Breakpoints */
         @media (max-width: 1024px) {
             .hub-split-grid { grid-template-columns: 1fr; }
-            .offer-panel h1 { font-size: 3rem; }
-            .matrix-box { grid-template-columns: 1fr; }
             .demo-hero-box { flex-direction: column; text-align: center; }
+            .demo-hero-box .btn-offer-action { width: auto; }
         }
 
         @media (max-width: 768px) {
@@ -730,180 +911,42 @@
                 top: var(--nav-height);
                 left: 0;
                 width: 100%;
-                background: #030712;
+                background: var(--surface-solid);
                 border-radius: 0;
                 border: none;
-                border-bottom: 1px solid rgba(255,255,255,0.08);
-                padding: 25px;
-                gap: 15px;
-                box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+                border-bottom: 1px solid var(--border-color);
+                padding: 18px;
+                gap: 8px;
             }
             .nav-menu.open { display: flex; }
-            .nav-btn-whatsapp { display: none; }
-            .offer-panel h1 { font-size: 2.4rem; }
-            .price-left strong { font-size: 2.6rem; }
-        }
-
-        .launchpad-card {
-            background: linear-gradient(135deg, rgba(13,20,38,0.95) 0%, #030712 100%);
-            border: 1px solid rgba(0, 242, 254, 0.25);
-            border-radius: 28px;
-            padding: 45px;
-            box-shadow: 0 30px 70px rgba(0,0,0,0.6);
-            backdrop-filter: blur(20px);
-            max-width: 950px;
-            margin: 0 auto;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 22px;
-        }
-
-        .field-group { margin-bottom: 20px; }
-
-        .field-group label {
-            display: block;
-            margin-bottom: 10px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .field-group input, .field-group textarea, .field-group select {
-            width: 100%;
-            padding: 16px;
-            background: #030712;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 14px;
-            color: white;
-            outline: none;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-        }
-
-        .field-group select option {
-            background: #0b1329;
-            color: white;
-        }
-
-        .field-group input:focus, .field-group textarea:focus, .field-group select:focus {
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
-        }
-
-        .btn-portal {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(90deg, var(--primary-blue), #2563eb);
-            border: none;
-            border-radius: 14px;
-            color: white;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 10px 25px rgba(0, 242, 254, 0.3);
-        }
-
-        .btn-portal:hover {
-            opacity: 0.95;
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(0, 242, 254, 0.45);
-        }
-
-        /* --- EMBEDDED LIVE DEMO MODAL FRAME --- */
-        .demo-viewer-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(3, 7, 18, 0.95);
-            backdrop-filter: blur(15px);
-            z-index: 9999;
-            display: none;
-            flex-direction: column;
-            animation: fadeInModal 0.3s ease-in-out forwards;
-        }
-
-        @keyframes fadeInModal {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .demo-viewer-modal.active { display: flex; }
-
-        .demo-viewer-header {
-            height: 65px;
-            background: rgba(11, 19, 41, 0.95);
-            border-bottom: 1px solid rgba(0, 242, 254, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 30px;
-        }
-
-        .demo-viewer-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--primary-blue);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-close-demo {
-            background: linear-gradient(135deg, var(--accent-orange), #e11d48);
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-        }
-
-        .btn-close-demo:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(255, 94, 98, 0.5);
-        }
-
-        .demo-iframe-container {
-            flex: 1;
-            width: 100%;
-            height: calc(100vh - 65px);
-            background: #fff;
-        }
-
-        .demo-iframe-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
+            .nav-btn-whatsapp span { display: none; }
+            .nav-btn-whatsapp { padding: 9px 12px; }
+            .price-display-box { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .price-right { text-align: left; }
         }
     </style>
 </head>
-<body>
+<body data-theme="dark">
 
     <div class="cyber-grid"></div>
     <div class="ambient-orb orb-1"></div>
     <div class="ambient-orb orb-2"></div>
     <canvas id="particleCanvas"></canvas>
 
+    <!-- Floating WhatsApp Shortcut -->
+    <a href="https://wa.me/918275544003" target="_blank" class="sticky-whatsapp-float" title="Quick WhatsApp Connect">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
     <!-- Navigation Header -->
     <nav>
         <div class="logo-block" onclick="switchTab('home')">
             <div class="logo-circle-wrapper">
-                <img src="logo.png" alt="Logic Art Logo" class="logo-img">
+                <img src="logo.png" alt="Logic Art" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback" style="display:none;">LA</div>
             </div>
-            <span style="font-weight: 900; font-size: 1.6rem; letter-spacing: 1.5px;">LOGIC <span style="color:var(--accent-orange)">ART</span></span>
+            <span style="font-weight: 900; font-size: 1.4rem; letter-spacing: 0.5px;">LOGIC <span style="color:var(--accent-orange)">ART</span></span>
         </div>
-        
-        <i class="fa-solid fa-bars hamburger" onclick="toggleNavMenu()"></i>
         
         <ul class="nav-menu" id="navMenu">
             <li><a onclick="switchTab('home')" id="tab-home" class="active">Home</a></li>
@@ -913,22 +956,28 @@
             <li><a onclick="switchTab('contact')" id="tab-contact">Contact</a></li>
         </ul>
 
-        <a href="https://wa.me/918275544003" target="_blank" class="nav-btn-whatsapp">
-            <i class="fa-brands fa-whatsapp"></i> Chat Live
-        </a>
+        <div class="nav-right-actions">
+            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Theme">
+                <i class="fa-solid fa-sun"></i>
+            </button>
+            <a href="https://wa.me/918275544003" target="_blank" class="nav-btn-whatsapp">
+                <i class="fa-brands fa-whatsapp"></i> <span>Chat Live</span>
+            </a>
+            <i class="fa-solid fa-bars hamburger" onclick="toggleNavMenu()"></i>
+        </div>
     </nav>
 
     <!-- TAB 1: HOME -->
     <div id="view-home" class="page-view active">
         <div class="hub-split-grid">
-            <div class="offer-panel">
-                <div>
+            <div class="offer-panel tilt-card">
+                <div class="tilt-content-3d">
                     <div class="badge-limited"><i class="fa-solid fa-bolt"></i> Limited New User Offer</div>
                     <h1>Elite Digital <br><span class="gradient-text">Presence Agency</span></h1>
-                    <p>Engineered for high-end brands looking for lightning-fast speeds, bespoke UI layout grids, and conversion-optimized performance.</p>
+                    <p>Engineered for businesses seeking lightning-fast load speeds, high-converting WhatsApp leads, and modern interactive designs.</p>
                 </div>
 
-                <div>
+                <div class="tilt-content-3d">
                     <div class="price-display-box">
                         <div class="price-left">
                             <span>INVESTMENT</span>
@@ -940,85 +989,78 @@
                         </div>
                     </div>
 
-                    <a href="https://wa.me/918275544003" target="_blank" class="btn-offer-action">
+                    <a href="https://wa.me/918275544003?text=Hi%20Logic%20Art,%20I%20want%20to%20claim%20the%20New%20User%20Offer%20for%20%E2%82%B91,999!" target="_blank" class="btn-offer-action">
                         <i class="fa-brands fa-whatsapp"></i> CLAIM NEW USER OFFER NOW
                     </a>
                 </div>
             </div>
 
-            <div class="details-panel">
-                <div>
+            <div class="details-panel tilt-card">
+                <div class="tilt-content-3d">
                     <h2><i class="fa-solid fa-microchip"></i> System Architecture</h2>
                     <ul class="spec-list">
                         <li class="spec-item">
                             <i class="fa-solid fa-bolt"></i>
                             <div>
                                 <strong>Sub-Second Load Engine</strong>
-                                <span>Ultra-lightweight codebase engineered for instant asset rendering.</span>
+                                <span>Lightweight code structure optimized for instant loading.</span>
+                            </div>
+                        </li>
+                        <li class="spec-item">
+                            <i class="fa-solid fa-cube"></i>
+                            <div>
+                                <strong>3D Glassmorphism Theme</strong>
+                                <span>Modern spatial visuals tailored for local & global brands.</span>
                             </div>
                         </li>
                         <li class="spec-item">
                             <i class="fa-solid fa-mobile-screen"></i>
                             <div>
-                                <strong>Fluid Responsive Grid</strong>
-                                <span>Immaculate visual scaling across mobile, tablet, and desktop viewports.</span>
-                            </div>
-                        </li>
-                        <li class="spec-item">
-                            <i class="fa-solid fa-shield-halved"></i>
-                            <div>
-                                <strong>Direct Conversion Nodes</strong>
-                                <span>Seamless WhatsApp routing & instant communication channels integrated.</span>
+                                <strong>Responsive Grid Layout</strong>
+                                <span>Seamless rendering on mobile, tablet, and desktop screens.</span>
                             </div>
                         </li>
                     </ul>
                 </div>
-
-                <div class="preview-mini-box">
-                    <div class="left-info">
-                        <span>Live System Status</span>
-                        <strong>Logic Art V3 Engine Operational</strong>
-                    </div>
-                    <div class="status-dot-wrapper">
-                        <div class="status-dot"></div>
-                        <span>Active</span>
-                    </div>
-                </div>
             </div>
         </div>
 
-        <div style="margin-top: 80px;">
-            <div class="section-header" style="margin-bottom: 35px;">
-                <h2><span class="gradient-text">Interactive Live Demos</span></h2>
-                <p>Click any industry node to instantly enter its dedicated live demo ecosystem.</p>
+        <
+        <!-- Social Proof Testimonials -->
+        <div>
+            <div class="section-header">
+                <h2>What <span class="gradient-text">Clients Say</span></h2>
+                <p>Real feedback from business owners using Logic Art deployments.</p>
             </div>
-
-            <div class="deck-grid">
-                <div class="deck-card" onclick="switchTab('demo-hotel')" style="cursor: pointer;">
-                    <i class="fa-solid fa-hotel deck-icon"></i>
-                    <h3>Hotels & Restaurants</h3>
-                    <p style="margin-bottom: 20px;">Dynamic room booking grids, table reservation matrices, and instant WhatsApp food order nodes.</p>
-                    <span style="color: var(--primary-blue); font-weight: 700; font-size: 0.9rem;">Explore Ecosystem <i class="fa-solid fa-arrow-right"></i></span>
+            <div class="testimonials-grid">
+                <div class="testimonial-card tilt-card">
+                    <div class="stars-row"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p>"Website speed super fast hai! Customers directly menu dekhte hain aur WhatsApp pe order karte hain. Super easy!"</p>
+                    <div class="client-info">
+                        <div class="client-avatar">RK</div>
+                        <div class="client-details">
+                            <h4>Royal Cafe & Resto</h4>
+                            <span>Restaurant Partner</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="deck-card" onclick="switchTab('demo-gym')" style="cursor: pointer;">
-                    <i class="fa-solid fa-dumbbell deck-icon" style="color: #ef4444;"></i>
-                    <h3>Gym & Fitness Hubs</h3>
-                    <p style="margin-bottom: 20px;">Workout plan showcases, membership tier calculators, and trainer slot booking nodes.</p>
-                    <span style="color: #ef4444; font-weight: 700; font-size: 0.9rem;">Explore Ecosystem <i class="fa-solid fa-arrow-right"></i></span>
-                </div>
-
-                <div class="deck-card" onclick="switchTab('demo-shop')" style="cursor: pointer;">
-                    <i class="fa-solid fa-bag-shopping deck-icon" style="color: var(--accent-orange);"></i>
-                    <h3>Shopping Centers</h3>
-                    <p style="margin-bottom: 20px;">Ultra-fast e-commerce catalogs, instant cart caches, category filters, and quick checkout flow.</p>
-                    <span style="color: var(--accent-orange); font-weight: 700; font-size: 0.9rem;">Explore Ecosystem <i class="fa-solid fa-arrow-right"></i></span>
+                <div class="testimonial-card tilt-card">
+                    <div class="stars-row"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p>"Hamare gym memberships increase ho gaye. Clean design aur membership plans layout bohot professional hai."</p>
+                    <div class="client-info">
+                        <div class="client-avatar">IP</div>
+                        <div class="client-details">
+                            <h4>IronPulse Fitness</h4>
+                            <span>Gym Owner</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- MAIN LIVE DEMOS TAB -->
+   <!-- MAIN LIVE DEMOS TAB -->
     <div id="view-demos" class="page-view">
         <div class="section-header">
             <h2>Select An <span class="gradient-text">Industry Ecosystem</span></h2>
@@ -1097,7 +1139,7 @@
                 <h1 style="font-size: 2.5rem; margin-top: 10px;">Grand Hotel & Fine Dine Portal</h1>
                 <p style="color: var(--text-muted); margin-top: 8px;">Experience our full interactive live layout designed for luxury stay & dining.</p>
             </div>
-            <button onclick="openLiveDemo('hotel-demo.html', 'Grand Hotel Demo')" class="btn-offer-action" style="background: linear-gradient(135deg, var(--primary-blue), #2563eb);">
+            <button onclick="openLiveDemo('hotel.html', 'Grand Hotel Demo')" class="btn-offer-action" style="background: linear-gradient(135deg, var(--primary-blue), #2563eb);">
                 <i class="fa-solid fa-eye"></i> HOTEL DEMO (LIVE PREVIEW)
             </button>
         </div>
@@ -1122,7 +1164,7 @@
         <div class="demo-hero-box" style="border-color: rgba(239, 68, 68, 0.3);">
             <div>
                 <span class="badge-limited" style="background: rgba(239, 68, 68, 0.1); color: #ef4444; border-color: rgba(239, 68, 68, 0.3);">Fitness Ecosystem</span>
-                <h1 style="font-size: 2.5rem; margin-top: 10px;">IronEdge Gym & Fitness Studio</h1>
+                <h1 style="font-size: 2.5rem; margin-top: 10px;">IronPulse Gym & Fitness Studio</h1>
                 <p style="color: var(--text-muted); margin-top: 8px;">High-energy layout engineered for gyms, personal trainers, and CrossFit centers.</p>
             </div>
             <button onclick="openLiveDemo('gym.html', 'Gym & Fitness Demo')" class="btn-offer-action" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
@@ -1153,7 +1195,7 @@
                 <h1 style="font-size: 2.5rem; margin-top: 10px;">Metro Shopping & Retail Hub</h1>
                 <p style="color: var(--text-muted); margin-top: 8px;">Engineered for high-volume stores, shopping malls, and product lines.</p>
             </div>
-            <button onclick="openLiveDemo('grocery shop.html', 'Shopping Center Demo')" class="btn-offer-action" style="background: linear-gradient(135deg, var(--accent-orange), #e11d48);">
+            <button onclick="openLiveDemo('shop.html', 'Shopping Center Demo')" class="btn-offer-action" style="background: linear-gradient(135deg, var(--accent-orange), #e11d48);">
                 <i class="fa-solid fa-eye"></i> SHOPPING DEMO (LIVE PREVIEW)
             </button>
         </div>
@@ -1217,7 +1259,7 @@
         <div class="demo-features-grid">
             <div class="demo-feature-card">
                 <i class="fa-solid fa-gauge-high" style="font-size: 2rem; color: var(--accent-amber); margin-bottom: 15px;"></i>
-                <h3> Vehicle Specs Inspector</h3>
+                <h3>Vehicle Specs Inspector</h3>
                 <p style="color: var(--text-muted); margin-top: 10px; font-size: 0.95rem;">Engine specs, color options switcher, and trim comparison tool.</p>
             </div>
             <div class="demo-feature-card">
@@ -1256,78 +1298,71 @@
         </div>
     </div>
 
-    <!-- SERVICES -->
+
+    <!-- SERVICES TAB -->
     <div id="view-services" class="page-view">
         <div class="section-header">
             <h2>Our Core Engine Capabilities</h2>
             <p>Every deployment contains optimized core assets built from raw system code structures.</p>
         </div>
         <div class="deck-grid">
-            <div class="deck-card">
-                <i class="fa-solid fa-cubes deck-icon"></i>
-                <h3>Fluid Design Systems</h3>
-                <p>Layouts explicitly optimized for seamless performance scaling on viewport aspect ratios.</p>
+            <div class="deck-card tilt-card">
+                <div class="tilt-content-3d">
+                    <i class="fa-solid fa-cubes deck-icon"></i>
+                    <h3>Fluid 3D Design Systems</h3>
+                    <p>Layouts explicitly optimized for interactive spatial depth and viewport scaling.</p>
+                </div>
             </div>
-            <div class="deck-card">
-                <i class="fa-solid fa-bolt deck-icon"></i>
-                <h3>Instant Asset Loading</h3>
-                <p>Minimized file bundles that bypass heavy frame rendering layers to guarantee high speed metrics.</p>
+            <div class="deck-card tilt-card">
+                <div class="tilt-content-3d">
+                    <i class="fa-solid fa-bolt deck-icon"></i>
+                    <h3>Instant Asset Loading</h3>
+                    <p>Minimized file bundles that bypass heavy frame rendering layers to guarantee sub-second speeds.</p>
+                </div>
             </div>
-            <div class="deck-card">
-                <i class="fa-solid fa-route deck-icon"></i>
-                <h3>Unified Communications</h3>
-                <p>Directly routed custom forms and instantaneous live communication chat nodes integrated directly.</p>
+            <div class="deck-card tilt-card">
+                <div class="tilt-content-3d">
+                    <i class="fa-solid fa-route deck-icon"></i>
+                    <h3>WhatsApp Direct Routing</h3>
+                    <p>Directly routed custom forms and instantaneous live communication chat nodes integrated directly.</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- PERFECT FOR -->
+    <!-- PERFECT FOR TAB -->
     <div id="view-perfect" class="page-view">
         <div class="section-header">
             <h2>Optimized Domain Scaling</h2>
             <p>We craft interfaces designed precisely for targeted commercial operations.</p>
         </div>
-        <div class="matrix-box">
-            <div class="matrix-item">
-                <i class="fa-solid fa-shop"></i>
-                <div>
-                    <h4>Showrooms & Stores</h4>
-                    <p>Clean high-end interface portfolios to map product ranges elegantly.</p>
+        <div class="deck-grid">
+            <div class="deck-card tilt-card">
+                <div class="tilt-content-3d">
+                    <i class="fa-solid fa-store deck-icon"></i>
+                    <h3>Stores & Stationery</h3>
+                    <p>Digital catalog interfaces for local shops, stationery, and retail businesses.</p>
                 </div>
             </div>
-            <div class="matrix-item">
-                <i class="fa-solid fa-dumbbell"></i>
-                <div>
-                    <h4>Gyms & Fitness Hubs</h4>
+            <div class="deck-card tilt-card">
+                <div class="tilt-content-3d">
+                    <i class="fa-solid fa-dumbbell deck-icon" style="color: var(--accent-orange);"></i>
+                    <h3>Gyms & Sports Hubs</h3>
                     <p>High-converting membership plan pages and trainer session scheduling.</p>
-                </div>
-            </div>
-            <div class="matrix-item">
-                <i class="fa-solid fa-mug-saucer"></i>
-                <div>
-                    <h4>Premium Cafes</h4>
-                    <p>Frictionless dynamic menu views matching high corporate standards.</p>
-                </div>
-            </div>
-            <div class="matrix-item">
-                <i class="fa-solid fa-graduation-cap"></i>
-                <div>
-                    <h4>Training Academies</h4>
-                    <p>Structured info matrices to convert visitors into batch enrollments.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- CONTACT / LAUNCHPAD -->
+    <!-- CONTACT / LAUNCHPAD TAB -->
     <div id="view-contact" class="page-view">
         <div class="section-header">
             <h2>Project <span class="gradient-text">Launchpad</span></h2>
-            <p>Tell us about your business vision and get a customized design roadmap & quote instantly.</p>
+            <p>Fill out parameters and transmit your project details directly via WhatsApp.</p>
         </div>
 
-        <div class="launchpad-card">
-            <form id="projectLaunchForm" onsubmit="handleFormSubmit(event)">
+        <div class="launchpad-card tilt-card">
+            <form id="projectLaunchForm" onsubmit="handleFormSubmit(event)" class="tilt-content-3d">
                 <div class="form-grid">
                     <div class="field-group">
                         <label><i class="fa-solid fa-user"></i> Full Name *</label>
@@ -1336,25 +1371,23 @@
 
                     <div class="field-group">
                         <label><i class="fa-brands fa-whatsapp"></i> WhatsApp Number *</label>
-                        <input type="tel" id="custPhone" required placeholder="e.g. 9876543210">
+                        <input type="tel" id="custPhone" pattern="[6-9][0-9]{9}" maxlength="10" required placeholder="10-digit mobile number">
                     </div>
 
                     <div class="field-group">
                         <label><i class="fa-solid fa-briefcase"></i> Business / Brand Name</label>
-                        <input type="text" id="custBusiness" placeholder="e.g. IronPulse Gym / Royal Cafe">
+                        <input type="text" id="custBusiness" placeholder="e.g. Royal Cafe / Zam Zam Store">
                     </div>
 
                     <div class="field-group">
-                        <label><i class="fa-solid fa-laptop-code"></i> Website Category *</label>
+                        <label><i class="fa-solid fa-laptop-code"></i> Category *</label>
                         <select id="webType" required>
-                            <option value="" disabled selected>Select Website Type...</option>
-                            <option value="Hotel & Restaurant">Hotel & Restaurant (Booking & QR Menu)</option>
-                            <option value="Gym & Fitness Studio">Gym & Fitness Studio (Plans & Booking)</option>
-                            <option value="Shopping & E-Commerce">Shopping Center & E-Commerce Store</option>
-                            <option value="Problem Solving & SaaS">Business Automation & Custom SaaS/ERP</option>
-                            <option value="Automotive & Fleet">Automotive & Garage Service Hub</option>
-                            <option value="Real Estate & Showroom">Real Estate & Property Showroom</option>
-                            <option value="Standard Business Site">Standard Company / Portfolio Site</option>
+                            <option value="" disabled selected>Select Category...</option>
+                            <option value="Hotel & Restaurant">Hotel & Restaurant</option>
+                            <option value="Gym & Fitness Studio">Gym & Fitness Studio</option>
+                            <option value="Shopping & E-Commerce">Shopping & E-Commerce</option>
+                            <option value="Stationery & Local General Store">Stationery & General Store</option>
+                            <option value="Standard Business Site">Standard Business Portfolio</option>
                         </select>
                     </div>
 
@@ -1362,33 +1395,32 @@
                         <label><i class="fa-solid fa-indian-rupee-sign"></i> Estimated Budget</label>
                         <select id="budgetRange">
                             <option value="₹1,999 (New User Offer)">₹1,999 (New User Offer)</option>
-                            <option value="₹5,000 - ₹10,000">₹5,000 - ₹10,000 (Standard Site)</option>
-                            <option value="₹10,000 - ₹25,000">₹10,000 - ₹25,000 (Advanced Automation)</option>
+                            <option value="₹5,000 - ₹10,000">₹5,000 - ₹10,000 (Advanced)</option>
                         </select>
                     </div>
 
                     <div class="field-group">
-                        <label><i class="fa-solid fa-clock"></i> Preferred Delivery Time</label>
+                        <label><i class="fa-solid fa-clock"></i> Target Timeline</label>
                         <select id="timeline">
-                            <option value="Urgent (24-48 Hours)">Urgent (24 - 48 Hours)</option>
+                            <option value="Urgent (24-48 Hours)">Urgent (24-48 Hours)</option>
                             <option value="Within 1 Week">Within 1 Week</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="field-group" style="margin-top: 22px;">
-                    <label><i class="fa-solid fa-pen-to-square"></i> Project Scope & Specific Requirements</label>
-                    <textarea id="custMessage" rows="4" placeholder="Mention features you need..."></textarea>
+                <div class="field-group" style="margin-top: 10px;">
+                    <label><i class="fa-solid fa-pen-to-square"></i> Special Requirements</label>
+                    <textarea id="custMessage" rows="3" placeholder="Tell us what special features you want..."></textarea>
                 </div>
 
-                <button type="submit" class="btn-portal" style="margin-top: 15px;">
-                    <i class="fa-solid fa-paper-plane"></i> TRANSMIT PROJECT PARAMETERS
+                <button type="submit" class="btn-portal" style="margin-top: 10px;">
+                    <i class="fa-solid fa-paper-plane"></i> TRANSMIT VIA WHATSAPP
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- EMBEDDED MODAL PREVIEW -->
+    <!-- EMBEDDED DEMO MODAL -->
     <div id="demoViewerModal" class="demo-viewer-modal">
         <div class="demo-viewer-header">
             <div class="demo-viewer-title">
@@ -1400,17 +1432,38 @@
             </button>
         </div>
         <div class="demo-iframe-container">
-            <iframe id="demoIframe" src="" title="Live Demo Preview"></iframe>
+            <div class="iframe-loader" id="iframeLoader">
+                <div class="spinner"></div>
+                <span>Loading Interactive Demo...</span>
+            </div>
+            <iframe id="demoIframe" src="" title="Live Demo Preview" onload="hideIframeLoader()"></iframe>
         </div>
     </div>
 
     <!-- Footer -->
     <footer>
         <p>THANK YOU FOR SUPPORTING <span>LOGIC ART</span></p>
-        <p style="font-size:0.8rem; margin-top:12px; opacity:0.4;">&copy; 2026 Logic Art. Engineered for modern business ecosystems.</p>
+        <p style="font-size:0.78rem; margin-top:8px; opacity:0.6;">&copy; 2026 Logic Art Agency. All Rights Reserved.</p>
     </footer>
 
     <script>
+        /* --- Dark / Light Theme System --- */
+        function toggleTheme() {
+            const body = document.body;
+            const themeBtn = document.getElementById('themeToggleBtn');
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            body.setAttribute('data-theme', newTheme);
+            themeBtn.innerHTML = newTheme === 'dark' ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+            localStorage.setItem('theme', newTheme);
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.body.setAttribute('data-theme', savedTheme);
+        document.getElementById('themeToggleBtn').innerHTML = savedTheme === 'dark' ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+
+        /* --- Tab Switcher --- */
         function switchTab(tabId) {
             document.querySelectorAll('.page-view').forEach(view => view.classList.remove('active'));
             document.querySelectorAll('.nav-menu a').forEach(link => link.classList.remove('active'));
@@ -1418,7 +1471,7 @@
             const selectedView = document.getElementById('view-' + tabId);
             if(selectedView) {
                 selectedView.classList.add('active');
-                window.scrollTo({ top: 0, behavior: 'instant' });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
 
             const mainTab = tabId.startsWith('demo-') ? 'demos' : tabId;
@@ -1432,15 +1485,23 @@
             document.getElementById('navMenu').classList.toggle('open');
         }
 
+        /* --- Modal Control with Loader --- */
         function openLiveDemo(fileUrl, titleText) {
             const modal = document.getElementById('demoViewerModal');
             const iframe = document.getElementById('demoIframe');
+            const loader = document.getElementById('iframeLoader');
             const title = document.getElementById('demoViewerTitleText');
 
+            loader.style.display = 'flex';
             iframe.src = fileUrl;
             title.innerText = titleText;
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+        }
+
+        function hideIframeLoader() {
+            const loader = document.getElementById('iframeLoader');
+            if(loader) loader.style.display = 'none';
         }
 
         function closeLiveDemo() {
@@ -1452,11 +1513,36 @@
             document.body.style.overflow = 'auto';
         }
 
-        /* Particle System */
+        /* --- Touch-Aware 3D Tilt (Only Desktop) --- */
+        const isTouchDevice = ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+        if (!isTouchDevice) {
+            const cards = document.querySelectorAll('.tilt-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const rotateX = ((y - centerY) / centerY) * -8; 
+                    const rotateY = ((x - centerX) / centerX) * 8;  
+
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                });
+            });
+        }
+
+        /* --- Dynamic Canvas Particle Engine (Mobile Adaptive) --- */
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
         let particlesArray = [];
-        const numberOfParticles = 60;
+        const isMobile = window.innerWidth < 768;
+        const numberOfParticles = isMobile ? 20 : 45;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -1469,9 +1555,9 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.6;
-                this.vy = (Math.random() - 0.5) * 0.6;
-                this.radius = Math.random() * 2 + 0.8;
+                this.vx = (Math.random() - 0.5) * 0.4;
+                this.vy = (Math.random() - 0.5) * 0.4;
+                this.radius = Math.random() * 1.8 + 0.8;
             }
             update() {
                 this.x += this.vx;
@@ -1480,9 +1566,10 @@
                 if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
             }
             draw() {
+                const isLight = document.body.getAttribute('data-theme') === 'light';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(0, 242, 254, 0.65)';
+                ctx.fillStyle = isLight ? 'rgba(2, 132, 199, 0.4)' : 'rgba(0, 242, 254, 0.5)';
                 ctx.fill();
             }
         }
@@ -1494,15 +1581,18 @@
         initParticles();
 
         function connectParticles() {
+            const isLight = document.body.getAttribute('data-theme') === 'light';
             for (let a = 0; a < particlesArray.length; a++) {
                 for (let b = a + 1; b < particlesArray.length; b++) {
                     let dx = particlesArray[a].x - particlesArray[b].x;
                     let dy = particlesArray[a].y - particlesArray[b].y;
                     let distance = Math.sqrt(dx * dx + dy * dy);
 
-                    if (distance < 155) {
-                        let opacity = 1 - (distance / 155);
-                        ctx.strokeStyle = `rgba(0, 242, 254, ${opacity * 0.2})`;
+                    if (distance < 130) {
+                        let opacity = 1 - (distance / 130);
+                        ctx.strokeStyle = isLight 
+                            ? `rgba(2, 132, 199, ${opacity * 0.12})`
+                            : `rgba(0, 242, 254, ${opacity * 0.15})`;
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
@@ -1524,6 +1614,7 @@
         }
         animateParticles();
 
+        /* --- WhatsApp Form Transmission with Validation --- */
         function handleFormSubmit(e) {
             e.preventDefault();
             const name = document.getElementById('custName').value;
@@ -1534,14 +1625,14 @@
             const timeline = document.getElementById('timeline').value;
             const msg = document.getElementById('custMessage').value || 'None';
 
-            const text = `*🚀 NEW PROJECT INQUIRY - LOGIC ART*%0A%0A` +
-                         `👤 *Client Name:* ${encodeURIComponent(name)}%0A` +
-                         `📞 *Contact Number:* ${encodeURIComponent(phone)}%0A` +
-                         `🏢 *Business Name:* ${encodeURIComponent(business)}%0A` +
-                         `💻 *Category Needed:* ${encodeURIComponent(webType)}%0A` +
-                         `💰 *Estimated Budget:* ${encodeURIComponent(budget)}%0A` +
-                         `⏱️ *Target Timeline:* ${encodeURIComponent(timeline)}%0A` +
-                         `📝 *Requirements Scope:* ${encodeURIComponent(msg)}`;
+            const text = `*🚀 NEW INQUIRY - LOGIC ART*%0A%0A` +
+                         `👤 *Name:* ${encodeURIComponent(name)}%0A` +
+                         `📞 *Phone:* ${encodeURIComponent(phone)}%0A` +
+                         `🏢 *Business:* ${encodeURIComponent(business)}%0A` +
+                         `💻 *Type:* ${encodeURIComponent(webType)}%0A` +
+                         `💰 *Budget:* ${encodeURIComponent(budget)}%0A` +
+                         `⏱️ *Timeline:* ${encodeURIComponent(timeline)}%0A` +
+                         `📝 *Requirements:* ${encodeURIComponent(msg)}`;
 
             window.open(`https://wa.me/918275544003?text=${text}`, '_blank');
         }
