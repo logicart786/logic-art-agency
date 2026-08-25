@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE HEIGHTS — A New Standard of Modern Living</title>
+<meta name="description" content="THE HEIGHTS is a landmark residential tower designed around light, space and an elevated way of living. Explore residences, amenities and floor plans.">
+<meta property="og:title" content="THE HEIGHTS — A New Standard of Modern Living">
+<meta property="og:description" content="A contemporary residential landmark designed around space, light, connection and an elevated way of living.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%23b08d57%22>H</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --charcoal:#111110;
+  --charcoal-2:#171614;
+  --ivory:#f4f0e8;
+  --ivory-dim:#c9c3b6;
+  --bronze:#b08d57;
+  --bronze-soft:rgba(176,141,87,0.32);
+  --gray:#8a887f;
+  --line: rgba(244,240,232,0.12);
+  --display:'Fraunces', serif;
+  --body:'Inter', sans-serif;
+  --nav-h:88px;
+  --ease:cubic-bezier(.16,.8,.24,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--charcoal);color:var(--ivory);font-family:var(--body);font-weight:300;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;}
+img{display:block;max-width:100%;}
+a{color:inherit;}
+button{font-family:inherit;}
+::selection{background:var(--bronze);color:#111;}
+.wrap{max-width:1400px;margin:0 auto;padding:0 6%;}
+@media(max-width:700px){.wrap{padding:0 6%;}}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.001ms !important;transition-duration:0.001ms !important;}
+}
+
+/* type helpers */
+.eyebrow{font-family:var(--body);font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--bronze);}
+h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-0.01em;}
+.serif-italic{font-style:italic;font-weight:300;color:var(--bronze);}
+
+/* ============================================================
+   SCROLL PROGRESS
+   ============================================================ */
+#scrollProgress{position:fixed;top:0;left:0;height:2px;background:var(--bronze);z-index:2000;width:0%;transition:width .1s linear;}
+
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+.cursor{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;
+  border:1px solid var(--bronze);width:26px;height:26px;transform:translate(-50%,-50%);
+  transition:width .25s var(--ease),height .25s var(--ease),background .25s;mix-blend-mode:difference;}
+.cursor.hover{width:70px;height:70px;background:var(--bronze);}
+.cursor-label{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);
+  font-family:var(--body);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:#111;font-weight:600;
+  opacity:0;transition:opacity .2s;}
+.cursor-label.show{opacity:1;}
+body.has-cursor{cursor:none;}
+body.has-cursor a,body.has-cursor button{cursor:none;}
+@media (max-width:900px),(pointer:coarse){.cursor,.cursor-label{display:none !important;} body{cursor:auto !important;}}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+nav{position:fixed;top:0;left:0;width:100%;z-index:1000;height:var(--nav-h);display:flex;align-items:center;
+  justify-content:space-between;padding:0 6%;transition:background .5s var(--ease),height .4s var(--ease),border-color .5s;
+  border-bottom:1px solid transparent;}
+nav.scrolled{background:rgba(17,17,16,0.92);backdrop-filter:blur(14px);height:70px;border-color:var(--line);}
+.nav-logo{font-family:var(--display);font-size:1.3rem;letter-spacing:0.02em;text-decoration:none;display:flex;align-items:baseline;gap:6px;}
+.nav-logo em{font-style:italic;color:var(--bronze);}
+.nav-center{display:flex;gap:2.4rem;list-style:none;}
+.nav-center a{font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;color:var(--ivory-dim);
+  position:relative;padding:8px 0;transition:color .3s;}
+.nav-center a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--bronze);transition:width .35s var(--ease);}
+.nav-center a:hover,.nav-center a.active{color:var(--ivory);}
+.nav-center a:hover::after,.nav-center a.active::after{width:100%;}
+.nav-cta{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;border:1px solid var(--bronze-soft);color:var(--ivory);
+  padding:12px 22px;text-decoration:none;transition:background .3s,border-color .3s;white-space:nowrap;}
+.nav-cta:hover{background:var(--bronze);border-color:var(--bronze);color:#111;}
+.nav-burger{display:none;width:26px;height:18px;position:relative;background:none;border:none;cursor:pointer;}
+.nav-burger span{position:absolute;left:0;width:100%;height:1px;background:var(--ivory);transition:transform .3s,opacity .3s;}
+.nav-burger span:nth-child(1){top:0;}
+.nav-burger span:nth-child(2){top:8px;}
+.nav-burger span:nth-child(3){top:16px;}
+.nav-burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
+@media(max-width:1000px){
+  .nav-center{position:fixed;top:0;right:0;height:100vh;width:min(80vw,380px);background:var(--charcoal-2);
+    flex-direction:column;justify-content:center;gap:1.6rem;padding:0 12%;transform:translateX(100%);transition:transform .5s var(--ease);
+    border-left:1px solid var(--line);}
+  .nav-center.open{transform:translateX(0);}
+  .nav-center a{font-size:0.95rem;}
+  .nav-cta{display:none;}
+  .nav-burger{display:block;z-index:1001;}
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{position:relative;height:100vh;min-height:640px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;}
+.hero-media{position:absolute;inset:0;}
+.hero-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);
+  animation:heroZoom 16s var(--ease) forwards;}
+@keyframes heroZoom{to{transform:scale(1);}}
+.hero-media::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,17,16,0.35) 0%,rgba(17,17,16,0.15) 45%,rgba(17,17,16,0.96) 100%);}
+.hero-body{position:relative;z-index:2;padding:0 6% 90px;max-width:1000px;}
+.hero .eyebrow{opacity:0;animation:riseIn .8s var(--ease) 0.5s forwards;margin-bottom:22px;display:block;}
+.hero h1{font-size:clamp(2.8rem,8vw,6.4rem);line-height:0.98;font-weight:400;margin-bottom:26px;}
+.hero h1 span{display:block;overflow:hidden;}
+.hero h1 span em{display:block;opacity:0;transform:translateY(110%);animation:riseIn .9s var(--ease) forwards;font-style:italic;}
+.hero h1 span:nth-child(1) em{animation-delay:0.65s;}
+.hero h1 span:nth-child(2) em{animation-delay:0.8s;color:var(--bronze);}
+.hero h1 span:nth-child(3) em{animation-delay:0.95s;}
+@keyframes riseIn{to{opacity:1;transform:translateY(0);}}
+.hero p{font-size:1.02rem;color:var(--ivory-dim);max-width:480px;line-height:1.7;margin-bottom:38px;
+  opacity:0;animation:riseIn .8s var(--ease) 1.15s forwards;}
+.hero-ctas{display:flex;gap:18px;flex-wrap:wrap;opacity:0;animation:riseIn .8s var(--ease) 1.3s forwards;}
+.btn-solid{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;background:var(--bronze);color:#111;
+  text-decoration:none;font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;transition:transform .3s var(--ease),box-shadow .3s;border:none;cursor:pointer;}
+.btn-solid:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(176,141,87,0.25);}
+.btn-line{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;background:transparent;color:var(--ivory);
+  border:1px solid rgba(244,240,232,0.28);text-decoration:none;font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;
+  transition:border-color .3s,color .3s;cursor:pointer;}
+.btn-line:hover{border-color:var(--bronze);color:var(--bronze);}
+.scroll-indicator{position:absolute;right:6%;bottom:40px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;
+  opacity:0;animation:riseIn 1s var(--ease) 1.6s forwards;}
+.scroll-indicator span{writing-mode:vertical-rl;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--ivory-dim);}
+.scroll-line{width:1px;height:50px;background:linear-gradient(180deg,var(--bronze),transparent);animation:scrollMove 2s ease-in-out infinite;}
+@keyframes scrollMove{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}
+  51%{transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+/* ============================================================
+   SECTION SCAFFOLD
+   ============================================================ */
+section{position:relative;}
+.section-pad{padding:150px 0;}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease),transform 1s var(--ease);}
+.reveal.in{opacity:1;transform:translateY(0);}
+.section-index{font-family:var(--body);font-size:0.7rem;letter-spacing:0.1em;color:var(--gray);margin-bottom:20px;}
+
+/* ============================================================
+   INTRO / EDITORIAL
+   ============================================================ */
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+@media(max-width:900px){.intro-grid{grid-template-columns:1fr;gap:50px;}}
+.intro-text h2{font-size:clamp(1.9rem,3.6vw,3rem);line-height:1.2;margin-bottom:26px;}
+.intro-text p{color:var(--ivory-dim);line-height:1.8;font-size:1rem;max-width:480px;margin-bottom:20px;}
+.intro-media{position:relative;aspect-ratio:4/5;overflow:hidden;}
+.intro-media img{width:100%;height:100%;object-fit:cover;}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:70px;padding-top:50px;border-top:1px solid var(--line);}
+@media(max-width:700px){.stat-row{grid-template-columns:repeat(2,1fr);}}
+.stat strong{display:block;font-family:var(--display);font-size:clamp(2.2rem,4vw,3.4rem);color:var(--bronze);font-weight:400;line-height:1;}
+.stat span{font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray);display:block;margin-top:10px;}
+
+/* ============================================================
+   ARCHITECTURE
+   ============================================================ */
+.arch-section{background:var(--charcoal-2);}
+.arch-layout{display:grid;grid-template-columns:0.85fr 1.15fr;gap:70px;}
+@media(max-width:900px){.arch-layout{grid-template-columns:1fr;}}
+.arch-list{list-style:none;display:flex;flex-direction:column;}
+.arch-list li{border-top:1px solid var(--line);padding:26px 0;cursor:pointer;transition:padding-left .3s var(--ease);}
+.arch-list li:last-child{border-bottom:1px solid var(--line);}
+.arch-list li .num{font-size:0.72rem;color:var(--gray);letter-spacing:0.1em;margin-right:16px;}
+.arch-list li .label{font-family:var(--display);font-size:1.5rem;}
+.arch-list li.active{padding-left:16px;}
+.arch-list li.active .num{color:var(--bronze);}
+.arch-list li.active .label{color:var(--bronze);}
+.arch-list li p{max-height:0;overflow:hidden;transition:max-height .4s var(--ease),margin .4s;color:var(--ivory-dim);font-size:0.9rem;line-height:1.6;}
+.arch-list li.active p{max-height:80px;margin-top:12px;}
+.arch-visual{position:relative;aspect-ratio:4/3;overflow:hidden;}
+.arch-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .7s var(--ease);}
+.arch-visual img.active{opacity:1;}
+
+/* ============================================================
+   RESIDENCES
+   ============================================================ */
+.res-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:56px;border-bottom:1px solid var(--line);padding-bottom:30px;}
+.res-tab{background:none;border:1px solid var(--line);color:var(--ivory-dim);padding:12px 24px;font-size:0.72rem;
+  letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:border-color .3s,color .3s,background .3s;}
+.res-tab.active{border-color:var(--bronze);color:var(--bronze);background:rgba(176,141,87,0.06);}
+.res-panel{display:none;}
+.res-panel.active{display:grid;grid-template-columns:1.2fr 1fr;gap:70px;align-items:center;}
+@media(max-width:900px){.res-panel.active{grid-template-columns:1fr;gap:36px;}}
+.res-media{aspect-ratio:4/3;overflow:hidden;}
+.res-media img{width:100%;height:100%;object-fit:cover;}
+.res-info h3{font-family:var(--display);font-size:2rem;margin-bottom:8px;}
+.res-info .price-tag{color:var(--bronze);font-size:0.85rem;letter-spacing:0.05em;margin-bottom:22px;display:block;}
+.res-specs{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:26px;}
+.res-specs li{border-top:1px solid var(--line);padding-top:12px;}
+.res-specs li span{display:block;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray);margin-bottom:6px;}
+.res-specs li strong{font-family:var(--display);font-size:1.15rem;font-weight:400;}
+.res-info p.desc{color:var(--ivory-dim);line-height:1.7;margin-bottom:28px;}
+.link-arrow{display:inline-flex;align-items:center;gap:10px;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;
+  text-decoration:none;color:var(--ivory);border-bottom:1px solid var(--bronze);padding-bottom:6px;cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;}
+.link-arrow i{transition:transform .3s var(--ease);}
+.link-arrow:hover i{transform:translateX(6px);}
+
+/* ============================================================
+   FLOOR PLAN EXPLORER
+   ============================================================ */
+.floor-section{background:var(--charcoal-2);}
+.floor-layout{display:grid;grid-template-columns:110px 1fr 320px;gap:40px;}
+@media(max-width:1000px){.floor-layout{grid-template-columns:1fr;}}
+.floor-list{display:flex;flex-direction:row;overflow-x:auto;gap:2px;max-height:none;}
+@media(min-width:1001px){.floor-list{flex-direction:column;overflow-x:visible;max-height:520px;overflow-y:auto;}}
+.floor-btn{flex:0 0 auto;background:none;border:1px solid var(--line);color:var(--ivory-dim);padding:14px 18px;cursor:pointer;
+  font-family:var(--display);font-size:1rem;transition:all .25s;min-width:52px;text-align:center;}
+.floor-btn.active{background:var(--bronze);color:#111;border-color:var(--bronze);}
+.floor-visual{position:relative;background:#0c0b0a;border:1px solid var(--line);min-height:420px;display:flex;align-items:center;justify-content:center;padding:30px;}
+.floor-grid-svg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:100%;max-width:520px;}
+.apt-unit{aspect-ratio:1.3;border:1px solid var(--bronze-soft);background:rgba(176,141,87,0.05);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:4px;cursor:pointer;transition:background .25s,border-color .25s,transform .25s;}
+.apt-unit:hover,.apt-unit.selected{background:rgba(176,141,87,0.22);border-color:var(--bronze);transform:translateY(-3px);}
+.apt-unit span{font-size:0.72rem;color:var(--ivory-dim);}
+.apt-unit strong{font-family:var(--display);font-size:0.95rem;}
+.apt-panel{border:1px solid var(--line);padding:34px;height:fit-content;}
+.apt-panel .eyebrow{margin-bottom:18px;}
+.apt-panel h4{font-family:var(--display);font-size:1.7rem;margin-bottom:22px;}
+.apt-row{display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid var(--line);font-size:0.88rem;}
+.apt-row span:first-child{color:var(--gray);}
+.apt-status{display:inline-block;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;padding:5px 12px;
+  background:rgba(120,180,120,0.15);color:#8fd49a;margin-top:16px;}
+.apt-panel .btn-solid{width:100%;justify-content:center;margin-top:24px;}
+.apt-empty{color:var(--gray);font-size:0.88rem;line-height:1.6;}
+
+/* ============================================================
+   AMENITIES — editorial composition
+   ============================================================ */
+.amen-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:140px;gap:2px;}
+@media(max-width:900px){.amen-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.amen-grid{grid-template-columns:1fr;}}
+.amen-item{position:relative;overflow:hidden;grid-row:span 2;cursor:pointer;background:#0c0b0a;}
+.amen-item:nth-child(3n){grid-row:span 3;}
+.amen-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;
+  transition:opacity .5s var(--ease),transform .7s var(--ease);filter:grayscale(0.25);}
+.amen-item:hover img{opacity:0.85;transform:scale(1.06);filter:grayscale(0);}
+.amen-item::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(17,17,16,0.9) 100%);z-index:1;}
+.amen-label{position:absolute;left:20px;bottom:18px;z-index:2;}
+.amen-label h4{font-family:var(--display);font-size:1.1rem;margin-bottom:4px;}
+.amen-label p{font-size:0.78rem;color:var(--ivory-dim);max-height:0;overflow:hidden;transition:max-height .4s var(--ease);}
+.amen-item:hover .amen-label p{max-height:60px;}
+
+/* ============================================================
+   LIFESTYLE
+   ============================================================ */
+.life-scroll{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;}
+.life-scroll::-webkit-scrollbar{display:none;}
+.life-item{position:relative;flex:0 0 300px;height:420px;overflow:hidden;cursor:pointer;}
+.life-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease),filter .5s;filter:grayscale(0.5) brightness(0.75);}
+.life-item:hover img{transform:scale(1.05);filter:grayscale(0) brightness(0.95);}
+.life-item::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(17,17,16,0.85) 100%);}
+.life-label{position:absolute;left:24px;bottom:24px;z-index:2;}
+.life-label .tag{font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--bronze);display:block;margin-bottom:6px;}
+.life-label h4{font-family:var(--display);font-size:1.4rem;}
+
+/* ============================================================
+   GALLERY
+   ============================================================ */
+.gallery-grid{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:120px;gap:8px;}
+@media(max-width:700px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
+.g-item{position:relative;overflow:hidden;cursor:pointer;background:#0c0b0a;}
+.g-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease);}
+.g-item:hover img{transform:scale(1.08);}
+.g-item.g-a{grid-column:span 3;grid-row:span 3;}
+.g-item.g-b{grid-column:span 3;grid-row:span 2;}
+.g-item.g-c{grid-column:span 2;grid-row:span 2;}
+.g-item.g-d{grid-column:span 2;grid-row:span 2;}
+.g-item.g-e{grid-column:span 2;grid-row:span 2;}
+.g-item.g-f{grid-column:span 3;grid-row:span 2;}
+.g-item.g-g{grid-column:span 3;grid-row:span 2;}
+@media(max-width:700px){.gallery-grid .g-item{grid-column:span 1 !important;grid-row:span 2 !important;}}
+.g-view{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(17,17,16,0.4);
+  opacity:0;transition:opacity .3s;}
+.g-item:hover .g-view{opacity:1;}
+.g-view span{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;border:1px solid var(--ivory);padding:10px 20px;}
+
+/* lightbox */
+.lightbox{position:fixed;inset:0;z-index:3000;background:rgba(10,10,9,0.97);display:none;align-items:center;justify-content:center;
+  flex-direction:column;}
+.lightbox.active{display:flex;}
+.lb-img-wrap{max-width:88vw;max-height:76vh;position:relative;}
+.lightbox img{max-width:88vw;max-height:76vh;object-fit:contain;}
+.lb-counter{margin-top:18px;font-size:0.75rem;letter-spacing:0.1em;color:var(--ivory-dim);}
+.lb-close,.lb-prev,.lb-next{position:absolute;background:none;border:1px solid var(--line);color:var(--ivory);cursor:pointer;
+  width:46px;height:46px;display:flex;align-items:center;justify-content:center;transition:border-color .25s,color .25s;}
+.lb-close{top:26px;right:6%;}
+.lb-prev{left:4%;top:50%;transform:translateY(-50%);}
+.lb-next{right:4%;top:50%;transform:translateY(-50%);}
+.lb-close:hover,.lb-prev:hover,.lb-next:hover{border-color:var(--bronze);color:var(--bronze);}
+@media(max-width:700px){.lb-prev,.lb-next{width:38px;height:38px;}}
+
+/* ============================================================
+   LOCATION
+   ============================================================ */
+.loc-layout{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;}
+@media(max-width:900px){.loc-layout{grid-template-columns:1fr;}}
+.loc-map{position:relative;aspect-ratio:1/1;border:1px solid var(--line);background:
+  radial-gradient(circle at 50% 50%, rgba(176,141,87,0.1), transparent 60%),
+  repeating-linear-gradient(0deg, rgba(244,240,232,0.04) 0 1px, transparent 1px 60px),
+  repeating-linear-gradient(90deg, rgba(244,240,232,0.04) 0 1px, transparent 1px 60px);
+  overflow:hidden;}
+.loc-pin{position:absolute;width:14px;height:14px;border-radius:50%;background:var(--bronze);
+  box-shadow:0 0 0 6px rgba(176,141,87,0.18);}
+.loc-pin.center{width:20px;height:20px;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 10px rgba(176,141,87,0.22);}
+.loc-list{list-style:none;display:flex;flex-direction:column;}
+.loc-list li{display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-top:1px solid var(--line);}
+.loc-list li:last-child{border-bottom:1px solid var(--line);}
+.loc-list li .name{display:flex;align-items:center;gap:14px;font-family:var(--display);font-size:1.05rem;}
+.loc-list li i{color:var(--bronze);width:18px;}
+.loc-list li .time{font-size:0.8rem;color:var(--gray);letter-spacing:0.05em;}
+
+/* ============================================================
+   WHY THIS PROJECT
+   ============================================================ */
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);}
+@media(max-width:900px){.why-grid{grid-template-columns:repeat(2,1fr);}}
+.why-item{background:var(--charcoal);padding:44px 32px;min-height:220px;display:flex;flex-direction:column;justify-content:space-between;}
+.why-item .num{font-size:0.7rem;color:var(--gray);}
+.why-item h3{font-family:var(--display);font-size:1.3rem;line-height:1.3;margin-top:auto;}
+.why-item h3 em{color:var(--bronze);font-style:italic;}
+
+/* ============================================================
+   DEVELOPER
+   ============================================================ */
+.dev-layout{display:grid;grid-template-columns:0.9fr 1.1fr;gap:70px;align-items:center;}
+@media(max-width:900px){.dev-layout{grid-template-columns:1fr;}}
+.dev-stats{display:flex;gap:50px;margin-top:40px;flex-wrap:wrap;}
+.dev-note{font-size:0.68rem;color:var(--gray);margin-top:30px;font-style:italic;}
+
+/* ============================================================
+   FINAL CTA
+   ============================================================ */
+.final-cta{position:relative;min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;}
+.final-cta-media{position:absolute;inset:0;}
+.final-cta-media img{width:100%;height:100%;object-fit:cover;}
+.final-cta-media::after{content:'';position:absolute;inset:0;background:rgba(17,17,16,0.82);}
+.final-cta-body{position:relative;z-index:2;max-width:800px;padding:0 6%;}
+.final-cta-body h2{font-size:clamp(2.4rem,6vw,4.6rem);line-height:1.05;margin-bottom:26px;}
+.final-cta-body h2 em{font-style:italic;color:var(--bronze);}
+.final-cta-body p{color:var(--ivory-dim);font-size:1.05rem;margin-bottom:44px;line-height:1.7;}
+.final-cta-actions{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;}
+
+/* ============================================================
+   ENQUIRY FORM
+   ============================================================ */
+.form-section{background:var(--charcoal-2);}
+.form-layout{display:grid;grid-template-columns:0.9fr 1.1fr;gap:70px;}
+@media(max-width:900px){.form-layout{grid-template-columns:1fr;}}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr;}}
+.field{display:flex;flex-direction:column;gap:10px;margin-bottom:24px;}
+.field.full{grid-column:1/-1;}
+.field label{font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray);}
+.field input,.field select,.field textarea{background:transparent;border:none;border-bottom:1px solid var(--line);
+  padding:12px 2px;color:var(--ivory);font-family:var(--body);font-size:0.95rem;outline:none;transition:border-color .3s;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--bronze);}
+.field select option{background:var(--charcoal);}
+.field.error input,.field.error select{border-color:#c96a5a;}
+.field-error-msg{font-size:0.72rem;color:#c96a5a;display:none;}
+.field.error .field-error-msg{display:block;}
+.form-status{margin-top:14px;font-size:0.85rem;padding:16px 18px;display:none;}
+.form-status.success{display:block;background:rgba(120,180,120,0.12);color:#8fd49a;border:1px solid rgba(120,180,120,0.25);}
+.form-status.error{display:block;background:rgba(201,106,90,0.12);color:#e08c7d;border:1px solid rgba(201,106,90,0.25);}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{border-top:1px solid var(--line);padding:80px 0 40px;}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:60px;margin-bottom:60px;}
+@media(max-width:800px){.foot-grid{grid-template-columns:1fr;gap:36px;}}
+.foot-logo{font-family:var(--display);font-size:1.6rem;margin-bottom:18px;}
+.foot-logo em{font-style:italic;color:var(--bronze);}
+.foot-col h5{font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray);margin-bottom:20px;}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.foot-col a{text-decoration:none;color:var(--ivory-dim);font-size:0.9rem;transition:color .25s;}
+.foot-col a:hover{color:var(--bronze);}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:30px;border-top:1px solid var(--line);
+  flex-wrap:wrap;gap:16px;}
+.foot-bottom p{font-size:0.72rem;color:var(--gray);}
+.foot-social{display:flex;gap:16px;}
+.foot-social a{width:36px;height:36px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;
+  justify-content:center;text-decoration:none;color:var(--ivory-dim);transition:border-color .25s,color .25s;}
+.foot-social a:hover{border-color:var(--bronze);color:var(--bronze);}
+
+/* focus visibility for accessibility */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:2px solid var(--bronze);outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<div id="scrollProgress"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-label" id="cursorLabel"></div>
+
+<!-- ============ NAV ============ -->
+<nav id="mainNav">
+  <a href="#hero" class="nav-logo">THE <em>HEIGHTS</em></a>
+  <ul class="nav-center" id="navCenter">
+    <li><a href="#project" data-nav>Project</a></li>
+    <li><a href="#architecture" data-nav>Architecture</a></li>
+    <li><a href="#residences" data-nav>Residences</a></li>
+    <li><a href="#amenities" data-nav>Amenities</a></li>
+    <li><a href="#gallery" data-nav>Gallery</a></li>
+    <li><a href="#location" data-nav>Location</a></li>
+    <li><a href="#contact" data-nav>Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta" data-hover>Book a Visit</a>
+  <button class="nav-burger" id="burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <div class="hero-media">
+    <img id="heroImg" src="" alt="THE HEIGHTS residential tower at dusk">
+  </div>
+  <div class="hero-body">
+    <span class="eyebrow">AN ICON OF MODERN LIVING</span>
+    <h1>
+      <span><em>WHERE</em></span>
+      <span><em>LIFE RISES</em></span>
+      <span><em>ABOVE.</em></span>
+    </h1>
+    <p>A contemporary residential landmark designed around space, light, connection and an elevated way of living.</p>
+    <div class="hero-ctas">
+      <a href="#residences" class="btn-solid" data-hover>Explore the Residences</a>
+      <a href="#contact" class="btn-line" data-hover>Book a Private Visit</a>
+    </div>
+  </div>
+  <div class="scroll-indicator"><span>SCROLL</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- ============ PROJECT INTRO ============ -->
+<section class="section-pad" id="project">
+  <div class="wrap">
+    <div class="intro-grid reveal">
+      <div class="intro-text">
+        <span class="eyebrow">The Project</span>
+        <h2 style="margin-top:18px;">Architecture that belongs to its <span class="serif-italic">surroundings.</span></h2>
+        <p>THE HEIGHTS rises from its site rather than imposing on it — every terrace, setback and material choice responds to sun path, wind and the skyline it joins.</p>
+        <p>180 residences across 25 floors, three typologies, and a single conviction: that a home should feel considered from the moment you enter the lobby to the last light of evening on your balcony.</p>
+      </div>
+      <div class="intro-media"><img id="introImg" src="" alt="THE HEIGHTS facade detail" loading="lazy"></div>
+    </div>
+    <div class="stat-row reveal">
+      <div class="stat"><strong data-count="25">0</strong><span>Floors</span></div>
+      <div class="stat"><strong data-count="180">0</strong><span>Residences</span></div>
+      <div class="stat"><strong data-count="3">0</strong><span>Typologies</span></div>
+      <div class="stat"><strong data-count="2028" data-nocomma>0</strong><span>Est. Completion</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ARCHITECTURE ============ -->
+<section class="section-pad arch-section" id="architecture">
+  <div class="wrap">
+    <span class="eyebrow reveal">Architecture</span>
+    <h2 class="reveal" style="margin:18px 0 60px;font-size:clamp(1.9rem,3.4vw,2.8rem);max-width:600px;">Four ideas shape every elevation.</h2>
+    <div class="arch-layout reveal">
+      <ul class="arch-list" id="archList">
+        <li class="active" data-img="0"><span class="num">01</span><span class="label">Form</span>
+          <p>A tapering silhouette that reduces wind load while sharpening the skyline profile.</p></li>
+        <li data-img="1"><span class="num">02</span><span class="label">Light</span>
+          <p>Deep-set balconies and floor-to-ceiling glazing bring daylight into every principal room.</p></li>
+        <li data-img="2"><span class="num">03</span><span class="label">Material</span>
+          <p>Board-formed concrete, bronze detailing and stone — materials chosen to age with dignity.</p></li>
+        <li data-img="3"><span class="num">04</span><span class="label">Space</span>
+          <p>Generous circulation and double-height lobbies that never feel like transit space.</p></li>
+      </ul>
+      <div class="arch-visual">
+        <img class="arch-img active" data-idx="0" src="" alt="Building form">
+        <img class="arch-img" data-idx="1" src="" alt="Facade light detail">
+        <img class="arch-img" data-idx="2" src="" alt="Material palette">
+        <img class="arch-img" data-idx="3" src="" alt="Interior space">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESIDENCES ============ -->
+<section class="section-pad" id="residences">
+  <div class="wrap">
+    <span class="eyebrow reveal">Residences</span>
+    <h2 class="reveal" style="margin:18px 0 50px;font-size:clamp(1.9rem,3.4vw,2.8rem);max-width:600px;">Three typologies, one standard.</h2>
+    <div class="res-tabs reveal" id="resTabs">
+      <button class="res-tab active" data-res="1bhk">01 BHK</button>
+      <button class="res-tab" data-res="2bhk">02 BHK</button>
+      <button class="res-tab" data-res="3bhk">03 BHK</button>
+      <button class="res-tab" data-res="penthouse">Penthouse</button>
+    </div>
+    <div id="resPanels" class="reveal"></div>
+  </div>
+</section>
+
+<!-- ============ FLOOR PLAN EXPLORER ============ -->
+<section class="section-pad floor-section" id="floorplan">
+  <div class="wrap">
+    <span class="eyebrow reveal">Explore Your Floor</span>
+    <h2 class="reveal" style="margin:18px 0 50px;font-size:clamp(1.9rem,3.4vw,2.8rem);max-width:600px;">Select a floor, then a home.</h2>
+    <div class="floor-layout reveal">
+      <div class="floor-list" id="floorList"></div>
+      <div class="floor-visual">
+        <div class="floor-grid-svg" id="floorGrid"></div>
+      </div>
+      <div class="apt-panel" id="aptPanel">
+        <p class="apt-empty">Select a home on the floor plan to view its details.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AMENITIES ============ -->
+<section class="section-pad" id="amenities">
+  <div class="wrap">
+    <span class="eyebrow reveal">Amenities</span>
+    <h2 class="reveal" style="margin:18px 0 50px;font-size:clamp(1.9rem,3.4vw,2.8rem);max-width:600px;">Everything a day could ask for.</h2>
+  </div>
+  <div class="amen-grid reveal" id="amenGrid"></div>
+</section>
+
+<!-- ============ LIFESTYLE ============ -->
+<section class="section-pad" style="padding-left:0;padding-right:0;">
+  <div class="wrap" style="margin-bottom:50px;">
+    <span class="eyebrow reveal">Lifestyle</span>
+    <h2 class="reveal" style="margin-top:18px;font-size:clamp(1.9rem,3.4vw,2.8rem);max-width:640px;">Designed for the way you want to <span class="serif-italic">live.</span></h2>
+  </div>
+  <div class="life-scroll reveal" id="lifeScroll" style="padding:0 6%;"></div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="section-pad" id="gallery">
+  <div class="wrap">
+    <span class="eyebrow reveal">Gallery</span>
+    <h2 class="reveal" style="margin:18px 0 50px;font-size:clamp(1.9rem,3.4vw,2.8rem);">A closer look.</h2>
+    <div class="gallery-grid reveal" id="galleryGrid"></div>
+  </div>
+</section>
+
+<!-- lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+  <button class="lb-prev" id="lbPrev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+  <div class="lb-img-wrap"><img id="lbImg" src="" alt=""></div>
+  <button class="lb-next" id="lbNext" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<!-- ============ LOCATION ============ -->
+<section class="section-pad" id="location">
+  <div class="wrap">
+    <span class="eyebrow reveal">Location</span>
+    <h2 class="reveal" style="margin:18px 0 50px;font-size:clamp(1.9rem,3.4vw,2.8rem);max-width:640px;">Connected to everything that <span class="serif-italic">matters.</span></h2>
+    <div class="loc-layout reveal">
+      <div class="loc-map">
+        <div class="loc-pin center"></div>
+        <div class="loc-pin" style="top:22%;left:30%;"></div>
+        <div class="loc-pin" style="top:70%;left:65%;"></div>
+        <div class="loc-pin" style="top:34%;left:78%;"></div>
+        <div class="loc-pin" style="top:75%;left:22%;"></div>
+      </div>
+      <ul class="loc-list" id="locList"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY THIS PROJECT ============ -->
+<section class="section-pad" style="padding-top:0;">
+  <div class="wrap">
+    <div class="why-grid reveal">
+      <div class="why-item"><span class="num">01</span><h3>Built around <em>light.</em></h3></div>
+      <div class="why-item"><span class="num">02</span><h3>Designed for <em>privacy.</em></h3></div>
+      <div class="why-item"><span class="num">03</span><h3>Connected by <em>location.</em></h3></div>
+      <div class="why-item"><span class="num">04</span><h3>Crafted for <em>long-term value.</em></h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEVELOPER ============ -->
+<section class="section-pad arch-section">
+  <div class="wrap">
+    <div class="dev-layout reveal">
+      <div class="intro-media"><img id="devImg" src="" alt="Developer portfolio building" loading="lazy"></div>
+      <div>
+        <span class="eyebrow">Developer</span>
+        <h2 style="margin:18px 0 22px;font-size:clamp(1.9rem,3.4vw,2.6rem);">About the Developer</h2>
+        <p style="color:var(--ivory-dim);line-height:1.8;max-width:520px;">
+          Ashbourne Developments has spent two decades shaping residential landmarks that outlast trends —
+          working with the same conviction on the smallest detail as on the skyline itself.
+        </p>
+        <div class="dev-stats">
+          <div class="stat"><strong data-count="20">0</strong><span>Years of Experience</span></div>
+          <div class="stat"><strong data-count="35">0</strong><span>Projects</span></div>
+          <div class="stat"><strong data-count="12">0</strong><span>M+ Sq.Ft. Delivered</span></div>
+        </div>
+        <p class="dev-note">*Sample figures for demonstration — replace with verified developer data before launch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final-cta" id="finalcta">
+  <div class="final-cta-media"><img id="finalImg" src="" alt="THE HEIGHTS at night"></div>
+  <div class="final-cta-body reveal in">
+    <h2>YOUR NEXT ADDRESS<br><span class="serif-italic">STARTS HERE.</span></h2>
+    <p>Discover a residence designed for everything that comes next.</p>
+    <div class="final-cta-actions">
+      <a href="#contact" class="btn-solid" data-hover>Book a Private Visit</a>
+      <button class="btn-line" id="brochureBtn" data-hover>Download Brochure</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ENQUIRY FORM ============ -->
+<section class="section-pad form-section" id="contact">
+  <div class="wrap">
+    <div class="form-layout">
+      <div class="reveal">
+        <span class="eyebrow">Enquiry</span>
+        <h2 style="margin:18px 0 22px;font-size:clamp(1.9rem,3.4vw,2.6rem);">Request a callback.</h2>
+        <p style="color:var(--ivory-dim);line-height:1.8;max-width:400px;">Share a few details and our sales team will reach out to arrange a private viewing at your convenience.</p>
+      </div>
+      <form id="enquiryForm" class="reveal" novalidate>
+        <div class="form-grid">
+          <div class="field" id="f-name"><label for="inName">Full Name</label><input id="inName" type="text" required><span class="field-error-msg">Please enter your name.</span></div>
+          <div class="field" id="f-phone"><label for="inPhone">Phone Number</label><input id="inPhone" type="tel" required><span class="field-error-msg">Please enter a valid phone number.</span></div>
+          <div class="field full" id="f-email"><label for="inEmail">Email</label><input id="inEmail" type="email" required><span class="field-error-msg">Please enter a valid email.</span></div>
+          <div class="field full" id="f-pref"><label for="inPref">Residence Preference</label>
+            <select id="inPref">
+              <option>01 BHK</option><option>02 BHK</option><option>03 BHK</option><option>Penthouse</option>
+            </select>
+          </div>
+          <div class="field full"><label for="inMsg">Message</label><textarea id="inMsg" rows="3"></textarea></div>
+        </div>
+        <button type="submit" class="btn-solid" data-hover>Request a Callback</button>
+        <div class="form-status" id="formStatus"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">THE <em>HEIGHTS</em></div>
+        <p style="color:var(--ivory-dim);font-size:0.88rem;max-width:280px;line-height:1.7;">A residential landmark by Ashbourne Developments — designed around light, space and long-term value.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Navigate</h5>
+        <ul>
+          <li><a href="#project">Project</a></li>
+          <li><a href="#architecture">Architecture</a></li>
+          <li><a href="#residences">Residences</a></li>
+          <li><a href="#amenities">Amenities</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#location">Location</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="tel:+91XXXXXXXXXX">+91 XXX XXX XXXX</a></li>
+          <li><a href="mailto:hello@example.com">hello@example.com</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>&copy; 2026 THE HEIGHTS — Ashbourne Developments. All rights reserved.</p>
+      <div class="foot-social">
+        <a href="#" aria-label="Instagram" data-hover><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn" data-hover><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Facebook" data-hover><i class="fa-brands fa-facebook-f"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   CENTRALIZED IMAGE CONFIG — replace these URLs with real photography
+   ============================================================ */
+const projectImages = {
+  hero: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2000&auto=format&fit=crop",
+  intro: "https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=1400&auto=format&fit=crop",
+  architecture: [
+    "https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=1600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&w=1600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1600&auto=format&fit=crop"
+  ],
+  developer: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1400&auto=format&fit=crop",
+  finalCta: "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?q=80&w=2000&auto=format&fit=crop",
+  residences: {
+    "1bhk": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=1400&auto=format&fit=crop",
+    "2bhk": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1400&auto=format&fit=crop",
+    "3bhk": "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=1400&auto=format&fit=crop",
+    "penthouse": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1400&auto=format&fit=crop"
+  },
+  amenities: [
+    "https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=1200&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=1200&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1585129777188-9f0d1acbc3b7?q=80&w=1200&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1616627561950-9f746e330187?q=80&w=1200&auto=format&fit=crop"
+  ],
+  lifestyle: [
+    "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1200&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=1200&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1200&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=1200&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1200&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1600566752355-35792bedcfea?q=80&w=1200&auto=format&fit=crop"
+  ],
+  gallery: [
+    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1400&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=1400&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1600210492493-0946911123ea?q=80&w=1400&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1400&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1600585154363-67eb9e2e2099?q=80&w=1400&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1600607687644-c7171b42498b?q=80&w=1400&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=1400&auto=format&fit=crop"
+  ]
+};
+
+/* ============================================================
+   STRUCTURED CONTENT DATA
+   ============================================================ */
+const residenceData = {
+  "1bhk": {title:"The Studio Collection", price:"From ₹1.1 Cr", area:"620 – 720 sq.ft.", bed:"1", bath:"1", balcony:"1", floors:"3rd – 10th",
+    desc:"Compact, light-filled homes for the single professional or investor — efficient layouts with no wasted space."},
+  "2bhk": {title:"The Family Residence", price:"From ₹1.9 Cr", area:"980 – 1,180 sq.ft.", bed:"2", bath:"2", balcony:"1", floors:"5th – 18th",
+    desc:"A layout built around a generous living-dining core, with two private bedroom wings for balance and quiet."},
+  "3bhk": {title:"The Signature Residence", price:"From ₹2.8 Cr", area:"1,650 – 1,950 sq.ft.", bed:"3", bath:"3", balcony:"2", floors:"10th – 22nd",
+    desc:"Corner-facing homes with dual aspect views, a private study nook, and an oversized wraparound balcony."},
+  "penthouse": {title:"The Sky Penthouses", price:"On Request", area:"3,400 – 4,200 sq.ft.", bed:"4", bath:"5", balcony:"3", floors:"23rd – 25th",
+    desc:"Full-floor residences with private elevator access, a rooftop terrace and unobstructed 360° skyline views."}
+};
+
+const amenitiesData = [
+  {name:"Infinity Pool", desc:"A 45m rooftop pool overlooking the skyline."},
+  {name:"Fitness Studio", desc:"Full-equipment gym with dedicated trainer sessions."},
+  {name:"Sky Lounge", desc:"A private lounge on the 25th floor for residents only."},
+  {name:"Landscaped Garden", desc:"Two acres of curated greenery at podium level."},
+  {name:"Clubhouse", desc:"Indoor games, lounge seating and event space."},
+  {name:"Children's Play Area", desc:"A dedicated, safety-certified play zone."}
+];
+
+const lifestyleData = [
+  {tag:"Morning", title:"First light on the terrace"},
+  {tag:"Work", title:"A co-working lounge, steps from home"},
+  {tag:"Wellness", title:"Sunrise laps in the infinity pool"},
+  {tag:"Family", title:"An acre of garden to grow into"},
+  {tag:"Evening", title:"Golden hour from every balcony"},
+  {tag:"Weekend", title:"The sky lounge, unhurried"}
+];
+
+const locationData = [
+  {name:"Metro Station", icon:"fa-solid fa-train-subway", time:"04 MIN"},
+  {name:"Business District", icon:"fa-solid fa-building", time:"08 MIN"},
+  {name:"Shopping District", icon:"fa-solid fa-bag-shopping", time:"06 MIN"},
+  {name:"International School", icon:"fa-solid fa-graduation-cap", time:"07 MIN"},
+  {name:"Hospital", icon:"fa-solid fa-hospital", time:"05 MIN"},
+  {name:"Airport", icon:"fa-solid fa-plane", time:"22 MIN"}
+];
+
+/* ============================================================
+   IMAGE INJECTION
+   ============================================================ */
+document.getElementById('heroImg').src = projectImages.hero;
+document.getElementById('introImg').src = projectImages.intro;
+document.getElementById('devImg').src = projectImages.developer;
+document.getElementById('finalImg').src = projectImages.finalCta;
+document.querySelectorAll('.arch-img').forEach(img=>{
+  img.src = projectImages.architecture[+img.dataset.idx];
+});
+
+/* ============================================================
+   NAV: scroll state, active link, mobile menu
+   ============================================================ */
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', ()=>{
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+  const doc = document.documentElement;
+  const pct = (doc.scrollTop) / (doc.scrollHeight - doc.clientHeight) * 100;
+  document.getElementById('scrollProgress').style.width = pct + '%';
+});
+const burger = document.getElementById('burger');
+const navCenter = document.getElementById('navCenter');
+burger.addEventListener('click', ()=>{
+  burger.classList.toggle('open');
+  navCenter.classList.toggle('open');
+});
+document.querySelectorAll('[data-nav]').forEach(a=>{
+  a.addEventListener('click', ()=>{ burger.classList.remove('open'); navCenter.classList.remove('open'); });
+});
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-center a');
+const navObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navLinks.forEach(l=>l.classList.remove('active'));
+      const match = document.querySelector('.nav-center a[href="#'+e.target.id+'"]');
+      if(match) match.classList.add('active');
+    }
+  });
+},{rootMargin:'-45% 0px -45% 0px'});
+sections.forEach(s=>navObserver.observe(s));
+
+/* ============================================================
+   REVEAL ON SCROLL
+   ============================================================ */
+const revealObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); revealObserver.unobserve(e.target);} });
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+
+/* ============================================================
+   NUMBER COUNTERS
+   ============================================================ */
+const counters = document.querySelectorAll('[data-count]');
+const counterObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const el = e.target;
+      const target = parseInt(el.dataset.count,10);
+      const dur = 1400;
+      const start = performance.now();
+      function tick(now){
+        const p = Math.min((now-start)/dur,1);
+        const val = Math.floor(p*target);
+        el.textContent = val;
+        if(p<1) requestAnimationFrame(tick); else el.textContent = target;
+      }
+      requestAnimationFrame(tick);
+      counterObserver.unobserve(el);
+    }
+  });
+},{threshold:0.4});
+counters.forEach(c=>counterObserver.observe(c));
+
+/* ============================================================
+   ARCHITECTURE — interactive labels
+   ============================================================ */
+document.querySelectorAll('#archList li').forEach(li=>{
+  li.addEventListener('click', ()=>{
+    document.querySelectorAll('#archList li').forEach(x=>x.classList.remove('active'));
+    li.classList.add('active');
+    const idx = li.dataset.img;
+    document.querySelectorAll('.arch-img').forEach(img=>{
+      img.classList.toggle('active', img.dataset.idx===idx);
+    });
+  });
+});
+
+/* ============================================================
+   RESIDENCES — tabs + panel render
+   ============================================================ */
+const resPanels = document.getElementById('resPanels');
+function renderResidence(key){
+  const d = residenceData[key];
+  resPanels.innerHTML = `
+    <div class="res-panel active">
+      <div class="res-media"><img src="${projectImages.residences[key]}" alt="${d.title}" loading="lazy"></div>
+      <div class="res-info">
+        <h3>${d.title}</h3>
+        <span class="price-tag">${d.price}</span>
+        <ul class="res-specs">
+          <li><span>Area</span><strong>${d.area}</strong></li>
+          <li><span>Floors</span><strong>${d.floors}</strong></li>
+          <li><span>Bed / Bath</span><strong>${d.bed} / ${d.bath}</strong></li>
+          <li><span>Balcony</span><strong>${d.balcony}</strong></li>
+        </ul>
+        <p class="desc">${d.desc}</p>
+        <button class="link-arrow" data-hover>VIEW FLOOR PLAN <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>`;
+  resPanels.querySelector('.link-arrow').addEventListener('click', ()=>{
+    document.getElementById('floorplan').scrollIntoView({behavior:'smooth'});
+  });
+}
+renderResidence('1bhk');
+document.querySelectorAll('.res-tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('.res-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    resPanels.style.opacity = 0;
+    setTimeout(()=>{ renderResidence(tab.dataset.res); resPanels.style.transition='opacity .4s'; resPanels.style.opacity=1; }, 180);
+  });
+});
+
+/* ============================================================
+   FLOOR PLAN EXPLORER
+   ============================================================ */
+const floorList = document.getElementById('floorList');
+const floorGrid = document.getElementById('floorGrid');
+const aptPanel = document.getElementById('aptPanel');
+const TYPES = ['1 BHK','2 BHK','3 BHK','Penthouse'];
+const VIEWS = ['East Facing','West Facing','North Facing','Skyline View'];
+
+function unitDataFor(floor, idx){
+  const letter = String.fromCharCode(65+idx);
+  const type = floor >= 23 ? 'Penthouse' : TYPES[(floor+idx)%3];
+  const areaMap = {'1 BHK':'680','2 BHK':'1,080','3 BHK':'1,820','Penthouse':'3,650'};
+  const statusRoll = (floor*7+idx*3)%5;
+  const status = statusRoll===0 ? 'SOLD' : (statusRoll===1 ? 'HELD' : 'AVAILABLE');
+  return {
+    code:`${letter}-${floor}${String(idx+1).padStart(2,'0')}`,
+    type, area: areaMap[type], view: VIEWS[(floor+idx)%4], status
+  };
+}
+
+let currentFloor = 24;
+function renderFloors(){
+  floorList.innerHTML='';
+  for(let f=25; f>=1; f--){
+    const btn=document.createElement('button');
+    btn.className='floor-btn'+(f===currentFloor?' active':'');
+    btn.textContent=f;
+    btn.addEventListener('click', ()=>{ currentFloor=f; renderFloors(); renderFloorGrid(); });
+    floorList.appendChild(btn);
+  }
+}
+function renderFloorGrid(){
+  floorGrid.innerHTML='';
+  const unitsOnFloor = currentFloor>=23 ? 2 : 4;
+  for(let i=0;i<unitsOnFloor;i++){
+    const u = unitDataFor(currentFloor,i);
+    const div=document.createElement('div');
+    div.className='apt-unit';
+    div.innerHTML=`<strong>${u.code}</strong><span>${u.type}</span>`;
+    div.addEventListener('click', ()=>{
+      document.querySelectorAll('.apt-unit').forEach(x=>x.classList.remove('selected'));
+      div.classList.add('selected');
+      renderAptPanel(u);
+    });
+    floorGrid.appendChild(div);
+  }
+  aptPanel.innerHTML='<p class="apt-empty">Select a home on the floor plan to view its details.</p>';
+}
+function renderAptPanel(u){
+  const statusColor = u.status==='AVAILABLE' ? '#8fd49a' : (u.status==='HELD' ? '#e0c07d' : '#c96a5a');
+  aptPanel.innerHTML=`
+    <span class="eyebrow">Apartment</span>
+    <h4>${u.code}</h4>
+    <div class="apt-row"><span>Type</span><span>${u.type}</span></div>
+    <div class="apt-row"><span>Area</span><span>${u.area} sq.ft.</span></div>
+    <div class="apt-row"><span>View</span><span>${u.view}</span></div>
+    <div class="apt-row"><span>Status</span><span style="color:${statusColor}">${u.status}</span></div>
+    <button class="btn-solid" data-hover>Enquire About This Home</button>`;
+  aptPanel.querySelector('.btn-solid').addEventListener('click', ()=>{
+    document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+    document.getElementById('inMsg').value = `I'm interested in unit ${u.code} (${u.type}, ${u.area} sq.ft.).`;
+  });
+}
+renderFloors();
+renderFloorGrid();
+
+/* ============================================================
+   AMENITIES GRID
+   ============================================================ */
+const amenGrid = document.getElementById('amenGrid');
+amenitiesData.forEach((a,i)=>{
+  const div=document.createElement('div');
+  div.className='amen-item';
+  div.innerHTML=`<img src="${projectImages.amenities[i]}" alt="${a.name}" loading="lazy">
+    <div class="amen-label"><h4>${a.name}</h4><p>${a.desc}</p></div>`;
+  amenGrid.appendChild(div);
+});
+
+/* ============================================================
+   LIFESTYLE STRIP
+   ============================================================ */
+const lifeScroll = document.getElementById('lifeScroll');
+lifestyleData.forEach((l,i)=>{
+  const div=document.createElement('div');
+  div.className='life-item';
+  div.innerHTML=`<img src="${projectImages.lifestyle[i]}" alt="${l.title}" loading="lazy">
+    <div class="life-label"><span class="tag">${l.tag}</span><h4>${l.title}</h4></div>`;
+  lifeScroll.appendChild(div);
+});
+
+/* ============================================================
+   GALLERY + LIGHTBOX
+   ============================================================ */
+const galleryGrid = document.getElementById('galleryGrid');
+const gClasses = ['g-a','g-b','g-c','g-d','g-e','g-f','g-g'];
+const galleryLabels = ["Exterior","Lobby","Living Room","Bedroom","Kitchen","Balcony","Pool"];
+projectImages.gallery.forEach((src,i)=>{
+  const div=document.createElement('div');
+  div.className='g-item '+gClasses[i%gClasses.length];
+  div.innerHTML=`<img src="${src}" alt="${galleryLabels[i]||'Gallery image'}" loading="lazy"><div class="g-view"><span>View</span></div>`;
+  div.addEventListener('click', ()=>openLightbox(i));
+  galleryGrid.appendChild(div);
+});
+const lightbox=document.getElementById('lightbox');
+const lbImg=document.getElementById('lbImg');
+const lbCounter=document.getElementById('lbCounter');
+let lbIndex=0;
+function openLightbox(i){
+  lbIndex=i;
+  updateLightbox();
+  lightbox.classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function updateLightbox(){
+  lbImg.src=projectImages.gallery[lbIndex];
+  lbImg.alt = galleryLabels[lbIndex]||'Gallery image';
+  lbCounter.textContent = `${lbIndex+1} / ${projectImages.gallery.length}`;
+}
+document.getElementById('lbClose').addEventListener('click', closeLightbox);
+document.getElementById('lbPrev').addEventListener('click', ()=>{ lbIndex=(lbIndex-1+projectImages.gallery.length)%projectImages.gallery.length; updateLightbox(); });
+document.getElementById('lbNext').addEventListener('click', ()=>{ lbIndex=(lbIndex+1)%projectImages.gallery.length; updateLightbox(); });
+function closeLightbox(){ lightbox.classList.remove('active'); document.body.style.overflow='auto'; }
+lightbox.addEventListener('click', (e)=>{ if(e.target===lightbox) closeLightbox(); });
+document.addEventListener('keydown', (e)=>{
+  if(!lightbox.classList.contains('active')) return;
+  if(e.key==='Escape') closeLightbox();
+  if(e.key==='ArrowLeft') document.getElementById('lbPrev').click();
+  if(e.key==='ArrowRight') document.getElementById('lbNext').click();
+});
+
+/* ============================================================
+   LOCATION LIST
+   ============================================================ */
+const locList = document.getElementById('locList');
+locationData.forEach(l=>{
+  const li=document.createElement('li');
+  li.innerHTML=`<span class="name"><i class="${l.icon}"></i>${l.name}</span><span class="time">${l.time}</span>`;
+  locList.appendChild(li);
+});
+
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+const isTouch = ('ontouchstart' in window || navigator.maxTouchPoints>0);
+if(!isTouch){
+  document.body.classList.add('has-cursor');
+  const cursor=document.getElementById('cursor');
+  const label=document.getElementById('cursorLabel');
+  let mx=0,my=0,cx=0,cy=0;
+  window.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; label.style.left=mx+'px'; label.style.top=my+'px'; });
+  (function loop(){ cx+=(mx-cx)*0.18; cy+=(my-cy)*0.18; cursor.style.left=cx+'px'; cursor.style.top=cy+'px'; requestAnimationFrame(loop); })();
+  function attachCursorEvents(){
+    document.querySelectorAll('a,button,.apt-unit,.g-item,.amen-item,.life-item').forEach(el=>{
+      el.addEventListener('mouseenter', ()=>{
+        cursor.classList.add('hover');
+        if(el.closest('.gallery-grid')){ label.textContent='VIEW'; label.classList.add('show'); }
+      });
+      el.addEventListener('mouseleave', ()=>{ cursor.classList.remove('hover'); label.classList.remove('show'); });
+    });
+  }
+  attachCursorEvents();
+  // re-attach for dynamically injected elements
+  new MutationObserver(attachCursorEvents).observe(document.body,{childList:true,subtree:true});
+}
+
+/* ============================================================
+   ENQUIRY FORM — validation + simulated submit
+   ============================================================ */
+const form = document.getElementById('enquiryForm');
+const status = document.getElementById('formStatus');
+function setFieldError(id, hasError){
+  document.getElementById(id).classList.toggle('error', hasError);
+}
+form.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const name=document.getElementById('inName').value.trim();
+  const phone=document.getElementById('inPhone').value.trim();
+  const email=document.getElementById('inEmail').value.trim();
+  let valid=true;
+  setFieldError('f-name', name.length<2); if(name.length<2) valid=false;
+  const phoneOk=/^[0-9+\-\s]{7,15}$/.test(phone);
+  setFieldError('f-phone', !phoneOk); if(!phoneOk) valid=false;
+  const emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  setFieldError('f-email', !emailOk); if(!emailOk) valid=false;
+
+  status.className='form-status';
+  if(!valid){
+    status.textContent='Please correct the highlighted fields.';
+    status.classList.add('error');
+    return;
+  }
+  // Simulated submission — no data is actually sent anywhere.
+  status.textContent='Thank you — our team will call you back within 24 hours.';
+  status.classList.add('success');
+  form.reset();
+});
+
+/* Brochure button — simulated action */
+document.getElementById('brochureBtn').addEventListener('click', ()=>{
+  alert('Brochure download will be available once real project assets are added.');
+});
+</script>
+</body>
+</html>
